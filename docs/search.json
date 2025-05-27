@@ -1,0 +1,205 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Analysing Genomic Data with dartRverse",
+    "section": "",
+    "text": "Welcome!\nWelcome, Fellow Magical Beings, to the Second Gathering of our Population Genetics Workshop —this time in the bustling, sun-drenched realm of Brisbane!\nWe’re absolutely spellbound to be casting our workshop at the International Congress for Conservation Biology (ICCB)—a place where conservation minds converge and new enchantments in science are born. From the wild coasts to the heart of the city, Brisbane may lack the mystical seclusion of Kioloa’s forests, but it brims with its own vibrant energy, ready to charge our wands and laptops alike.\nIn this shorter but no less powerful incantation—think of it as a concentrated potion—we’ll dive deep into the arcane arts of Population Genetics through the language of R. Whether you’re here to strengthen your spellwork or forge your first analytical wand, you’re among kin. As before, every magical mind in this room is both apprentice and sage; together we will conjure insights, challenge assumptions, and build spells for biodiversity conservation and ecosystem restoration.\nThough we’ve traded forest trails for conference halls and ocean breezes for river winds, our core magic remains unchanged: community, curiosity, and courage. Mistakes are just misfired spells (easily re-aimed), and questions are the candles lighting our path.\nThis workshop is a chance to sharpen your skills, spark new collaborations, and deepen your understanding of the genetic undercurrents shaping the natural world. And yes—there will be time for hands-on sorcery with your own data scrolls!\nBring your flexibility, your dedication, and your sense of humour. Dragons may appear (as bugs in your code), storms may brew (metaphorically or meteorologically), but together, we’ll navigate every twist and turn with grace, grit, and probably a bit of caffeine alchemy.\nWe are thrilled to share this second chapter of our journey with you. Let the runes of R guide us, the spirit of conservation bind us, and may our collective enchantment make this workshop truly unforgettable."
+  },
+  {
+    "objectID": "index.html#here-are-some-things-you-might-see-along-your-journey",
+    "href": "index.html#here-are-some-things-you-might-see-along-your-journey",
+    "title": "Analysing Genomic Data with dartRverse",
+    "section": "Here are some things you might see along your journey:",
+    "text": "Here are some things you might see along your journey:\nBelow is an exercise box, this is encouraging you to give it a go yourself!\n\n\n\n\n\n\nExercise\n\n\n\n Give the code a go!\n\n\nBelow is a tip box, with added insights for your journey.\n\n\n\n\n\n\nTip\n\n\n\ntake a look…\nA variety of things to learn!\n\n\nBelow is a caution box, take note, this will keep you on your path.\n\n\n\n\n\n\nCaution\n\n\n\nTake CARE! It is easy to go astray, I am here to help.\n\n\nBelow is a warning box! Be careful and take head of what it says.\n\n\n\n\n\n\nWarning\n\n\n\nNOTICE! Thank you for noticing this warning!"
+  },
+  {
+    "objectID": "index.html#a-big-thank-you-to-the-developers",
+    "href": "index.html#a-big-thank-you-to-the-developers",
+    "title": "Analysing Genomic Data with dartRverse",
+    "section": "A big thank you to the developers!",
+    "text": "A big thank you to the developers!\nDartR published first by Gruber et al. (2018), and DartR V2 published by Mijangos et al. (2022)\n\n\n\n\nGruber, Bernd, Peter J. Unmack, Oliver F. Berry, and Arthur Georges. 2018. “DARTR : An R Package to Facilitate Analysis of SNP Data Generated from Reduced Representation Genome Sequencing.” Molecular Ecology Resources 18 (3): 691–99. https://doi.org/10.1111/1755-0998.12745.\n\n\nMijangos, Jose Luis, Bernd Gruber, Oliver Berry, Carlo Pacioni, and Arthur Georges. 2022. “dartR V2: An Accessible Genetic Analysis Platform for Conservation, Ecology and Agriculture.” Methods in Ecology and Evolution 13 (10): 2150–58. https://doi.org/10.1111/2041-210X.13918."
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Program",
+    "section": "",
+    "text": "#\nDay\nTime\nTopic\nPresenters\n\n\n\n\n1\nSaturday\n9 am – 11 am\nImporting and Handling Genomic Data\nArthur Georges, Diana Robledo\n\n\n2\n\n11 am – 1 pm\nEstimating Effective Population Size and Key Stats\nBernd Gruber, Luis Mijangos, Emily Stringer\n\n\n3\n\n1 pm – 3 pm\nIdentifying Population Structure\nLuis Mijangos, Diana Robledo, Emily Stringer\n\n\n4\nSunday\n9 am – 11 am\nAssigning Individuals to Populations\nArthur Georges, Luis Mijangos, Elise Furlan, Andrzej Killian\n\n\n5\n\n11 am – 1 pm\nKinship, Pedigrees & Mating Recommendations\nLuis Mijangos, Bernd Gruber\n\n\n6\n\n1 pm – 3 pm\nSNP Panel Selection & Simulations for Conservation\nElise Furlan, Bernd Gruber, Luis Mijangos, Emily Stringer"
+  },
+  {
+    "objectID": "speakers.html",
+    "href": "speakers.html",
+    "title": "Speaker Bios",
+    "section": "",
+    "text": "Elise Furlan, bio to come… session 4 and session 6\nArthur Georges, a distinguished professor at the University of Canberra, has revolutionized the understanding of sex determination in reptiles. His major achievement? Unravelling how environmental factors influence sex in reptiles, a game-changer in herpetology and conservation genetics. Arthur’s work has far-reaching implications, from conservation strategies to understanding evolutionary processes. He’s the Dumbledore of herpetology, albeit more fascinated by dragon eggs than by magic ones, and probably wonders if he could genetically engineer a lizard to brew his morning coffee. session 1 and session 4\nBernd Gruber, from the University of Canberra, is a master at blending spatial and ecological modelling with genetics. His crowning achievement? Developing dartR, a tool that’s revolutionizing genetic data analysis in conservation projects. His approach to research is as innovative as it is impactful, making him the Houdini of ecology – he makes complex data disappear into meaningful conservation strategies. Bernd might secretly wish to decode the genetic basis for why every odd sock goes missing, solving one of life’s great mysteries.session 2, session 5, and session 6\nAndrzej Kilian, founder of DArT in 2001, has been a pioneer in genomics, creating a technology that simplifies high-throughput genotyping across various organisms. His work at DArT supports global food security, sustainable agriculture, and biodiversity, making significant strides towards understanding and improving agricultural and environmental practices. Andrzej’s commitment to science and humanity illustrates a unique blend of innovation with a purpose. Andrzej, much like a maestro in an orchestra of genomes, harmonizes the complex notes of genetics to compose a symphony for a sustainable planet, ensuring every note contributes to the grander vision of global harmony and well-being. session 4\nLuis Mijangos, at DArT, he combines his passion for technology and conservation, using genetic data analysis to protect biodiversity. His standout achievement? Applying his expertise in genetic data analysis to conservation projects, making him the tech-savvy guardian of the planet. Luis’s contributions are crucial in the fight against biodiversity loss, and he’s probably brainstorming ways to use genetic data to convince plants to grow in perfect Instagram-worthy arrangements. session 2, session 3, session 4, session 5, and session 6\nDiana Robledo-Ruiz is a name you’ll want to remember in the field of conservation biology, specifically at Monash University. She’s been making waves with her work on the Helmeted Honeyeater’s genome, leading to significant advancements in genetic rescue operations. Her high-quality genomic research is not just for the birds – it’s key to saving them from extinction and maintaining their unique identity. Diana is also the lead developer of dartR.sexlinked which will make your life easier when filtering genetic data! She is developing this and other genomic tools to keep the endangered Helmeted Honeyeater, Leadbeater’s possum and Macquarie perch buzzing in the wild. session 1 and session 3\nEmily Stringer is rocking her PhD at the University of Canberra, diving deep into conservation ecology and genomics. She kicked off with a mission to save the elusive Canberra grassland earless dragon and then hopped into the world of population genetics. Her main gig? Unraveling the genetic puzzle of an Australian rodent known for its dramatic population swings. Emily’s all about cracking complex data to solve ecological mysteries, aiming to turn her findings into real-world conservation victories. session 2, session 3, and session 6"
+  },
+  {
+    "objectID": "install.html#rationale",
+    "href": "install.html#rationale",
+    "title": "Install dartRverse",
+    "section": "Rationale",
+    "text": "Rationale\nWe have developed a new suit of packages called “dartRverse” packages, that will replace the previous dartR package, which soon will be no longer supported. The new suit of packages are meant to be a 1:1 replacement and only in some instance very minor changes will be needed to update previous code. For example we reworked on the “output” of all functions, now being able to save figures in specified folders, which can be easier recovered and manipulated for further tweaking. The main reasons for splitting dartR into several packages and developing the dartRverse suit of packages was difficulty to maintain dartR, because of limits imposed by CRAN, but also limits due the the long time to test new function, when compiling the package. Therefore we were forced to split the package into several smaller packages. This has several advantages and in the best of all cases no disadvantages.\n\neasier maintenance\nfaster development\nless dependencies on other packages\neasier to become a contributor\nhave your own package developed that can be branded as part of the dartRverse\n\nThe main paradigm was also that for our users nothing (or at as little as possible) needed to change and all existing code and scripts should still work. Also the installation process was meant to be straightforward and finally the coexistance between dartR and dartRverse packages should be possible (for the interim until dartR will be no longer supported)."
+  },
+  {
+    "objectID": "install.html#installation",
+    "href": "install.html#installation",
+    "title": "Install dartRverse",
+    "section": "Installation",
+    "text": "Installation\n\ninstall dartRverse\n\n#installs the necessary bioconductor packages\ninstall.packages(\"devtools\")\ninstall.packages(\"BiocManager\")\nBiocManager::install(\"SNPRelate\")\n\n#install dartRverse (dartRverse) & core (dartR.base, dartR.data)\ninstall.packages(\"dartRverse\")\n\nThe dartRverse package is the first package to install and its only purpose is to support the installation of the other dartRverse packages. It will also be the first port of call to provide links to tutorials and other documentation.\nIf everything works well this should install two more packages with form the core version of dartRverse, nameley dartR.base and dartR.data. Those core packages have all the main function of old dartR package that deals with input, conversion, reporting and filtering of data. Also some base function to analysse data (e.g. PCoA, Fst) are included.\nOnce the dartRverse package has been installed we can load the package to check which part of the dartRverse has been installed.\n\nlibrary(dartRverse)\n\n\n\n\n\n\n\n\ninstall additional packages\nNow we can install the additional packages that are part of the dartRverse. Depending on your needs you can install all of them or only the one you are interested.\nFor example if you are interested in additional functions to analyse population structure (e.g. run STRUCTURE or faststructure) you can install the dartR.popgen package. If you are interested in functions that support the simulation of data you can install the dartR.sim package.\nYou can check which packages are avaialbel and which of them you have installed by typing:\n\ndartRverse::dartRverse_install()\n\n\n\n\n\n\nThe currently available packages are:\n\ndartR.sim (simulate SNP data)\ndartR.popgen (run population genetic analysis)\ndartR.spatial (run landscape genetic analysis)\ndartR.captive (estimate relatedness, support captive breeding)\ndartR.sexlinked (identify sexlinked markers, not ready yet)\n\nSo to install the dartR.sim simply type:\n\ninstall.packages(\"dartR.sim\")\ninstall.packages(\"dartR.popgen\")\ninstall.packages(\"dartR.spatial\")\ninstall.packages(\"dartR.captive\")\n# currently dartR.sexlinked requires a different installation process (see below)\n\n\n\nGithub repositories\nWe make all of our packages available via CRAN. The reason for this is that CRAN packages follow a stringent testing before they are allowed to be uploaded to CRAN and therefore are more likely to contain less errors then packages that are available on other repositories. Nevertheless we also make our packages available during development via github.\nYou can find the repositories under: https://github.com/green-striped-gecko/dartR.base [for the dartR.base package] and equivalent for the other packages.\nThe reason why you might want to install a package from github is that you want to use the latest version of the package. However, you should be aware that the packages on github are not tested and therefore might contain errors. Also the packages on github might be updated on a daily basis and therefore might change without notice.\nWe use different branches and they are reflecting different stages of development and majurity.\n\nmain (the main branch, which is equivalent to the current CRAN version)\ndev (development branch, which has the latest functions that might be in the next CRAN version, but have not been tested yet)\ndev_name (these are branches of our main developers and are used for testing and development of new functions. Installing functions from here might cause problems and should only be done if you know what you are doing)\n\ndartRverse supports the installation of github version of the packages using the following syntax:\ndartRverse_install(package = \"dartR.base\", repo = \"github\", branch = \"dev\")\nThis install the dev branch of dartR.base from CRAN. All main and dev branches are tested if they can be installed (and some additional error checks via): https://github.com/green-striped-gecko/dartRverse\nPlease note that you should provide the package repository (github/cran), the branch (main, dev,dev_name) and version number in case you want to report a bug. You can use the github methods to report issues or use our google group: https://groups.google.com/d/forum/dartr.\n\n\nInstalling dartR.sexlinked\ndartRverse_install(package = \"dartR.sexlinked\", repo = \"github\", branch = \"dev\")"
+  },
+  {
+    "objectID": "install.html#using-dartrverse",
+    "href": "install.html#using-dartrverse",
+    "title": "Install dartRverse",
+    "section": "Using dartRverse",
+    "text": "Using dartRverse\nTo use dartRverse you can simply load the package and use it as before.\n\nlibrary(dartRverse)"
+  },
+  {
+    "objectID": "session01.html#required-packages",
+    "href": "session01.html#required-packages",
+    "title": "1  Importing and Handling Genomic Data",
+    "section": "Required packages",
+    "text": "Required packages\n\nlibrary(dartRverse)"
+  },
+  {
+    "objectID": "session01.html#session-content",
+    "href": "session01.html#session-content",
+    "title": "1  Importing and Handling Genomic Data",
+    "section": "Session Content",
+    "text": "Session Content\n\nIntroduction\nEXAMPLE CONTENT\nAn accessible genetic analysis platform for conservation, ecology and agriculture\ndartRverse aims to support the installation of R packages of the dartRverse that are user-friendly and deliver a variety of analyses and pipelines on the one platform. Currently there are two core R packages that need to be installed to use dartR:\n\ndartR.base\ndartR.data\n\nAdditional packages are\n\ndartR.sim (functions to simulate SNP data)\ndartR.spatial (spatial analysis)\ndartR.popgenomics (popgenomics analysis)\ndartR.captive\ndartR.sexlinked\n\n\n\nExample\n\nexample content header: load data\n\nmy_data &lt;- read.csv('./data/my_data.csv')\nmy_rdata &lt;- readRDS('./data/my_rdata.rds')\n\n\n\n\nExercise\n\n\n\n\n\n\nExercise\n\n\n\n Try loading in your own data!"
+  },
+  {
+    "objectID": "session01.html#further-study",
+    "href": "session01.html#further-study",
+    "title": "1  Importing and Handling Genomic Data",
+    "section": "Further Study",
+    "text": "Further Study\n\nReadings\nGruber et al. (2018)\nMijangos et al. (2022)\n\n\n\n\nGruber, Bernd, Peter J. Unmack, Oliver F. Berry, and Arthur Georges. 2018. “DARTR : An R Package to Facilitate Analysis of SNP Data Generated from Reduced Representation Genome Sequencing.” Molecular Ecology Resources 18 (3): 691–99. https://doi.org/10.1111/1755-0998.12745.\n\n\nMijangos, Jose Luis, Bernd Gruber, Oliver Berry, Carlo Pacioni, and Arthur Georges. 2022. “dartR V2: An Accessible Genetic Analysis Platform for Conservation, Ecology and Agriculture.” Methods in Ecology and Evolution 13 (10): 2150–58. https://doi.org/10.1111/2041-210X.13918."
+  },
+  {
+    "objectID": "session02.html#required-packages",
+    "href": "session02.html#required-packages",
+    "title": "2  Estimating Effective Population Size and Key Stats",
+    "section": "Required packages",
+    "text": "Required packages\n\nlibrary(dartR.base)\nlibrary(dartR.data)"
+  },
+  {
+    "objectID": "session02.html#session-content",
+    "href": "session02.html#session-content",
+    "title": "2  Estimating Effective Population Size and Key Stats",
+    "section": "Session Content",
+    "text": "Session Content"
+  },
+  {
+    "objectID": "session02.html#further-study",
+    "href": "session02.html#further-study",
+    "title": "2  Estimating Effective Population Size and Key Stats",
+    "section": "Further Study",
+    "text": "Further Study\n\nReadings"
+  },
+  {
+    "objectID": "session03.html#required-packages",
+    "href": "session03.html#required-packages",
+    "title": "3  Identifying Population Structure",
+    "section": "Required packages",
+    "text": "Required packages\n\nlibrary(dartR.base)\nlibrary(dartR.data)"
+  },
+  {
+    "objectID": "session03.html#session-content",
+    "href": "session03.html#session-content",
+    "title": "3  Identifying Population Structure",
+    "section": "Session Content",
+    "text": "Session Content"
+  },
+  {
+    "objectID": "session03.html#further-study",
+    "href": "session03.html#further-study",
+    "title": "3  Identifying Population Structure",
+    "section": "Further Study",
+    "text": "Further Study\n\nReadings"
+  },
+  {
+    "objectID": "session04.html#required-packages",
+    "href": "session04.html#required-packages",
+    "title": "4  Assigning Individuals to Populations",
+    "section": "Required packages",
+    "text": "Required packages\n\nlibrary(dartR.base)\nlibrary(dartR.data)"
+  },
+  {
+    "objectID": "session04.html#session-content",
+    "href": "session04.html#session-content",
+    "title": "4  Assigning Individuals to Populations",
+    "section": "Session Content",
+    "text": "Session Content"
+  },
+  {
+    "objectID": "session04.html#further-study",
+    "href": "session04.html#further-study",
+    "title": "4  Assigning Individuals to Populations",
+    "section": "Further Study",
+    "text": "Further Study\n\nReadings"
+  },
+  {
+    "objectID": "session05.html#required-packages",
+    "href": "session05.html#required-packages",
+    "title": "5  Kinship, Pedigrees & Mating Recommendations",
+    "section": "Required packages",
+    "text": "Required packages\n\nlibrary(dartR.base)\nlibrary(dartR.data)"
+  },
+  {
+    "objectID": "session05.html#session-content",
+    "href": "session05.html#session-content",
+    "title": "5  Kinship, Pedigrees & Mating Recommendations",
+    "section": "Session Content",
+    "text": "Session Content"
+  },
+  {
+    "objectID": "session05.html#further-study",
+    "href": "session05.html#further-study",
+    "title": "5  Kinship, Pedigrees & Mating Recommendations",
+    "section": "Further Study",
+    "text": "Further Study\n\nReadings"
+  },
+  {
+    "objectID": "session06.html#required-packages",
+    "href": "session06.html#required-packages",
+    "title": "6  SNP Panel Selection & Simulations for Conservation",
+    "section": "Required packages",
+    "text": "Required packages\n\nlibrary(dartR.base)\nlibrary(dartR.data)"
+  },
+  {
+    "objectID": "session06.html#session-content",
+    "href": "session06.html#session-content",
+    "title": "6  SNP Panel Selection & Simulations for Conservation",
+    "section": "Session Content",
+    "text": "Session Content"
+  },
+  {
+    "objectID": "session06.html#further-study",
+    "href": "session06.html#further-study",
+    "title": "6  SNP Panel Selection & Simulations for Conservation",
+    "section": "Further Study",
+    "text": "Further Study\n\nReadings"
+  },
+  {
+    "objectID": "break.html",
+    "href": "break.html",
+    "title": "__________",
+    "section": "",
+    "text": "Everything beyond this point is for added learning, we hope you have fun exploring all the amazing things the dartRverse has to offer."
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Gruber, Bernd, Peter J. Unmack, Oliver F. Berry, and Arthur Georges.\n2018. “DARTR : An R Package\nto Facilitate Analysis of SNP Data Generated from Reduced\nRepresentation Genome Sequencing.” Molecular Ecology\nResources 18 (3): 691–99. https://doi.org/10.1111/1755-0998.12745.\n\n\nMijangos, Jose Luis, Bernd Gruber, Oliver Berry, Carlo Pacioni, and\nArthur Georges. 2022. “dartR V2:\nAn Accessible Genetic Analysis Platform for Conservation,\nEcology and Agriculture.” Methods in Ecology and\nEvolution 13 (10): 2150–58. https://doi.org/10.1111/2041-210X.13918."
+  },
+  {
+    "objectID": "feedback.html",
+    "href": "feedback.html",
+    "title": "Feedback",
+    "section": "",
+    "text": "Please provide any questions, suggestions, or praises in the message box below and then hit submit.\n\nName: \nEmail: \nMessage:"
+  }
+]

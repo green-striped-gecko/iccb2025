@@ -1,0 +1,36 @@
+project:
+  type: book
+  output-dir: docs
+book:
+  title: Analysing Genomic Data with dartRverse
+  author: Bernd Gruber, Diana Robledo-Ruiz, Arthur Georges, Elise Furlan, Luis Mijangos, and Emily Stringer
+  date: 05/21/2025
+  chapters:
+  - index.qmd
+  - schedule.qmd
+  - speakers.qmd
+  - install.qmd
+  - session01.qmd
+  - session02.qmd
+  - session03.qmd
+  - session04.qmd
+  - session05.qmd
+  - session06.qmd
+  - break.qmd
+  - references.qmd
+  - feedback.qmd
+bibliography: references.bib
+highlight-style: pygments
+format:
+  html:
+    theme: cosmo
+    css:
+    - css.css
+    - include/webex.css
+    number-depth: 1
+    include-after-body: include/webex.js
+    link-external-icon: true
+    link-external-newwindow: true
+execute: 
+  cache: true
+editor: visual

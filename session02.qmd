@@ -1,0 +1,18 @@
+# Estimating Effective Population Size and Key Stats
+
+*Session Presenters*
+
+![](images/Presenters2.png)
+
+## *Required packages*
+
+```{r, warning=FALSE, message=FALSE}
+library(dartR.base)
+library(dartR.data)
+```
+
+## Session Content
+
+## *Further Study*
+
+### Readings

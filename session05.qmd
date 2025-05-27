@@ -1,0 +1,20 @@
+# Kinship, Pedigrees & Mating Recommendations
+
+*Session Presenters*
+
+![](images/Presenters5.png)
+
+## *Required packages*
+
+```{r, warning=FALSE, message=FALSE}
+library(dartR.base)
+library(dartR.data)
+```
+
+## Session Content
+
+
+## *Further Study*
+
+### Readings
+

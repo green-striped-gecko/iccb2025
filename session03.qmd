@@ -1,0 +1,18 @@
+# Identifying Population Structure
+
+*Session Presenters*
+
+![](images/Presenters3.png)
+
+## *Required packages*
+
+```{r, warning=FALSE, message=FALSE}
+library(dartR.base)
+library(dartR.data)
+```
+
+## Session Content
+
+## *Further Study*
+
+### Readings

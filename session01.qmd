@@ -1,0 +1,69 @@
+---
+title: "Importing and Handling Genomic Data"
+---
+
+*Session Presenters*
+
+![](images/Presenters1.png)
+
+## *Required packages*
+
+```{r, warning=FALSE, message=FALSE}
+library(dartRverse)
+```
+
+## Session Content (Topic title)
+
+
+### Introduction
+
+**EXAMPLE CONTENT**
+
+*An accessible genetic analysis platform for conservation, ecology and agriculture*
+
+`dartRverse` aims to support the installation of R packages of the dartRverse that are user-friendly and deliver a variety of analyses and pipelines on the one platform. Currently there are two core R packages that need to be installed to use dartR:
+
+-   dartR.base
+
+-   dartR.data
+
+Additional packages are
+
+-   dartR.sim (functions to simulate SNP data)
+
+-   dartR.spatial (spatial analysis)
+
+-   dartR.popgenomics (popgenomics analysis)
+
+-   dartR.captive
+
+-   dartR.sexlinked
+
+
+
+
+### Example
+
+#### *example content header: load data*
+
+```{r}
+my_data <- read.csv('./data/my_data.csv')
+my_rdata <- readRDS('./data/my_rdata.rds')
+
+```
+
+### Exercise
+
+::: callout-note
+#### Exercise
+
+![](images/task.png){#id .class width="48" height="48"} Try `loading` in your own data!
+:::
+
+## *Further Study*
+
+### Readings
+
+@gruber2018
+
+@mijangos2022

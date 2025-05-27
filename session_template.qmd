@@ -1,0 +1,27 @@
+---
+title: "session title"
+---
+
+*Session Presenters*
+
+![](images/Presenters1.png)
+
+## *Required packages*
+
+```{r, warning=FALSE, message=FALSE}
+library(dartRverse)
+```
+
+## Session Content (topic title)
+
+### Introduction
+
+### Example
+
+### Exercise
+
+## *Further Study*
+
+### Readings
+
+

@@ -1,0 +1,59 @@
+![](images/ICCB2025Logo2.png) 
+![](images/dartR7.png)
+
+
+# Welcome! {.unnumbered}
+
+**Welcome, Fellow Magical Beings, to the Second Gathering of our Population Genetics Workshop ---this time in the bustling, sun-drenched realm of Brisbane!**
+
+We're absolutely spellbound to be casting our workshop at the **International Congress for Conservation Biology (ICCB)**---a place where conservation minds converge and new enchantments in science are born. From the wild coasts to the heart of the city, Brisbane may lack the mystical seclusion of Kioloa's forests, but it brims with its own vibrant energy, ready to charge our wands and laptops alike.
+
+In this shorter but no less powerful incantation---think of it as a concentrated potion---we'll dive deep into the arcane arts of **Population Genetics through the language of R**. Whether you're here to strengthen your spellwork or forge your first analytical wand, you're among kin. As before, every magical mind in this room is both apprentice and sage; together we will conjure insights, challenge assumptions, and build spells for biodiversity conservation and ecosystem restoration.
+
+Though we've traded forest trails for conference halls and ocean breezes for river winds, our core magic remains unchanged: **community, curiosity, and courage**. Mistakes are just misfired spells (easily re-aimed), and questions are the candles lighting our path.
+
+This workshop is a chance to sharpen your skills, spark new collaborations, and deepen your understanding of the genetic undercurrents shaping the natural world. And yes---there will be time for hands-on sorcery with your own data scrolls!
+
+Bring your flexibility, your dedication, and your sense of humour. Dragons may appear (as bugs in your code), storms may brew (metaphorically or meteorologically), but together, we'll navigate every twist and turn with grace, grit, and probably a bit of caffeine alchemy.
+
+We are thrilled to share this second chapter of our journey with you. Let the runes of R guide us, the spirit of conservation bind us, and may our collective enchantment make this workshop truly unforgettable.
+
+![](images/Workshop_logo2.png)
+
+## Here are some things you might see along your journey:
+
+**Below is an exercise box, this is encouraging you to give it a go yourself!**
+
+::: callout-note
+## Exercise
+
+![](images/task.png){#id .class width="48" height="48"} Give the `code` a go!
+:::
+
+**Below is a tip box, with added insights for your journey.**
+
+::: callout-tip
+*take a look...*
+
+A variety of things to learn!
+:::
+
+**Below is a caution box, take note, this will keep you on your path.**
+
+::: callout-caution
+**Take CARE!** It is easy to go astray, I am here to help.
+:::
+
+**Below is a warning box! Be careful and take head of what it says.**
+
+::: callout-warning
+**NOTICE!** Thank you for noticing this **warning**!
+
+<img src="images/pirat.png" align="right" width="100" height="100"/>
+:::
+
+<br>
+
+## A big thank you to the developers!
+
+DartR published first by @gruber2018, and DartR V2 published by @mijangos2022
