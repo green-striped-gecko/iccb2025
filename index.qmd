@@ -1,24 +1,20 @@
-![](images/ICCB2025Logo2.png) 
-![](images/dartR7.png)
-
+![](images/intro_slide.png)
 
 # Welcome! {.unnumbered}
 
-**Welcome, Fellow Magical Beings, to the Second Gathering of our Population Genetics Workshop ---this time in the bustling, sun-drenched realm of Brisbane!**
+**Welcome, Trailblazers of Biodiversity, to the Second Gathering of our Population Genetics Workshop — this time under the vast skies and red dust of the Australian Outback (well… Brisbane's subtropical edge of it)!**
 
-We're absolutely spellbound to be casting our workshop at the **International Congress for Conservation Biology (ICCB)**---a place where conservation minds converge and new enchantments in science are born. From the wild coasts to the heart of the city, Brisbane may lack the mystical seclusion of Kioloa's forests, but it brims with its own vibrant energy, ready to charge our wands and laptops alike.
+We’re excited to bring this workshop to the **International Congress for Conservation Biology (ICCB)** — a meeting ground where conservationists from every corner gather to share stories, science, and strategies for protecting the wild heart of our planet. While Brisbane may not boast the rustle of Kioloa’s forests, it hums with its own rhythm — a place where mangroves meet skyscrapers and river currents carry both eDNA and ideas.
 
-In this shorter but no less powerful incantation---think of it as a concentrated potion---we'll dive deep into the arcane arts of **Population Genetics through the language of R**. Whether you're here to strengthen your spellwork or forge your first analytical wand, you're among kin. As before, every magical mind in this room is both apprentice and sage; together we will conjure insights, challenge assumptions, and build spells for biodiversity conservation and ecosystem restoration.
+In this workshop — a compact but powerful expedition — we’ll explore **Population Genetics using R**. Whether you're a seasoned fieldworker or new to the code trail, you're in good company. Here, every voice matters, and learning is a shared journey.
 
-Though we've traded forest trails for conference halls and ocean breezes for river winds, our core magic remains unchanged: **community, curiosity, and courage**. Mistakes are just misfired spells (easily re-aimed), and questions are the candles lighting our path.
+This is your chance to sharpen your analytical tools, exchange ideas, and delve into the genomic threads that weave through ecosystems across Australia and beyond. And yes — we’ll get our hands dirty (metaphorically… unless your dataset's really dusty) with hands-on practice using your own data.
 
-This workshop is a chance to sharpen your skills, spark new collaborations, and deepen your understanding of the genetic undercurrents shaping the natural world. And yes---there will be time for hands-on sorcery with your own data scrolls!
+So bring your resilience, your field-hardened humour, and your willingness to wrestle a few data-wrangling goannas. Bugs in your code? Think of them as wildlife encounters. We’ll handle it all with tenacity, teamwork, and maybe a bit of data-fuelled bush magic.
 
-Bring your flexibility, your dedication, and your sense of humour. Dragons may appear (as bugs in your code), storms may brew (metaphorically or meteorologically), but together, we'll navigate every twist and turn with grace, grit, and probably a bit of caffeine alchemy.
+**We’re glad to have you on this journey. Let’s get started.**
 
-We are thrilled to share this second chapter of our journey with you. Let the runes of R guide us, the spirit of conservation bind us, and may our collective enchantment make this workshop truly unforgettable.
-
-![](images/Workshop_logo2.png)
+![](images/dartR7.png)
 
 ## Here are some things you might see along your journey:
 

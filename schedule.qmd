@@ -5,13 +5,13 @@ editor: visual
 
 # Program {.unnumbered}
 
-| \#  | Day      |     Time      |                                  Topic                                  |                          Presenters                          |
-|:---:|----------|:-------------:|:-----------------------------------------------------------------------:|:------------------------------------------------------------:|
-|  1  | Saturday | 9 am -- 11 am |        [**Importing and Handling Genomic Data**](session01.qmd)         |                Arthur Georges, Diana Robledo                 |
-|  2  |          | 11 am -- 1 pm | [**Estimating Effective Population Size and Key Stats**](session02.qmd) |         Bernd Gruber, Luis Mijangos, Emily Stringer          |
-|  3  |          | 1 pm -- 3 pm  |          [**Identifying Population Structure**](session03.qmd)          |         Luis Mijangos, Diana Robledo, Emily Stringer         |
-|  4  | Sunday   | 9 am -- 11 am |        [**Assigning Individuals to Populations**](session04.qmd)        | Arthur Georges, Luis Mijangos, Elise Furlan, Andrzej Killian |
-|  5  |          | 11 am -- 1 pm |    [**Kinship, Pedigrees & Mating Recommendations**](session05.qmd)     |                 Luis Mijangos, Bernd Gruber                  |
-|  6  |          | 1 pm -- 3 pm  | [**SNP Panel Selection & Simulations for Conservation**](session06.qmd) |  Elise Furlan, Bernd Gruber, Luis Mijangos, Emily Stringer   |
+| \#  | Day      |       Time        |                                  Topic                                  |                                 Presenters                                 |
+|:--------:|----------|:--------:|:---------------------:|:-----------------:|
+|  1  | Saturday |   9 am -- 11 am   |        [**Importing and Handling Genomic Data**](session01.qmd)         |                       Arthur Georges, Diana Robledo                        |
+|  2  |          | 11 am -- 12:30 pm | [**Estimating Effective Population Size and Key Stats**](session02.qmd) |                Bernd Gruber, Luis Mijangos, Emily Stringer                 |
+|  3  |          |  1:30 pm -- 3 pm  |          [**Identifying Population Structure**](session03.qmd)          |                Luis Mijangos, Diana Robledo, Emily Stringer                |
+|  4  |          |   3 am -- 5 pm    |        [**Assigning Individuals to Populations**](session04.qmd)        |                Arthur Georges, Luis Mijangos, Elise Furlan                 |
+|  5  | Sunday   |   9 am -- 11 am   |    [**Kinship, Pedigrees & Mating Recommendations**](session05.qmd)     |                        Luis Mijangos, Bernd Gruber                         |
+|  6  |          |   12 pm -- 2 pm   | [**SNP Panel Selection & Simulations for Conservation**](session06.qmd) | Elise Furlan, Bernd Gruber, Andrzej Killian, Luis Mijangos, Emily Stringer |
 
 : {tbl-colwidths="\[5,5,20, 30, 40\]" .striped .bordered}

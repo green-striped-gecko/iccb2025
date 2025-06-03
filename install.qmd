@@ -1,6 +1,8 @@
 # Install dartRverse {.unnumbered}
 
-![](images/dartR7.png) \# Install dartRverse {.unnumbered}
+![](images/dartR7.png) 
+
+# Install dartRverse {.unnumbered}
 
 ## Rationale
 

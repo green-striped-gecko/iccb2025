@@ -223,15 +223,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#rationale" id="toc-rationale" class="nav-link active" data-scroll-target="#rationale">Rationale</a></li>
+  <li><a href="#install-dartrverse" id="toc-install-dartrverse" class="nav-link active" data-scroll-target="#install-dartrverse">Install dartRverse</a>
+  <ul class="collapse">
+  <li><a href="#rationale" id="toc-rationale" class="nav-link" data-scroll-target="#rationale">Rationale</a></li>
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a>
   <ul class="collapse">
-  <li><a href="#install-dartrverse" id="toc-install-dartrverse" class="nav-link" data-scroll-target="#install-dartrverse">install dartRverse</a></li>
+  <li><a href="#install-dartrverse-1" id="toc-install-dartrverse-1" class="nav-link" data-scroll-target="#install-dartrverse-1">install dartRverse</a></li>
   <li><a href="#install-additional-packages" id="toc-install-additional-packages" class="nav-link" data-scroll-target="#install-additional-packages">install additional packages</a></li>
   <li><a href="#github-repositories" id="toc-github-repositories" class="nav-link" data-scroll-target="#github-repositories">Github repositories</a></li>
   <li><a href="#installing-dartr.sexlinked" id="toc-installing-dartr.sexlinked" class="nav-link" data-scroll-target="#installing-dartr.sexlinked">Installing <code>dartR.sexlinked</code></a></li>
   </ul></li>
   <li><a href="#using-dartrverse" id="toc-using-dartrverse" class="nav-link" data-scroll-target="#using-dartrverse">Using dartRverse</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -255,7 +258,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><img src="images/dartR7.png" class="img-fluid"> # Install dartRverse {.unnumbered}</p>
+<p><img src="images/dartR7.png" class="img-fluid"></p>
+<section id="install-dartrverse" class="level1 unnumbered">
+<h1 class="unnumbered">Install dartRverse</h1>
 <section id="rationale" class="level2">
 <h2 class="anchored" data-anchor-id="rationale">Rationale</h2>
 <p>We have developed a new suit of packages called “dartRverse” packages, that will replace the previous dartR package, which soon will be no longer supported. The new suit of packages are meant to be a 1:1 replacement and only in some instance very minor changes will be needed to update previous code. For example we reworked on the “output” of all functions, now being able to save figures in specified folders, which can be easier recovered and manipulated for further tweaking. The main reasons for splitting dartR into several packages and developing the dartRverse suit of packages was difficulty to maintain dartR, because of limits imposed by CRAN, but also limits due the the long time to test new function, when compiling the package. Therefore we were forced to split the package into several smaller packages. This has several advantages and in the best of all cases no disadvantages.</p>
@@ -270,8 +275,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="installation" class="level2">
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<section id="install-dartrverse" class="level3">
-<h3 class="anchored" data-anchor-id="install-dartrverse">install dartRverse</h3>
+<section id="install-dartrverse-1" class="level3">
+<h3 class="anchored" data-anchor-id="install-dartrverse-1">install dartRverse</h3>
 <div class="cell" data-hash="install_cache/html/unnamed-chunk-1_d57365d56ed7b9cfe2c8c842822b43e3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#installs the necessary bioconductor packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"devtools"</span>)</span>
@@ -352,6 +357,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
