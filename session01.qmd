@@ -8,86 +8,303 @@ title: "Importing and Handling Genomic Data"
 
 ## *Required packages*
 
+```{r}
+#| include: false
+ library(webexercises)
+```
+
 ```{r, warning=FALSE, message=FALSE}
 library(dartRverse)
 ```
 
-## Session Content (Topic title)
+## `dartR` Fundamentals
 
-### Introduction
+Just before you get started how about checking out some prerequisite tutorials if you are not up to date. These are the following two tutorials [RStudio refresher](tutorials.qmd#tutorial-pres-one) and [installing dartR](tutorials.qmd#tutorial-pres-two).
 
-**EXAMPLE CONTENT**
+::: callout-tip
+##### Also a little reminder about `dartRverse`:
 
 *An accessible genetic analysis platform for conservation, ecology and agriculture*
 
 `dartRverse` aims to support the installation of R packages of the dartRverse that are user-friendly and deliver a variety of analyses and pipelines on the one platform. Currently there are two core R packages that need to be installed to use dartR:
 
 -   dartR.base
-
 -   dartR.data
 
 Additional packages are
 
 -   dartR.sim (functions to simulate SNP data)
-
 -   dartR.spatial (spatial analysis)
-
 -   dartR.popgenomics (popgenomics analysis)
-
 -   dartR.captive
-
 -   dartR.sexlinked
+
+`dartR` is a collaboration between the University of Canberra, CSIRO and Diversity Arrays Technology, and is supported with funding from the ACT Priority Investment Program, CSIRO and the University of Canberra.
+:::
+
+### Introduction
+
+SNPs, or single nucleotide polymorphisms, are single base pair mutations at a nuclear locus (Figure 2). That nuclear locus is represented in the dataset by two sequence tags which, at a heterozygous locus, take on two allelic states, one referred to as the reference state, the other as the alternate or SNP state.
+
+![Figure 2. A diagram illustrating what is meant by a SNP (single point polymorphism)](images/snp_profile.png)
+
+Because it is extremely rare for a mutation to occur twice at the same site in the genome (perhaps with the exception of Eucalypts), the SNP data are considered to be effectively biallelic. Sites with more than two states that occur rarely are typically eliminated in the quality control steps as they are bundled with multiallelic sites arising from multiple copy sequences (e.g. as would arise from gene duplications) removed during preliminary filtering.
+
+The data can be represented as SNP bases (A, T, C or G), with two states for each individual at each locus in a diploid organisms. Alternatively, because the data are biallelic, it is computationally convenient to code the data as 0 for homozyogotes for one allele, 1 for heterozygotes, and 2 for homozygotes of the other allele. The reference allele is arbitrarily taken to be the most common allele, so 0 is the score for homozygous reference, and 2 is the score for homozygous alternate or SNP state. NA indicates that the SNP could not be scored.
+
+SNP data when using `dartR` are held in a genlight object that is defined in R package `adegenet` (Jombart, 2008; Jombart and Ahmed, 2011). The locus metadata included in the genlight object are those provided as part of your Diversity Arrays Technology report. These metadata are obtained from the Diversity Arrays Technology csv file when it is read in to the genlight object. The locus metadata are held in an R data.frame that is associated with the SNP data as part of the genlight object.
+
+Here is an example of the data structure of a genlight object
+
+![](images/genlight_structure.jpg){.class width="600" fig-align="left"}
+
+For further details go check out the [Data Structure](tutorials.qmd#tutorial-begin-one) tutorial.
 
 ### Example
 
-#### *example content header: load data*
+To help us get our head around data interrogation, subsetting, and basic filtering we are going to work through a worked example using a test dataset.
+
+```{r output=FALSE}
+# dartR comes with a built in test dataset called testset.gl. 
+# We first examine the contents of testset.gl
+testset.gl
+```
+
+How many individuals have been genotyped? How many SNP loci have been scored? What is the percentage of missing data?
+
+::: callout-note
+#### Quiz!
+
+![](images/task.png){.class width="48" height="48"}This quiz is referring to the `testset.gl` data set you have interrogated above.
+
+Type the correct number into the blank boxes below:
+
+-   number of SNPs `r fitb(255)`
+-   number of individuals `r fitb(250)`
+-   percent missing data `r fitb(12.34)`
+
+*boxes will go green if you have the answer correct*
+:::
+
+```{r output=FALSE}
+# Next let us copy the contents of testset.gl to another genlight object called gl.
+gl <- testset.gl
+# Use adegenet accessors to interrogate the genlight object further
+nInd(gl)
+nLoc(gl)
+nPop(gl)
+popNames(gl)
+indNames(gl)
+locNames(gl)
+```
+
+Now you have a better appreciation of the contents of genlight object gl. `pop(gl)` is a vector of population names against each individual. Note that it is distinguished from `popNames(gl)` which just lists the unique names.
 
 ```{r}
-my_data <- read.csv('./data/my_data.csv')
-my_rdata <- readRDS('./data/my_rdata.rds')
+# So if you want to tablulate the number of individuals in each population, use
+table(pop(gl))
+```
+
+We have learned that typing the name of the genlight object gives its attributes. How do we examine the genotypes in a genlight object. This is done by converting it to a matrix.
+
+```{r output=FALSE}
+as.matrix(gl)[1:7,1:5]
+```
+
+What do you see. Is it what you expected for the coding of the SNP scores?
+
+Lets start again.
+
+```{r output=FALSE}
+# Copy the original testset.gl
+gl <- testset.gl
+# Set the global verbosity to 3 – this will result in some detailed comments as you run each # script
+gl.set.verbosity(3)
+# Now lets use a report function to report the call rate for genlight object gl
+gl.report.callrate(gl)
+```
+
+::: callout-tip
+Note that the call rate is reported against locus. This is the default. Both a tabulated result and a graph is produced. You can use both to determine a suitable threshold for filtering on callrate.
+
+What threshold do you think might be appropriate?
+:::
+
+Now let's report the call rate for genlight object gl by individual.
+
+```{r output=FALSE}
+gl.report.callrate(gl,method="ind")
+```
+
+Can you see the difference. Again, both a tabulated result and a graph is produced. You can use both to determine a suitable threshold for filtering on callrate. What threshold do you think might be appropriate?
+
+What about reproducibility?
+
+```{r output=FALSE}
+gl.report.reproducibility(gl)
+```
+
+::: callout-tip
+Recall that DArT runs a series of technical replicates as part of its routine workflow. This enables an assessment of the quality of data associated with each locus. What threshold do you think might be appropriate for a filter of reproducability?
+:::
+
+Now let's try some filtering. Return to call rate.
+
+```{r output=FALSE}
+# First look at a report to decide a threshold
+gl.report.callrate(gl,method="ind")
+
+# Then filter using that threshold
+gl <- gl.filter.callrate(gl, method="ind", threshold=0.80)
+
+# Use a smear plot for a visual assessment of the effectiveness of filtering
+gl <- testset.gl
+gl.smearplot(gl)
 
 ```
 
+::: callout-tip
+Note the whitespace, which indicates missing data.
+:::
+
+```{r output=FALSE}
+# Filter on callrate by locus, then on individual
+gl <- gl.filter.callrate(gl,verbose=0)
+gl <- gl.filter.callrate(gl, method= "ind", threshold=0.80, verbose=0)
+
+# Examine the smearplot again
+gl.smearplot(gl)
+```
+
+*What has happened. What do you conclude?*
+
 ### Exercise
 
-::: callout-note
-#### Exercise
+::::: callout-note
+#### Knock yourself out trying all the different report and filtering functions
 
-![](images/task.png){#id .class width="48" height="48"} Try `loading` in your own data!
+Remember to use them as pairs – report function to decide a threshold, filter function to apply the threshold (where appropriate)
+
+How about trying it with a different dataset?
+
+::: download_btn
+```{css}
+#| echo: false
+
+.btn-default,
+.btn-default:hover,
+.btn-default:active {
+  font-size: 20px;
+  color: black;
+  background-color: transparent;
+  border-color: lightblue;
+}
+
+.btn-default:hover {
+  color: grey;
+  transition: 0.2s;
+}
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+library(downloadthis)
+
+
+  download_file(path = './data/sample_data_2row.csv',
+    output_name = "sample_data_2Row.csv",
+    output_extension = ".csv",
+    button_label = "Download SNP data (2 row)",
+    button_type = "default",
+    has_icon = TRUE,
+    icon = "fa fa-file-csv"
+  )
+
+```
 :::
+
+::: download_btn
+```{css}
+#| echo: false
+
+.btn-default,
+.btn-default:hover,
+.btn-default:active {
+  font-size: 20px;
+  color: black;
+  background-color: transparent;
+  border-color: lightblue;
+}
+
+.btn-default:hover {
+  color: grey;
+  transition: 0.2s;
+}
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+library(downloadthis)
+
+
+  download_file(path = './data/sample_metadata.csv',
+    output_name = "sample_metadata.csv",
+    output_extension = ".csv",
+    button_label = "Download metadata",
+    button_type = "default",
+    has_icon = TRUE,
+    icon = "fa fa-file-csv"
+  )
+
+```
+:::
+
+```{r output=FALSE}
+# how to load a genlight object
+gl <- gl.read.dart(filename="./data/sample_data_2Row.csv", 
+                   ind.metafile="./data/sample_metadata.csv")
+```
+
+You can even try it with your own data.
+:::::
+
+| Report functions | description |
+|-------------------------|-----------------------------------------------|
+| gl.report.callrate | *summarises CallRate values* |
+| gl.report.reproducibility | *summarises repAvg (SNP) or reproducibility (SilicoDArT) values.* |
+| gl. report.monomorphs | *provides a count of polymorphic and monomorphic loci* |
+| gl.report.secondaries | *provides a count of loci that are secondaries, that is, loci that reside on the one sequence tag.* |
+| gl.report.rdepth | *reports the estimate of average read depth for each locus* |
+| gl.report.hamming | *reports on Hamming distances between sequence tags* |
+| gl.report.overshoot | *reports loci for which the SNP has been trimmed along with the adaptor sequence* |
+| gl.report.taglength | *reports a frequency tabulation of sequence tag lengths* |
+| gl.report.sexlinked | *reports the number and type of loci likely to be in sex chromosomes* |
+
+: {.striped .bordered}
+
+| Filter functions | description |
+|------------------------|-----------------------------------------------|
+| gl.filter.callrate | *filter out loci or individuals for which the call rate (rate of non-missing values) is less than a specified threshold, say threshold = 0.95* |
+| gl.filter.reproducibility | *filter out loci for which the reproducibility (strictly repeatability) is less than a specified threshold, say threshold = 0.99* |
+| gl. filter.monomorphs | *provides a count of polymorphic and monomorphic loci* |
+| gl.filter.allna | *filter out loci that are all missing values (NA)* |
+| gl.filter.secondaries | *filter out SNPs that share a sequence tag, except one retained at random \[or the best based on reproducibility (RepAvg) and information content (AvgPIC)\].* |
+| gl.filter.rdepth | *filter out loci with exceptionally low or high read depth (coverage)* |
+| gl.filter.hamming | *filter out loci that differ from each other by less than a specified number of base pairs* |
+| gl.filter.overshoot | *filter out loci where the SNP location lies outside the trimmed sequence tag* |
+| gl.filter.taglength | *filter out loci for which the tag length is less that a threshold* |
+| gl.filter.sexlinked | *filter out loci that are likely to be in sex chromosomes* |
+
+: {.striped .bordered}
 
 ## *Further Study*
 
-### Tutorials 
-
-#### dartR RStudio Refresher
-
-{{< pdf extra/Tutorial_1_dartR_RStudio_Refresher_1-Jun-2025.pdf width=100% height=300 >}}
-
-
-#### dartR Installation
-
-{{< pdf extra/Tutorial_2_dartR_Installation_1-Jun-2025.pdf width=100% height=300 >}}
-
-
-#### dartR Data Structure and Input
-
-{{< pdf extra/Tutorial_3_dartR_Data_Structures_and_Input_1-Jun-2025.pdf width=100% height=300 >}}
-
-
-#### dartR Data Manipulation
-
-{{< pdf extra/Tutorial_4_dartR_Data_Manipulation_1-Jun-2025.pdf width=100% height=300 >}}
-
-
-#### dartR Basic Filtering
-
-{{< pdf extra/Tutorial_5_dartR_Basic_Filtering_1-Jun-2025.pdf width=100% height=300 >}}
-
-
+For more tuturials see the [dartR Tutorials](tutorials.qmd) section.
 
 ### Readings
 
 @gruber2018
 
 @mijangos2022
+
+@jombart2015

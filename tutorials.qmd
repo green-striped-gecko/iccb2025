@@ -1,0 +1,25 @@
+# dartR Tutorials {.unnumbered}
+
+## Prerequistes
+
+### RStudio Refresher {#tutorial-pres-one .unnumbered}
+
+{{< pdf extra/Tutorial_1_dartR_RStudio_Refresher_1-Jun-2025.pdf width=100% height=600 >}}
+
+### `dartR` Installation {#tutorial-pres-two .unnumbered}
+
+{{< pdf extra/Tutorial_2_dartR_Installation_1-Jun-2025.pdf width=100% height=600 >}}
+
+## Fundamentals
+
+### `dartR` Data Structure and Input  {#tutorial-begin-one .unnumbered}
+
+{{< pdf extra/Tutorial_3_dartR_Data_Structures_and_Input_1-Jun-2025.pdf width=100% height=600 >}}
+
+### `dartR` Data Manipulation
+
+{{< pdf extra/Tutorial_4_dartR_Data_Manipulation_1-Jun-2025.pdf width=100% height=600 >}}
+
+### `dartR` Basic Filtering
+
+{{< pdf extra/Tutorial_5_dartR_Basic_Filtering_1-Jun-2025.pdf width=100% height=600 >}}

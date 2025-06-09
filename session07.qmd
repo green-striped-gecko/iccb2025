@@ -1,0 +1,18 @@
+# Simulations for Conservation
+
+*Session Presenters*
+
+![](images/Presenters6.png)
+
+## *Required packages*
+
+```{r, warning=FALSE, message=FALSE}
+library(dartR.base)
+library(dartR.data)
+```
+
+## Session Content
+
+## *Further Study*
+
+### Readings
