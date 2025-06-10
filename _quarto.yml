@@ -28,6 +28,8 @@ bibliography: references.bib
 highlight-style: pygments
 format:
   html:
+    toc: true
+    toc-depth: 4
     theme: cosmo
     css:
     - css.css
@@ -37,5 +39,5 @@ format:
     link-external-icon: true
     link-external-newwindow: true
 execute: 
-  cache: true
+  cache: false
 editor: visual

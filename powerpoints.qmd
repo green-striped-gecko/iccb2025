@@ -38,4 +38,42 @@ library(downloadthis)
 ```
 :::
 
-## Session 2
+## Session 8
+
+
+::: download_btn
+```{css}
+#| echo: false
+
+.btn-default,
+.btn-default:hover,
+.btn-default:active {
+  font-size: 20px;
+  color: black;
+  background-color: transparent;
+  border-color: lightblue;
+}
+
+.btn-default:hover {
+  color: grey;
+  transition: 0.2s;
+}
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+library(downloadthis)
+
+
+  download_file(path = './extra/ICCB_Session_8.pptx',
+    output_name = "ICCB_dartR_session08",
+    output_extension = ".pptx",
+    button_label = "Download Session 8 powerpoint",
+    button_type = "default",
+    has_icon = TRUE,
+    icon = "fa fa-file-powerpoint"
+  )
+
+```
+:::
+

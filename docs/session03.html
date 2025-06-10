@@ -193,13 +193,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./session04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Assigning Individuals to Populations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Kinship, Pedigrees &amp; Mating Recommendations</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./session05.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Kinship, Pedigrees &amp; Mating Recommendations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Assigning Individuals to Populations</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -261,9 +261,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#required-packages" id="toc-required-packages" class="nav-link active" data-scroll-target="#required-packages"><em>Required packages</em></a></li>
-  <li><a href="#session-content" id="toc-session-content" class="nav-link" data-scroll-target="#session-content">Session Content</a></li>
-  <li><a href="#further-study" id="toc-further-study" class="nav-link" data-scroll-target="#further-study"><em>Further Study</em></a>
+  <li><a href="#uncovering-population-structure" id="toc-uncovering-population-structure" class="nav-link" data-scroll-target="#uncovering-population-structure">Uncovering Population Structure</a>
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
+  <li><a href="#analytical-toolkit" id="toc-analytical-toolkit" class="nav-link" data-scroll-target="#analytical-toolkit">Analytical toolkit</a></li>
+  </ul></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a>
+  <ul class="collapse">
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca">PCA</a></li>
+  <li><a href="#select-one-cluster" id="toc-select-one-cluster" class="nav-link" data-scroll-target="#select-one-cluster">Select one cluster</a></li>
+  </ul></li>
+  <li><a href="#what-can-go-wrong" id="toc-what-can-go-wrong" class="nav-link" data-scroll-target="#what-can-go-wrong">What can go wrong</a></li>
+  <li><a href="#structure-and-faststructure" id="toc-structure-and-faststructure" class="nav-link" data-scroll-target="#structure-and-faststructure">Structure and FastStructure</a></li>
+  <li><a href="#running-structure" id="toc-running-structure" class="nav-link" data-scroll-target="#running-structure">Running STRUCTURE</a></li>
+  <li><a href="#snmf" id="toc-snmf" class="nav-link" data-scroll-target="#snmf">snmf</a></li>
+  <li><a href="#popclusture" id="toc-popclusture" class="nav-link" data-scroll-target="#popclusture">Popclusture</a></li>
+  </ul></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
+  <li><a href="#further-study" id="toc-further-study" class="nav-link" data-scroll-target="#further-study"><em>Further Study</em></a>
+  <ul>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
   </ul></li>
   </ul>
@@ -295,18 +312,326 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="images/Presenters3.png" class="img-fluid"></p>
 <section id="required-packages" class="level2">
 <h2 class="anchored" data-anchor-id="required-packages"><em>Required packages</em></h2>
+<p>As always we need to have dartRverse installed and loaded. In addition you need to have dartR.popgen installend.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartR.base)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartR.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartRverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="session-content" class="level2">
-<h2 class="anchored" data-anchor-id="session-content">Session Content</h2>
+<section id="uncovering-population-structure" class="level2">
+<h2 class="anchored" data-anchor-id="uncovering-population-structure">Uncovering Population Structure</h2>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<p><em>Why population structure matters</em></p>
+<ul>
+<li><p>What is a “population” in population genetics?</p></li>
+<li><p>Genetic structure defined – how allele frequencies vary among groups.</p></li>
+<li><p>Key drivers: effective population size, gene flow/immigration, natural selection, drift.</p></li>
+<li><p>Isolation-by-distance &amp; sampling design – avoiding spurious structure.</p></li>
+<li><p>Why we care: management units, inbreeding, local adaptation, introgression.</p></li>
+</ul>
+<section id="analytical-toolkit" class="level4">
+<h4 class="anchored" data-anchor-id="analytical-toolkit">Analytical toolkit</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 37%">
+<col style="width: 36%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><strong>Approach</strong></td>
+<td><strong>Purpose</strong></td>
+<td><strong>dartR entry point</strong></td>
+</tr>
+<tr class="even">
+<td><strong>PCoA / PCA</strong></td>
+<td>Quick multivariate overview</td>
+<td><code>gl.pcoa()</code>, <code>gl.pcoa.plot()</code></td>
+</tr>
+<tr class="odd">
+<td><strong>STRUCTURE</strong></td>
+<td>Bayesian clustering</td>
+<td><code>gl.run.structure()</code>, <code>gl.plot.structure()</code>, <code>gl.map.structure()</code></td>
+</tr>
+<tr class="even">
+<td><strong>fastSTRUCTURE</strong></td>
+<td>Fast variational STRUCTURE (Mac/Linux)</td>
+<td><code>gl.run.faststructure()</code>, <code>gl.plot.faststructure()</code></td>
+</tr>
+<tr class="odd">
+<td><strong>sNMF</strong></td>
+<td>Sparse non-negative matrix factorisation</td>
+<td><code>gl.run.snmf()</code>, <code>gl.plot.snmf()</code>, <code>gl.map.snmf()</code></td>
+</tr>
+<tr class="even">
+<td><strong>POPCLUSTER</strong></td>
+<td>Ultra-fast admixture inference</td>
+<td><code>gl.run.popcluster()</code>, <code>gl.plot.popcluster()</code>, <code>gl.map.popcluster()</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<p>To help us understand our analytical toolkit better let’s start with a simple example using a simulated dataset.</p>
+<p>The dataset is a genlight object and contains 10 populations of 30 individuals each and 1000 loci and is part of the dartRverse package. The populations are fairly independent but are linked by some imigration, so a typical Metapopulation scenario. The populations are named A to J and follow more or less an isolation by distance (actually an isolation by resistance model). So population next to each other (e.g.&nbsp;B and C) are fairly well mixed and populations further apart from the rest (e.g.&nbsp;D) are more isolated.</p>
+<p>To simplify this further we limit our exercise to the first 150 individuals only (which entails now 5 populations a 30 individuals, A to E). To get an overview on the population we use the function: gl.map.interactive which plots the individuals on a map. Please note the genlight/dartR object needs to have valid lat long coordinates for each individual to be able to do so.</p>
+<p>Lets get started.</p>
+<section id="pca" class="level4">
+<h4 class="anchored" data-anchor-id="pca">PCA</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the simulated possum data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> possums.gl[<span class="dv">1</span><span class="sc">:</span><span class="dv">150</span>,]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Interrogate to see what the data are</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nLoc</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 200</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nInd</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 150</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">pop</span>(gl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ A  B  C  D  E 
+30 30 30 30 30 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SNP coding for individuals 1-5 and loci 1-8</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(gl)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  X1 X2 X3 X4 X5 X6 X7 X8
+1  1  2  1  2  2  2  1  2
+2  1  1  1  1  1  1  0  1
+3  2  0  2  0  1  1  1  1
+4  0  1  2  0  0  1  0  1
+5  1  2  1  2  2  2  1  0</code></pre>
+</div>
+</div>
+<p>The next step is to actually calculate genetic difference between individuals. We do this by measuring euclidean distance but it is worth remembering that there are a myriad of different distances we can use. There are five different options for the function we will using, <code>gl.dist.ind</code>, that may be worth exploring depending on the context of your data.</p>
+<p>The distance measure for SNP genotypes can be one of:</p>
+<ul>
+<li><p><strong>Euclidean Distance</strong></p></li>
+<li><p>Scaled Euclidean Distance</p></li>
+<li><p>Simple Mismatch Distance</p></li>
+<li><p>Absolute Mismatch Distance</p></li>
+<li><p>Czekanowski (Manhattan) Distance</p></li>
+</ul>
+<p>But lets stick with euclidean distance for now. Euclidean distance is quite simple it treats</p>
+<p>possum.gl</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate an Euclidean Distance Matrix on individuals</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">gl.dist.ind</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Represent visually as a heat map</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.plot.heatmap</span>(D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Undertake a PCA on the raw data</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> <span class="fu">gl.pcoa</span>(gl, <span class="at">verbose =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.pcoa 
+  Processing genlight object with SNP data
+  Performing a PCA, individuals as entities, loci as attributes, SNP genotype as state</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Ordination yielded 4 informative dimensions( broken-stick criterion) from 149 original dimensions
+    PCA Axis 1 explains 15.5 % of the total variance
+    PCA Axis 1 and 2 combined explain 30.8 % of the total variance
+    PCA Axis 1-3 combined explain 41.2 % of the total variance
+Starting gl.colors 
+Selected color type 2 
+Completed: gl.colors </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.pcoa </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first two dimensions of the PCA</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pc_a1a2 <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(pc,gl,<span class="at">pop.labels=</span><span class="st">"legend"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first and third dimensions of the PCA</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>pc_a1a3 <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(pc,gl,<span class="at">xaxis=</span><span class="dv">1</span>,<span class="at">yaxis=</span><span class="dv">3</span>, <span class="at">pop.labels=</span><span class="st">"legend"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="select-one-cluster" class="level4">
+<h4 class="anchored" data-anchor-id="select-one-cluster">Select one cluster</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only the data from one cluster in the primary PCA</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">gl.drop.pop</span>(gl, <span class="at">pop.list=</span><span class="fu">c</span>(<span class="st">'D'</span>, <span class="st">'A'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.drop.pop 
+  Processing genlight object with SNP data
+  Checking for presence of nominated populations, deleting them
+  Warning: Resultant dataset may contain monomorphic loci
+  Locus metrics not recalculated
+Completed: gl.drop.pop </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first two dimensions of the secondary PCA</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> <span class="fu">gl.pcoa</span>(temp, <span class="at">verbose =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.pcoa 
+  Processing genlight object with SNP data
+  Performing a PCA, individuals as entities, loci as attributes, SNP genotype as state</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Ordination yielded 2 informative dimensions( broken-stick criterion) from 89 original dimensions
+    PCA Axis 1 explains 22.9 % of the total variance
+    PCA Axis 1 and 2 combined explain 30.5 % of the total variance
+    PCA Axis 1-3 combined explain NA % of the total variance
+Starting gl.colors 
+Selected color type 2 
+Completed: gl.colors </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.pcoa </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pc_plot <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(pc, temp,<span class="at">pop.labels=</span><span class="st">"legend"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.pcoa.plot 
+  Processing an ordination file (glPca)
+  Processing genlight object with SNP data
+  Plotting populations identified by a legend
+  Preparing plot .... please wait</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.pcoa.plot </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="what-can-go-wrong" class="level3">
+<h3 class="anchored" data-anchor-id="what-can-go-wrong">What can go wrong</h3>
+<p>Missing data causes distortion, which can lead to misinterpretation.</p>
+<p>dartR, that uses the <code>adgenet</code> package for its pca, fills missing data with the global average.</p>
+<p>You can choose alternative methods of filling in the missing data prior to running your pca using the <code>gl.impute</code> function.</p>
+<p>PCA is a hypothesis generating tool, not a tool for definitive decisions of the structure of populations.</p>
+<p>Structure variants can also turn up on a PCA, like an inversion.</p>
+<p>PCA is sample size dependent - but this is more for the top two dimensions not all the informative dimensions.</p>
+</section>
+<section id="structure-and-faststructure" class="level3">
+<h3 class="anchored" data-anchor-id="structure-and-faststructure">Structure and FastStructure</h3>
+<p>To run STRUCTURE from within R, we need to install the non-GUI executable (the version without frontend) for your operating system [e.g windows, mac or linux]. You can download STRUCTURE for your OS from <a href="http://web.stanford.edu/group/pritchardlab/structure_software/release_versions/v2.3.4/html/structure.html" class="uri">http://web.stanford.edu/group/pritchardlab/structure_software/release_versions/v2.3.4/html/structure.html</a>.</p>
+<p>To let R know where the executable is, you need to set the path to the executable. For example, under windows, if you have the executable in <code>d:/programms/structure/structure.exe</code>, you can use the command below.</p>
+</section>
+<section id="running-structure" class="level3">
+<h3 class="anchored" data-anchor-id="running-structure">Running STRUCTURE</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>srnoad <span class="ot">&lt;-</span> <span class="fu">gl.run.structure</span>(possums, <span class="at">k.range =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">num.k.rep =</span> <span class="dv">10</span>, <span class="at">exec =</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                             <span class="st">'./binaries/structure.exe'</span>,<span class="at">plot.out =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">burnin=</span><span class="dv">50</span>, <span class="at">numreps=</span><span class="dv">100</span>, <span class="co"># this is just for a test run</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                         <span class="co"># burnin=50000, numreps=100000, # for robust results</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">noadmix=</span><span class="cn">FALSE</span>)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">gl.evanno</span>(srnoad)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>qmatnoad <span class="ot">&lt;-</span> <span class="fu">gl.plot.structure</span>(srnoad2, <span class="at">K=</span><span class="dv">4</span>, <span class="at">clumpak =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> <span class="fu">gl.map.structure</span>(<span class="at">qmat =</span> qmatnoad, <span class="at">x =</span> possums, <span class="at">K=</span><span class="dv">3</span>, <span class="at">scalex=</span><span class="dv">1</span>, <span class="at">scaley=</span><span class="fl">0.5</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise: Study the results using different Ks and with/without admixture
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/task.png" class="class" width="48" height="48"> The above run was a structure run using the no-admixture model for a range of K=2:7. Study the results by plotting it for various Ks and try to interpret the results in the light of the simulated population structure.</p>
+<p>How about trying it on your own data or the example data provided.</p>
+</div>
+</div>
+</section>
+<section id="snmf" class="level3">
+<h3 class="anchored" data-anchor-id="snmf">snmf</h3>
+</section>
+<section id="popclusture" class="level3">
+<h3 class="anchored" data-anchor-id="popclusture">Popclusture</h3>
+</section>
+</section>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
+<p>Fun example on real data.</p>
 </section>
 <section id="further-study" class="level2">
 <h2 class="anchored" data-anchor-id="further-study"><em>Further Study</em></h2>
+<p>Pdfs/links</p>
 <section id="readings" class="level3">
 <h3 class="anchored" data-anchor-id="readings">Readings</h3>
+<p>• Evanno et al.&nbsp;2005 – Detecting the number of clusters (ΔK).</p>
+<p>• Lawson et al.&nbsp;2018 – How not to over-interpret STRUCTURE/ADMIXTURE plots.</p>
+<p>• Wang 2017 – Common pitfalls when using STRUCTURE.</p>
+<p>• Raj et al.&nbsp;2014 – fastSTRUCTURE.</p>
+<p>• Frichot et al.&nbsp;2014 – sNMF.</p>
+<p>• Wang 2022 – POPCLUSTER.</p>
+<p>• Kopelman et al.&nbsp;2015 – CLUMPAK.</p>
+<p>• Jakobsson &amp; Rosenberg 2007 – CLUMPP.</p>
 
 
 </section>
@@ -1156,8 +1481,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./session04.html" class="pagination-link" aria-label="Assigning Individuals to Populations">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Assigning Individuals to Populations</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./session04.html" class="pagination-link" aria-label="Kinship, Pedigrees &amp; Mating Recommendations">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Kinship, Pedigrees &amp; Mating Recommendations</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

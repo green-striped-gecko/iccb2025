@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -193,13 +213,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./session04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Assigning Individuals to Populations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Kinship, Pedigrees &amp; Mating Recommendations</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./session05.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Kinship, Pedigrees &amp; Mating Recommendations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Assigning Individuals to Populations</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -262,8 +282,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#required-packages" id="toc-required-packages" class="nav-link active" data-scroll-target="#required-packages"><em>Required packages</em></a></li>
   <li><a href="#session-content" id="toc-session-content" class="nav-link" data-scroll-target="#session-content">Session Content</a></li>
+  <li><a href="#session-content-1" id="toc-session-content-1" class="nav-link" data-scroll-target="#session-content-1">Session Content</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises</a></li>
+  <li><a href="#exercise-1-identify-sex-linked-loci-and-use-them-for-sexing" id="toc-exercise-1-identify-sex-linked-loci-and-use-them-for-sexing" class="nav-link" data-scroll-target="#exercise-1-identify-sex-linked-loci-and-use-them-for-sexing">Exercise 1: Identify sex-linked loci and use them for sexing <img src="images/task.png" class="class" width="48" height="48"></a>
+  <ul>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
+  <li><a href="#search-for-sex-linked-loci" id="toc-search-for-sex-linked-loci" class="nav-link" data-scroll-target="#search-for-sex-linked-loci">Search for sex-linked loci</a></li>
+  <li><a href="#sexing-individuals-with-unknown-sex" id="toc-sexing-individuals-with-unknown-sex" class="nav-link" data-scroll-target="#sexing-individuals-with-unknown-sex">Sexing individuals with unknown sex</a></li>
+  </ul></li>
+  <li><a href="#exercise-2-observe-the-effects-of-not-removing-sex-linked-loci-on-population-genetic-analyses" id="toc-exercise-2-observe-the-effects-of-not-removing-sex-linked-loci-on-population-genetic-analyses" class="nav-link" data-scroll-target="#exercise-2-observe-the-effects-of-not-removing-sex-linked-loci-on-population-genetic-analyses">Exercise 2: Observe the effects of not removing sex-linked loci on population genetic analyses <img src="images/task.png" class="class" width="48" height="48"></a>
+  <ul>
+  <li><a href="#filtering-snps-only-with-standard-filters-sloppy-filtering" id="toc-filtering-snps-only-with-standard-filters-sloppy-filtering" class="nav-link" data-scroll-target="#filtering-snps-only-with-standard-filters-sloppy-filtering">Filtering SNPs only with standard filters (“sloppy filtering”)</a></li>
+  <li><a href="#filtering-snps-for-sex-linked-loci-and-then-with-standard-filters-correct-filtering" id="toc-filtering-snps-for-sex-linked-loci-and-then-with-standard-filters-correct-filtering" class="nav-link" data-scroll-target="#filtering-snps-for-sex-linked-loci-and-then-with-standard-filters-correct-filtering">Filtering SNPs for sex-linked loci and then with standard filters (“correct filtering”)</a></li>
+  <li><a href="#differences-in-pcoa-between-sloppily-filtered-dataset-only-standard-filters-vs-correctly-filtered-dataset-gl.drop.sexlinked-and-standard-filters" id="toc-differences-in-pcoa-between-sloppily-filtered-dataset-only-standard-filters-vs-correctly-filtered-dataset-gl.drop.sexlinked-and-standard-filters" class="nav-link" data-scroll-target="#differences-in-pcoa-between-sloppily-filtered-dataset-only-standard-filters-vs-correctly-filtered-dataset-gl.drop.sexlinked-and-standard-filters">2.1. Differences in PCoA between “sloppily filtered” dataset (only standard filters), vs “correctly filtered” dataset (gl.drop.sexlinked and standard filters)</a></li>
+  <li><a href="#differences-in-genetic-diversity-and-fixation-indices-between-sloppily-filtered-dataset-vs-correctly-filtered-dataset" id="toc-differences-in-genetic-diversity-and-fixation-indices-between-sloppily-filtered-dataset-vs-correctly-filtered-dataset" class="nav-link" data-scroll-target="#differences-in-genetic-diversity-and-fixation-indices-between-sloppily-filtered-dataset-vs-correctly-filtered-dataset">2.2. Differences in genetic diversity and fixation indices between “sloppily filtered” dataset vs “correctly filtered” dataset</a></li>
+  </ul></li>
   <li><a href="#further-study" id="toc-further-study" class="nav-link" data-scroll-target="#further-study"><em>Further Study</em></a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
   </ul></li>
   </ul>
@@ -296,19 +332,1082 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="required-packages" class="level2">
 <h2 class="anchored" data-anchor-id="required-packages"><em>Required packages</em></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartR.base)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartR.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartRverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartR.sexlinked)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="session-content" class="level2">
 <h2 class="anchored" data-anchor-id="session-content">Session Content</h2>
 </section>
+<section id="session-content-1" class="level2">
+<h2 class="anchored" data-anchor-id="session-content-1">Session Content</h2>
+<p>In this tutorial you will read about sex-linked loci and do two excercises.</p>
+<ul>
+<li>Introduction</li>
+<li>Exercises
+<ul>
+<li>Exercise 1: Identifying sex-linked loci and using them for sexing</li>
+<li>Exercise 2: Observing the effects of not removing sex-linked loci on population genetic analyses
+<ul>
+<li>2.1. Differences in PCoA</li>
+<li>2.2. Differences in genetic diversity and fixation indices</li>
+</ul></li>
+</ul></li>
+<li>References</li>
+</ul>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Many population genetic studies assume autosomal loci. Therefore, it is best practice to exclude sex-linked loci from SNP datasets. Failing to remove these loci can lead to skewed estimates of <strong>genetic diversity</strong>—such as heterozygosity, fixation indices (like FIS), polymorphism, and allelic richness—especially when the sample has an uneven sex ratio or when there are differences in diversity between sex chromosomes and autosomes. Identifying <strong>population structure</strong> also improves when sex-linked loci are excluded, since these markers can obscure patterns shaped by evolutionary forces like gene flow, selection, and drift. Similarly, <strong>parentage analyses</strong>, which rely on autosomal Mendelian inheritance, can be compromised by sex-linked loci, leading to apparent mismatches between true parent-offspring pairs. Therefore, <em>accurately identifying sex-linked loci is essential for reliable genetic analysis and informed management decisions.</em></p>
+<p>On the other hand, identifying sex-linked markers can be valuable for determining the sex of individuals in species without sexual dimorphism, and for uncovering sex-specific ecological or evolutionary patterns.</p>
+<p>Sex-linked markers are those that are inherited differently between the sexes, usually because they are present in sex chromosomes. In animal species, the two most common chromosomal sex-determination systems are ZW and XY. In the ZW system, typical for birds and some reptiles and insects, females are heterogametic (ZW) and males are homogametic (ZZ). On the contrary, in an XY system, typical for mammals and some insects, males are the heterogametic sex with one X and one Y chromosome, and females are the homogametic sex with two X chromosomes.</p>
+<p>Sex-linked markers can be classified into three types (<strong>Figure 1</strong>):</p>
+<ul>
+<li>W-linked or Y-linked loci</li>
+<li>Z-linked or X-linked loci</li>
+<li>Gametologs</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ZW.png" class="img-fluid figure-img"></p>
+<figcaption><strong>Figure 1.</strong> Sex-linked markers in ZW sex-determination systems</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<p>The following exercises can be done with the dataset included in the <code>dartR.sexlinked</code> package (that of the beautiful Eastern Yellow Robin, EYR; <strong>Figure 2</strong>; Robledo-Ruiz et al.&nbsp;2023) or on your own data!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Eastern_Yellow_Robin.jpg" class="img-fluid figure-img" width="349"></p>
+<figcaption><strong>Figure 2.</strong> Eastern Yellow Robin. Isn’t it a cutie?</figcaption>
+</figure>
+</div>
+</section>
+<section id="exercise-1-identify-sex-linked-loci-and-use-them-for-sexing" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-1-identify-sex-linked-loci-and-use-them-for-sexing">Exercise 1: Identify sex-linked loci and use them for sexing <img src="images/task.png" class="class" width="48" height="48"></h2>
+<p>Imagine you have a genetic dataset in which you have the sexes of most individuals but not all. You are also not sure about the sexes you have recorded for some individuals during fieldwork (human error exists!). Because you know a lot about sex-linked loci, you want to see if you can identify some in order to help you double-check sexes.</p>
+<section id="load-data" class="level3">
+<h3 class="anchored" data-anchor-id="load-data">Load data</h3>
+<p>Start by calling the dataset and exploring it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"EYR"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>EYR                   <span class="co"># Explore the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> ********************
+ *** DARTR OBJECT ***
+ ********************
+
+ ** 782 genotypes,  1,000 SNPs , size: 20.2 Mb
+
+    missing data: 147031 (=18.8 %) scored as NA
+
+ ** Genetic data
+   @gen: list of 782 SNPbin
+   @ploidy: ploidy of each individual  (range: 2-2)
+
+ ** Additional data
+   @ind.names:  782 individual labels
+   @loc.names:  1000 locus labels
+   @loc.all:  1000 allele labels
+   @position: integer storing positions of the SNPs [within 69 base sequence]
+   @pop: population of each individual (group size range: 52-421)
+   @other: a list containing: loc.metrics, ind.metrics, loc.metrics.flags, verbose, history 
+    @other$ind.metrics: id, pop, sex, Mito, service, plate_location 
+    @other$loc.metrics: AlleleID, CloneID, AlleleSequence, TrimmedSequence, Chrom_Yellow_robin_HiC_v2, ChromPos_Yellow_robin_HiC_v2, AlnCnt_Yellow_robin_HiC_v2, AlnEvalue_Yellow_robin_HiC_v2, SNP, SnpPosition, CallRate, OneRatioRef, OneRatioSnp, FreqHomRef, FreqHomSnp, FreqHets, PICRef, PICSnp, AvgPIC, AvgCountRef, AvgCountSnp, RepAvg, clone, uid, rdepth, maf 
+   @other$latlon[g]: no coordinates attached</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>EYR<span class="sc">@</span>n.loc             <span class="co"># Number of SNPs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(EYR<span class="sc">@</span>ind.names) <span class="co"># Number of individuals</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 782</code></pre>
+</div>
+</div>
+</section>
+<section id="search-for-sex-linked-loci" class="level3">
+<h3 class="anchored" data-anchor-id="search-for-sex-linked-loci">Search for sex-linked loci</h3>
+<p>The function <code>gl.report.sexlinked</code> identifies sex-linked and autosomal loci present in a SNP dataset (genlight object) using individuals with known sex. It identifies five types of loci: w-linked or y-linked, sex-biased, z-linked or x-linked, gametologous and autosomal.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The genlight object must contain in</em> <code>gl@other$ind.metrics</code> <em>a column named</em> <code>id</code><em>, and a column named</em> <code>sex</code> <em>in which individuals with known-sex are assigned</em> <code>M</code> <em>for male, or</em> <code>F</code> <em>for female. The function ignores individuals that are assigned anything else or nothing at all (unknown-sex).</em></p>
+</div>
+</div>
+<p>Check that <code>ind.metrics</code> has the necessary columns:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(EYR<span class="sc">@</span>other<span class="sc">$</span>ind.metrics[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 15%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 17%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">id</th>
+<th style="text-align: left;">pop</th>
+<th style="text-align: left;">sex</th>
+<th style="text-align: left;">Mito</th>
+<th style="text-align: left;">service</th>
+<th style="text-align: left;">plate_location</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">024-96401</td>
+<td style="text-align: left;">024-96401</td>
+<td style="text-align: left;">Crusoe</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">DYro17-3039</td>
+<td style="text-align: left;">2-D9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">024-96401b</td>
+<td style="text-align: left;">024-96401b</td>
+<td style="text-align: left;">Crusoe</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">DYro21-6107</td>
+<td style="text-align: left;">3-D3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">024-96402</td>
+<td style="text-align: left;">024-96402</td>
+<td style="text-align: left;">Crusoe</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">DYro17-3039</td>
+<td style="text-align: left;">2-C9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">024-96403</td>
+<td style="text-align: left;">024-96403</td>
+<td style="text-align: left;">Crusoe</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">DYro17-3039</td>
+<td style="text-align: left;">2-B9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">024-96404</td>
+<td style="text-align: left;">024-96404</td>
+<td style="text-align: left;">Crusoe</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">DYro17-3039</td>
+<td style="text-align: left;">2-A9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">024-96405</td>
+<td style="text-align: left;">024-96405</td>
+<td style="text-align: left;">Muckleford</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">DYro17-3039</td>
+<td style="text-align: left;">2-D6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">024-96406</td>
+<td style="text-align: left;">024-96406</td>
+<td style="text-align: left;">Crusoe</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">DYro17-3039</td>
+<td style="text-align: left;">2-H8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">024-96407</td>
+<td style="text-align: left;">024-96407</td>
+<td style="text-align: left;">Crusoe</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">DYro17-3039</td>
+<td style="text-align: left;">2-G8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">024-96408</td>
+<td style="text-align: left;">024-96408</td>
+<td style="text-align: left;">Crusoe</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">DYro17-3039</td>
+<td style="text-align: left;">2-F8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">024-96410</td>
+<td style="text-align: left;">024-96410</td>
+<td style="text-align: left;">Muckleford</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">DYro17-3039</td>
+<td style="text-align: left;">1-E9</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><em>only showing first 10 rows</em></p>
+<p>Run the function to identify sex-linked loci in the EYR genlight object:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">gl.report.sexlinked</span>(EYR, <span class="at">system =</span> <span class="st">"zw"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.sexlinked 
+  Processing genlight object with SNP data</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Detected 352 females and 429 males.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Starting phase 1. May take a while...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Building call rate plot.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Done building call rate plot.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Starting phase 2. May take a while...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Building heterozygosity plot.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Done building heterozygosity plot.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>**FINISHED** Total of analyzed loci: 1000.
+Found 150 sex-linked loci:
+   16 W-linked loci
+   82 sex-biased loci
+   32 Z-linked loci
+   20 gametologs.
+And 850 autosomal loci.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.report.sexlinked </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> How many males and females does the dataset contain?</p>
+<p><strong>Question:</strong> How many sex-linked loci were found?</p>
+<p><strong>Question:</strong> Why are there two plots?</p>
+<p><strong>Question:</strong> What does each point in the plots represent?</p>
+<p><strong>Question:</strong> What do the colours in the plots mean? Look at <strong>Figure 1</strong> for a hint. What about the blue dots?</p>
+</div>
+</div>
+</section>
+<section id="sexing-individuals-with-unknown-sex" class="level3">
+<h3 class="anchored" data-anchor-id="sexing-individuals-with-unknown-sex">Sexing individuals with unknown sex</h3>
+<p>The <code>dartR.sexlinked</code> package has more functions that can be useful when a dataset has some missing sex data.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> How many individuals does the <code>EYR</code> genlight object contain?</p>
+<p><strong>Question:</strong> How many males and females were detected by function <code>gl.report.sexlinked</code>? Are there individuals with unknown sex?</p>
+</div>
+</div>
+<p>Find the id of the individual that is not sexed:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>EYR<span class="sc">@</span>other<span class="sc">$</span>ind.metrics[<span class="sc">!</span>(EYR<span class="sc">@</span>other<span class="sc">$</span>ind.metrics<span class="sc">$</span>sex <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>)), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 id        pop sex Mito     service plate_location
+024-96417 024-96417 Muckleford        B DYro17-3039           2-E5</code></pre>
+</div>
+</div>
+<p>Use the sex-linked loci you have identified to infer the sex of that individual by running function <code>infer.sex</code>.</p>
+<p>This function uses the output of function <code>gl.keep.sexlinked</code> to infer the sex of <em>all</em> individuals in the dataset. It uses 3 types of sex-linked loci (W-/Y-linked, Z-/X-linked, and gametologs), assigns a preliminary genetic sex for each type of sex-linked loci available, and outputs an <code>agreed sex</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>EYR_sexLinked <span class="ot">&lt;-</span> <span class="fu">gl.keep.sexlinked</span>(EYR, <span class="at">system =</span> <span class="st">"zw"</span>) <span class="co"># save sex-linked loci</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.keep.sexlinked 
+  Processing genlight object with SNP data</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Detected 352 females and 429 males.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Starting phase 1. May take a while...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Building call rate plots.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Starting phase 2. May take a while...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Building heterozygosity plots.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Done building heterozygosity plots.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>**FINISHED** Total of analyzed loci: 1000.
+Kept 150 sex-linked loci:
+   16 W-linked loci
+   82 sex-biased loci
+   32 Z-linked loci
+   20 gametologs.
+And removed 850 autosomal loci.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.keep.sexlinked </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#inferred.sexes &lt;- gl.infer.sex(gl_sexlinked = EYR_sexLinked, system = "zw", seed = 124) # use sex-linked loci</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The function outputs a table with assigned sexes based on sex-linked loci:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#View(inferred.sexes)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Examine the output table. There are four assigned sexes per individual: one according to w-linked loci, one according to z-linked loci, one according to gametologs, and one final <code>agreed sex</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> What <code>agreed sex</code> was assigned to the individual with missing sex?</p>
+<p><strong>Question:</strong> Can you find individuals for which the <code>agreed sex</code> is uncertain (i.e., has an asterisk ‘*’)? How would you decide which is their correct sex?</p>
+</div>
+</div>
+</section>
+</section>
+<section id="exercise-2-observe-the-effects-of-not-removing-sex-linked-loci-on-population-genetic-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="exercise-2-observe-the-effects-of-not-removing-sex-linked-loci-on-population-genetic-analyses">Exercise 2: Observe the effects of not removing sex-linked loci on population genetic analyses <img src="images/task.png" class="class" width="48" height="48"></h2>
+<p>Imagine you are analyzing the genetic data of a species and you want to look at its population structure and genetic diversity. You start by filtering your beautiful set of SNPs. Because you are a rigorous scientist, you want to test whether using function <code>gl.drop.sexlinked</code> to properly filter out sex-linked loci changes the results of the populations analyses. So you: (1) process your SNP dataset by applying only standard filters (from here on “sloppy filtering”) and run analyses, and (2) process the dataset by filtering out sex-linked loci first, applying standard filters second (from here on “correct filtering”), and then run analyses.</p>
+<p>Use the EYR dataset or your own data to report:</p>
+<ol type="1">
+<li><p>Do you see any changes in a population structure analysis (PCoA) when you filter out sex-linked markers versus when you do not?</p></li>
+<li><p>Do you see any differences in genetic diversity and fixation indices when you filter out sex-linked markers versus when you do not?</p></li>
+</ol>
+<section id="filtering-snps-only-with-standard-filters-sloppy-filtering" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-snps-only-with-standard-filters-sloppy-filtering">Filtering SNPs only with standard filters (“sloppy filtering”)</h3>
+<p>Let’s apply only standard filters (read depth, call rate, and MAC):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for read depth</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.rdepth</span>(EYR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.rdepth 
+  Processing genlight object with SNP data
+  Reporting Read Depth by Locus
+  No. of loci = 1000 
+  No. of individuals = 782 
+    Minimum      :  2.6 
+    1st quartile :  4.3 
+    Median       :  5.6 
+    Mean         :  5.9649 
+    3r quartile  :  7.325 
+    Maximum      :  13.2 
+    Missing Rate Overall:  0.19 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Quantile Threshold Retained Percent Filtered Percent
+1      100%      13.2        1     0.1      999    99.9
+2       95%       9.9       51     5.1      949    94.9
+3       90%       9.0      105    10.5      895    89.5
+4       85%       8.3      151    15.1      849    84.9
+5       80%       7.8      208    20.8      792    79.2
+6       75%       7.3      258    25.8      742    74.2
+7       70%       6.9      304    30.4      696    69.6
+8       65%       6.5      354    35.4      646    64.6
+9       60%       6.2      404    40.4      596    59.6
+10      55%       5.9      451    45.1      549    54.9
+11      50%       5.6      504    50.4      496    49.6
+12      45%       5.3      563    56.3      437    43.7
+13      40%       5.1      602    60.2      398    39.8
+14      35%       4.8      659    65.9      341    34.1
+15      30%       4.6      702    70.2      298    29.8
+16      25%       4.3      752    75.2      248    24.8
+17      20%       4.0      823    82.3      177    17.7
+18      15%       3.9      852    85.2      148    14.8
+19      10%       3.6      906    90.6       94     9.4
+20       5%       3.3      956    95.6       44     4.4
+21       0%       2.6     1000   100.0        0     0.0
+Completed: gl.report.rdepth </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>EYR.sloppy <span class="ot">&lt;-</span> <span class="fu">gl.filter.rdepth</span>(EYR, <span class="at">lower =</span> <span class="dv">3</span>, <span class="at">upper =</span> <span class="dv">11</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for loci call rate</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.callrate</span>(EYR.sloppy, <span class="at">method =</span> <span class="st">"loc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.callrate 
+  Processing genlight object with SNP data
+  Reporting Call Rate by Locus
+  No. of loci = 958 
+  No. of individuals = 782 
+    Minimum      :  0.20844 
+    1st quartile :  0.7202688 
+    Median       :  0.895141 
+    Mean         :  0.8131871 
+    3r quartile  :  0.950128 
+    Maximum      :  0.988491 
+    Missing Rate Overall:  0.1868 
+
+   Quantile Threshold Retained Percent Filtered Percent
+1      100%  0.988491        1     0.1      957    99.9
+2       95%  0.979540       52     5.4      906    94.6
+3       90%  0.973146      104    10.9      854    89.1
+4       85%  0.965473      145    15.1      813    84.9
+5       80%  0.956522      197    20.6      761    79.4
+6       75%  0.950128      247    25.8      711    74.2
+7       70%  0.943734      291    30.4      667    69.6
+8       65%  0.932225      339    35.4      619    64.6
+9       60%  0.921995      386    40.3      572    59.7
+10      55%  0.910486      434    45.3      524    54.7
+11      50%  0.895141      482    50.3      476    49.7
+12      45%  0.872123      527    55.0      431    45.0
+13      40%  0.847826      575    60.0      383    40.0
+14      35%  0.819693      623    65.0      335    35.0
+15      30%  0.780051      671    70.0      287    30.0
+16      25%  0.719949      719    75.1      239    24.9
+17      20%  0.662404      768    80.2      190    19.8
+18      15%  0.594629      815    85.1      143    14.9
+19      10%  0.523018      863    90.1       95     9.9
+20       5%  0.402813      911    95.1       47     4.9
+21       0%  0.208440      958   100.0        0     0.0</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.report.callrate </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>EYR.sloppy <span class="ot">&lt;-</span> <span class="fu">gl.filter.callrate</span>(EYR.sloppy, <span class="at">method =</span> <span class="st">"loc"</span>,  <span class="at">threshold =</span> <span class="fl">0.75</span>, <span class="at">verbose =</span> <span class="dv">0</span>, <span class="at">recalc =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for individual call rate</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.callrate</span>(EYR.sloppy, <span class="at">method =</span> <span class="st">"ind"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.callrate 
+  Processing genlight object with SNP data
+
+  Reporting Call Rate by Individual
+  No. of loci = 703 
+  No. of individuals = 782 
+    Minimum      :  0.03556188 
+    1st quartile :  0.9174964 
+    Median       :  0.9416785 
+    Mean         :  0.9108097 
+    3r quartile  :  0.9573257 
+    Maximum      :  0.9829303 
+    Missing Rate Overall:  0.0892 
+
+Listing 4 populations and their average CallRates
+  Monitor again after filtering
+  Population CallRate   N
+1     Crusoe   0.9027 238
+2 Muckleford   0.9073 421
+3      Timor   0.9402  52
+4     Wombat   0.9371  71
+
+Listing 20 individuals with the lowest CallRates
+  Use this list to see which individuals will be lost on filtering by individual
+  Set ind.to.list parameter to see more individuals
+   Individual Population   CallRate
+1    M18.29.1 Muckleford 0.03556188
+2    M18.18.1 Muckleford 0.03982930
+3    M18.47.2 Muckleford 0.06970128
+4    C18.16.1     Crusoe 0.07112376
+5   027-34168     Crusoe 0.07681366
+6    C18.15.2     Crusoe 0.08534851
+7    C18.21.2     Crusoe 0.08677098
+8    M18.47.3 Muckleford 0.14224751
+9    M18.35.2 Muckleford 0.17211949
+10   M18.20.3 Muckleford 0.24039829
+11   M20.70.2 Muckleford 0.39687055
+12   C18.28.1     Crusoe 0.39971550
+13   C18.17.2     Crusoe 0.46088193
+14  027-34065 Muckleford 0.50640114
+15   C18.14.1     Crusoe 0.50640114
+16   M20.70.3 Muckleford 0.50782361
+17  M20.110.1 Muckleford 0.52347084
+18   M19.12.1 Muckleford 0.53342817
+19    M19.8.1 Muckleford 0.54907539
+20   M20.64.3 Muckleford 0.56045519
+
+)</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-8-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.report.callrate </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>EYR.sloppy <span class="ot">&lt;-</span> <span class="fu">gl.filter.callrate</span>(EYR.sloppy, <span class="at">method =</span> <span class="st">"ind"</span>, <span class="at">threshold =</span> <span class="fl">0.65</span>, <span class="at">verbose =</span> <span class="dv">0</span>, <span class="at">recalc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for MAC (= 3)</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.maf</span>(EYR.sloppy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.maf 
+  Processing genlight object with SNP data
+Starting gl.report.maf 
+
+  Reporting Minor Allele Frequency (MAF) by Locus for population Crusoe 
+  No. of loci = 670 
+  No. of individuals = 231 
+    Minimum      :  0.0022 
+    1st quantile :  0.064825 
+    Median       :  0.1582 
+    Mean         :  0.1793525 
+    3r quantile  :  0.267475 
+    Maximum      :  0.4975 
+    Missing Rate Overall:  0.08 
+
+  Reporting Minor Allele Frequency (MAF) by Locus for population Muckleford 
+  No. of loci = 683 
+  No. of individuals = 401 
+    Minimum      :  0.0013 
+    1st quantile :  0.05875 
+    Median       :  0.1404 
+    Mean         :  0.1729489 
+    3r quantile  :  0.2617 
+    Maximum      :  0.4985 
+    Missing Rate Overall:  0.07 
+
+  Reporting Minor Allele Frequency (MAF) by Locus for population Timor 
+  No. of loci = 589 
+  No. of individuals = 52 
+    Minimum      :  0.0096 
+    1st quantile :  0.0673 
+    Median       :  0.1667 
+    Mean         :  0.1914129 
+    3r quantile  :  0.2872 
+    Maximum      :  0.5 
+    Missing Rate Overall:  0.06 
+
+  Reporting Minor Allele Frequency (MAF) by Locus for population Wombat 
+  No. of loci = 627 
+  No. of individuals = 71 
+    Minimum      :  0.007 
+    1st quantile :  0.06385 
+    Median       :  0.1449 
+    Mean         :  0.1746703 
+    3r quantile  :  0.2542 
+    Maximum      :  0.5 
+    Missing Rate Overall:  0.06 
+
+  Reporting Minor Allele Frequency (MAF) by Locus OVERALL
+  No. of loci = 703 
+  No. of individuals = 755 
+    Minimum      :  7e-04 
+    1st quantile :  0.0618 
+    Median       :  0.1443 
+    Mean         :  0.1711869 
+    3r quantile  :  0.254425 
+    Maximum      :  0.5 
+    Missing Rate Overall:  0.07 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-8-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Quantile Threshold Retained Percent Filtered Percent
+1      100%    0.5000        1     0.1      699    99.9
+2       95%    0.4431       36     5.1      664    94.9
+3       90%    0.3812       71    10.1      629    89.9
+4       85%    0.3346      105    15.0      595    85.0
+5       80%    0.2873      141    20.1      559    79.9
+6       75%    0.2537      176    25.1      524    74.9
+7       70%    0.2279      210    30.0      490    70.0
+8       65%    0.2009      246    35.1      454    64.9
+9       60%    0.1779      280    40.0      420    60.0
+10      55%    0.1595      315    45.0      385    55.0
+11      50%    0.1442      351    50.1      349    49.9
+12      45%    0.1210      386    55.1      314    44.9
+13      40%    0.1024      422    60.3      278    39.7
+14      35%    0.0872      455    65.0      245    35.0
+15      30%    0.0755      490    70.0      210    30.0
+16      25%    0.0618      526    75.1      174    24.9
+17      20%    0.0487      561    80.1      139    19.9
+18      15%    0.0346      595    85.0      105    15.0
+19      10%    0.0227      631    90.1       69     9.9
+20       5%    0.0053      666    95.1       34     4.9
+21       0%    0.0007      700   100.0        0     0.0
+Completed: gl.report.maf </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>EYR.sloppy <span class="ot">&lt;-</span> <span class="fu">gl.filter.maf</span>(EYR.sloppy, <span class="at">threshold =</span> <span class="dv">3</span>, <span class="at">verbose =</span> <span class="dv">0</span>, <span class="at">recalc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="filtering-snps-for-sex-linked-loci-and-then-with-standard-filters-correct-filtering" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-snps-for-sex-linked-loci-and-then-with-standard-filters-correct-filtering">Filtering SNPs for sex-linked loci and then with standard filters (“correct filtering”)</h3>
+<p>Let’s remove sex-linked markers and then apply standard filters:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for sex-linked loci</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>EYR.correct <span class="ot">&lt;-</span> <span class="fu">gl.drop.sexlinked</span>(EYR, <span class="at">system =</span> <span class="st">"zw"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.drop.sexlinked 
+  Processing genlight object with SNP data</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.drop.sexlinked </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for read depth</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>EYR.correct <span class="ot">&lt;-</span> <span class="fu">gl.filter.rdepth</span>(EYR.correct, <span class="at">lower =</span> <span class="dv">3</span>, <span class="at">upper =</span> <span class="dv">11</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for loci call rate</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.callrate</span>(EYR.correct, <span class="at">method =</span> <span class="st">"loc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.callrate 
+  Processing genlight object with SNP data
+  Reporting Call Rate by Locus
+  No. of loci = 811 
+  No. of individuals = 782 
+    Minimum      :  0.20844 
+    1st quartile :  0.7436065 
+    Median       :  0.900256 
+    Mean         :  0.8192658 
+    3r quartile  :  0.951407 
+    Maximum      :  0.988491 
+    Missing Rate Overall:  0.1807 
+
+   Quantile Threshold Retained Percent Filtered Percent
+1      100%  0.988491        1     0.1      810    99.9
+2       95%  0.979540       46     5.7      765    94.3
+3       90%  0.974425       84    10.4      727    89.6
+4       85%  0.966752      130    16.0      681    84.0
+5       80%  0.957801      165    20.3      646    79.7
+6       75%  0.951407      208    25.6      603    74.4
+7       70%  0.945013      249    30.7      562    69.3
+8       65%  0.936061      289    35.6      522    64.4
+9       60%  0.924552      331    40.8      480    59.2
+10      55%  0.914322      368    45.4      443    54.6
+11      50%  0.900256      408    50.3      403    49.7
+12      45%  0.878517      449    55.4      362    44.6
+13      40%  0.850384      487    60.0      324    40.0
+14      35%  0.823529      531    65.5      280    34.5
+15      30%  0.789003      571    70.4      240    29.6
+16      25%  0.742967      609    75.1      202    24.9
+17      20%  0.672634      649    80.0      162    20.0
+18      15%  0.613811      691    85.2      120    14.8
+19      10%  0.539642      730    90.0       81    10.0
+20       5%  0.402813      771    95.1       40     4.9
+21       0%  0.208440      811   100.0        0     0.0</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-9-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.report.callrate </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>EYR.correct <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl.filter.callrate</span>(EYR.correct, <span class="at">method =</span> <span class="st">"loc"</span>,  <span class="at">threshold =</span> <span class="fl">0.75</span>, <span class="at">verbose =</span> <span class="dv">0</span>, <span class="at">recalc =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for individual call rate</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.callrate</span>(EYR.correct, <span class="at">method =</span> <span class="st">"ind"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.callrate 
+  Processing genlight object with SNP data
+
+  Reporting Call Rate by Individual
+  No. of loci = 605 
+  No. of individuals = 782 
+    Minimum      :  0.03801653 
+    1st quartile :  0.9173554 
+    Median       :  0.9438017 
+    Mean         :  0.9120479 
+    3r quartile  :  0.9586777 
+    Maximum      :  0.9818182 
+    Missing Rate Overall:  0.088 
+
+Listing 4 populations and their average CallRates
+  Monitor again after filtering
+  Population CallRate   N
+1     Crusoe   0.9037 238
+2 Muckleford   0.9090 421
+3      Timor   0.9418  52
+4     Wombat   0.9365  71
+
+Listing 20 individuals with the lowest CallRates
+  Use this list to see which individuals will be lost on filtering by individual
+  Set ind.to.list parameter to see more individuals
+   Individual Population   CallRate
+1    M18.29.1 Muckleford 0.03801653
+2    M18.18.1 Muckleford 0.04462810
+3    M18.47.2 Muckleford 0.06776860
+4    C18.16.1     Crusoe 0.07438017
+5   027-34168     Crusoe 0.08760331
+6    C18.15.2     Crusoe 0.08760331
+7    C18.21.2     Crusoe 0.08760331
+8    M18.47.3 Muckleford 0.13719008
+9    M18.35.2 Muckleford 0.18016529
+10   M18.20.3 Muckleford 0.24132231
+11   C18.28.1     Crusoe 0.41487603
+12   M20.70.2 Muckleford 0.42644628
+13   C18.17.2     Crusoe 0.44628099
+14  027-34065 Muckleford 0.49586777
+15   C18.14.1     Crusoe 0.49752066
+16  M20.110.1 Muckleford 0.53057851
+17   M20.70.3 Muckleford 0.53553719
+18   M19.12.1 Muckleford 0.54380165
+19    M19.8.1 Muckleford 0.56694215
+20   M19.33.2 Muckleford 0.57851240
+
+)</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-9-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.report.callrate </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>EYR.correct <span class="ot">&lt;-</span> <span class="fu">gl.filter.callrate</span>(EYR.correct, <span class="at">method =</span> <span class="st">"ind"</span>, <span class="at">threshold =</span> <span class="fl">0.65</span>, <span class="at">verbose =</span> <span class="dv">0</span>, <span class="at">recalc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter for MAC (= 3)</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.maf</span>(EYR.correct)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.maf 
+  Processing genlight object with SNP data
+Starting gl.report.maf 
+
+  Reporting Minor Allele Frequency (MAF) by Locus for population Crusoe 
+  No. of loci = 573 
+  No. of individuals = 231 
+    Minimum      :  0.0022 
+    1st quantile :  0.06 
+    Median       :  0.1488 
+    Mean         :  0.1741178 
+    3r quantile  :  0.2646 
+    Maximum      :  0.4975 
+    Missing Rate Overall:  0.08 
+
+  Reporting Minor Allele Frequency (MAF) by Locus for population Muckleford 
+  No. of loci = 585 
+  No. of individuals = 401 
+    Minimum      :  0.0013 
+    1st quantile :  0.055 
+    Median       :  0.129 
+    Mean         :  0.1639928 
+    3r quantile  :  0.2474 
+    Maximum      :  0.4985 
+    Missing Rate Overall:  0.07 
+
+  Reporting Minor Allele Frequency (MAF) by Locus for population Timor 
+  No. of loci = 504 
+  No. of individuals = 52 
+    Minimum      :  0.0096 
+    1st quantile :  0.068275 
+    Median       :  0.1635 
+    Mean         :  0.1898613 
+    3r quantile  :  0.286075 
+    Maximum      :  0.5 
+    Missing Rate Overall:  0.06 
+
+  Reporting Minor Allele Frequency (MAF) by Locus for population Wombat 
+  No. of loci = 536 
+  No. of individuals = 71 
+    Minimum      :  0.007 
+    1st quantile :  0.062475 
+    Median       :  0.13805 
+    Mean         :  0.1706063 
+    3r quantile  :  0.2509 
+    Maximum      :  0.5 
+    Missing Rate Overall:  0.06 
+
+  Reporting Minor Allele Frequency (MAF) by Locus OVERALL
+  No. of loci = 605 
+  No. of individuals = 755 
+    Minimum      :  7e-04 
+    1st quantile :  0.05815 
+    Median       :  0.13255 
+    Mean         :  0.1628168 
+    3r quantile  :  0.243425 
+    Maximum      :  0.5 
+    Missing Rate Overall:  0.07 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-9-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Quantile Threshold Retained Percent Filtered Percent
+1      100%    0.5000        1     0.2      601    99.8
+2       95%    0.4364       31     5.1      571    94.9
+3       90%    0.3714       61    10.1      541    89.9
+4       85%    0.3207       91    15.1      511    84.9
+5       80%    0.2734      121    20.1      481    79.9
+6       75%    0.2436      151    25.1      451    74.9
+7       70%    0.2127      181    30.1      421    69.9
+8       65%    0.1901      211    35.0      391    65.0
+9       60%    0.1714      241    40.0      361    60.0
+10      55%    0.1499      271    45.0      331    55.0
+11      50%    0.1320      302    50.2      300    49.8
+12      45%    0.1092      332    55.1      270    44.9
+13      40%    0.0950      362    60.1      240    39.9
+14      35%    0.0806      393    65.3      209    34.7
+15      30%    0.0710      422    70.1      180    29.9
+16      25%    0.0580      452    75.1      150    24.9
+17      20%    0.0447      482    80.1      120    19.9
+18      15%    0.0305      512    85.0       90    15.0
+19      10%    0.0194      542    90.0       60    10.0
+20       5%    0.0048      572    95.0       30     5.0
+21       0%    0.0007      602   100.0        0     0.0
+Completed: gl.report.maf </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>EYR.correct <span class="ot">&lt;-</span> dartR.base<span class="sc">::</span><span class="fu">gl.filter.maf</span>(EYR.correct, <span class="at">threshold =</span> <span class="dv">3</span>, <span class="at">verbose =</span> <span class="dv">0</span>, <span class="at">recalc =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="differences-in-pcoa-between-sloppily-filtered-dataset-only-standard-filters-vs-correctly-filtered-dataset-gl.drop.sexlinked-and-standard-filters" class="level3">
+<h3 class="anchored" data-anchor-id="differences-in-pcoa-between-sloppily-filtered-dataset-only-standard-filters-vs-correctly-filtered-dataset-gl.drop.sexlinked-and-standard-filters">2.1. Differences in PCoA between “sloppily filtered” dataset (only standard filters), vs “correctly filtered” dataset (gl.drop.sexlinked and standard filters)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sloppy</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>PCA.sloppy <span class="ot">&lt;-</span> <span class="fu">gl.pcoa</span>(EYR.sloppy, <span class="at">verbose =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>pcplot_sloppy <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(PCA.sloppy, EYR.sloppy, <span class="at">xaxis =</span> <span class="dv">1</span>, <span class="at">yaxis =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Correct</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>PCA.correct <span class="ot">&lt;-</span> <span class="fu">gl.pcoa</span>(EYR.correct, <span class="at">verbose =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>pcplot_correct <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(PCA.correct, EYR.correct, <span class="at">xaxis =</span> <span class="dv">1</span>, <span class="at">yaxis =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session08_files/figure-html/unnamed-chunk-10-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.colors 
+Selected color type 2 
+Completed: gl.colors 
+Starting gl.pcoa.plot 
+  Processing an ordination file (glPca)
+  Processing genlight object with SNP data
+  Plotting populations in a space defined by the SNPs
+  Preparing plot .... please wait
+Completed: gl.pcoa.plot 
+Starting gl.colors 
+Selected color type 2 
+Completed: gl.colors 
+Starting gl.pcoa.plot 
+  Processing an ordination file (glPca)
+  Processing genlight object with SNP data
+  Plotting populations in a space defined by the SNPs
+  Preparing plot .... please wait
+Completed: gl.pcoa.plot </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> Do the PCoA plots look different? Why?</p>
+</div>
+</div>
+</section>
+<section id="differences-in-genetic-diversity-and-fixation-indices-between-sloppily-filtered-dataset-vs-correctly-filtered-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="differences-in-genetic-diversity-and-fixation-indices-between-sloppily-filtered-dataset-vs-correctly-filtered-dataset">2.2. Differences in genetic diversity and fixation indices between “sloppily filtered” dataset vs “correctly filtered” dataset</h3>
+<p>Let’s check some basic stats:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>basic.sloppy  <span class="ot">&lt;-</span> <span class="fu">utils.basic.stats</span>(EYR.sloppy)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>basic.correct <span class="ot">&lt;-</span> <span class="fu">utils.basic.stats</span>(EYR.correct)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>basic.sloppy<span class="sc">$</span>overall</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Ho      Hs      Ht     Dst     Htp    Dstp     Fst    Fstp     Fis    Dest 
+ 0.1638  0.2442  0.2537  0.0095  0.2568  0.0126  0.0373  0.0491  0.3294  0.0167 
+Gst_max   Gst_H 
+ 0.7061  0.0696 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>basic.correct<span class="sc">$</span>overall</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Ho      Hs      Ht     Dst     Htp    Dstp     Fst    Fstp     Fis    Dest 
+ 0.1631  0.2379  0.2459  0.0080  0.2485  0.0107  0.0325  0.0429  0.3144  0.0140 
+Gst_max   Gst_H 
+ 0.7135  0.0601 </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> Why are observed Heterozygosity (Ho) and expected Heterozygosity (He) slightly higher for the “sloppyly filtered” dataset? <strong>Hint:</strong> Look at the second plot produced by function <code>gl.report.sexlinked</code>.</p>
+</div>
+</div>
+<p>Calculate FST fixation indices between populations:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.fst.pop</span>(EYR.sloppy, <span class="at">verbose =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Crusoe Muckleford      Timor Wombat
+Crusoe             NA         NA         NA     NA
+Muckleford 0.03234709         NA         NA     NA
+Timor      0.04072932 0.05451318         NA     NA
+Wombat     0.05484958 0.02376727 0.08401313     NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.fst.pop</span>(EYR.correct, <span class="at">verbose =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Crusoe Muckleford      Timor Wombat
+Crusoe             NA         NA         NA     NA
+Muckleford 0.02795813         NA         NA     NA
+Timor      0.03987369 0.04810759         NA     NA
+Wombat     0.04446378 0.02270137 0.07114017     NA</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> Which dataset has higher FST estimates overall?</p>
+</div>
+</div>
+</section>
+</section>
 <section id="further-study" class="level2">
 <h2 class="anchored" data-anchor-id="further-study"><em>Further Study</em></h2>
 <section id="readings" class="level3">
 <h3 class="anchored" data-anchor-id="readings">Readings</h3>
+<p><span class="citation" data-cites="robledo2023">Robledo-Ruiz et al. (<a href="references.html#ref-robledo2023" role="doc-biblioref">2023</a>)</span></p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-robledo2023" class="csl-entry" role="listitem">
+Robledo-Ruiz, Diana A., Lana Austin, J. Nevil Amos, Jesús Castrejón-Figueroa, Daniel K. P. Harley, Michael J. L. Magrath, Paul Sunnucks, and Alexandra Pavlova. 2023. <span>“Easy-to-Use <span>R</span> Functions to Separate Reduced-Representation Genomic Datasets into Sex-Linked and Autosomal Loci, and Conduct Sex Assignment.”</span> <em>Molecular Ecology Resources</em> 0 (n/a). <a href="https://doi.org/10.1111/1755-0998.13844">https://doi.org/10.1111/1755-0998.13844</a>.
+</div>
+</div>
 </section>
 </section>
 

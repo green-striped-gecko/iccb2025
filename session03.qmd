@@ -6,13 +6,197 @@
 
 ## *Required packages*
 
+As always we need to have dartRverse installed and loaded. In addition you need to have dartR.popgen installend.
+
 ```{r, warning=FALSE, message=FALSE}
-library(dartR.base)
-library(dartR.data)
+library(dartRverse)
 ```
 
-## Session Content
+## Uncovering Population Structure
+
+### Introduction
+
+*Why population structure matters*
+
+-   What is a “population” in population genetics?
+
+-   Genetic structure defined – how allele frequencies vary among groups.
+
+-   Key drivers: effective population size, gene flow/immigration, natural selection, drift.
+
+-   Isolation-by-distance & sampling design – avoiding spurious structure.
+
+-   Why we care: management units, inbreeding, local adaptation, introgression.
+
+#### Analytical toolkit
+
+|  |  |  |
+|-------------------|---------------------------|--------------------------|
+| **Approach** | **Purpose** | **dartR entry point** |
+| **PCoA / PCA** | Quick multivariate overview | `gl.pcoa()`, `gl.pcoa.plot()` |
+| **STRUCTURE** | Bayesian clustering | `gl.run.structure()`, `gl.plot.structure()`, `gl.map.structure()` |
+| **fastSTRUCTURE** | Fast variational STRUCTURE (Mac/Linux) | `gl.run.faststructure()`, `gl.plot.faststructure()` |
+| **sNMF** | Sparse non-negative matrix factorisation | `gl.run.snmf()`, `gl.plot.snmf()`, `gl.map.snmf()` |
+| **POPCLUSTER** | Ultra-fast admixture inference | `gl.run.popcluster()`, `gl.plot.popcluster()`, `gl.map.popcluster()` |
+
+### Example
+
+To help us understand our analytical toolkit better let's start with a simple example using a simulated dataset. 
+
+The dataset is a genlight object and contains 10 populations of 30 individuals each and 1000 loci and is part of the dartRverse package. The populations are fairly independent but are linked by some imigration, so a typical Metapopulation scenario. The populations are named A to J and follow more or less an isolation by distance (actually an isolation by resistance model). So population next to each other (e.g. B and C) are fairly well mixed and populations further apart from the rest (e.g. D) are more isolated.
+
+To simplify this further we limit our exercise to the first 150 individuals only (which entails now 5 populations a 30 individuals, A to E). To get an overview on the population we use the function: gl.map.interactive which plots the individuals on a map. Please note the genlight/dartR object needs to have valid lat long coordinates for each individual to be able to do so.
+
+Lets get started.
+
+#### PCA
+
+```{r}
+# Read in the simulated possum data
+gl <- possums.gl[1:150,]
+# Interrogate to see what the data are
+nLoc(gl)
+nInd(gl)
+table(pop(gl))
+
+# SNP coding for individuals 1-5 and loci 1-8
+as.matrix(gl)[1:5, 1:8]
+```
+The next step is to actually calculate genetic difference between individuals. We do this by measuring euclidean distance but it is worth remembering that there are a myriad of different distances we can use. There are five different options for the function we will using, `gl.dist.ind`, that may be worth exploring depending on the context of your data. 
+
+The distance measure for SNP genotypes can be one of:
+
+- **Euclidean Distance**
+
+- Scaled Euclidean Distance
+
+- Simple Mismatch Distance
+
+- Absolute Mismatch Distance
+
+- Czekanowski (Manhattan) Distance 
+
+But lets stick with euclidean distance for now. Euclidean distance is quite simple it treats
+
+possum.gl
+
+
+
+```{r message=FALSE, results='hide'}
+# Calculate an Euclidean Distance Matrix on individuals
+D <- gl.dist.ind(gl)
+# Represent visually as a heat map
+gl.plot.heatmap(D)
+
+```
+
+
+```{r}
+# Undertake a PCA on the raw data
+pc <- gl.pcoa(gl, verbose = 3)
+
+```
+
+```{r message=FALSE, results='hide'}
+# Plot the first two dimensions of the PCA
+pc_a1a2 <- gl.pcoa.plot(pc,gl,pop.labels="legend")
+
+# Plot the first and third dimensions of the PCA
+pc_a1a3 <- gl.pcoa.plot(pc,gl,xaxis=1,yaxis=3, pop.labels="legend")
+
+```
+
+#### Select one cluster
+
+```{r}
+# Select only the data from one cluster in the primary PCA
+temp <- gl.drop.pop(gl, pop.list=c('D', 'A'))
+# Plot the first two dimensions of the secondary PCA
+pc <- gl.pcoa(temp, verbose = 3)
+pc_plot <- gl.pcoa.plot(pc, temp,pop.labels="legend")
+
+
+```
+### What can go wrong
+
+Missing data causes distortion, which can lead to misinterpretation. 
+
+dartR, that uses the `adgenet` package for its pca, fills missing data with the global average. 
+
+You can choose alternative methods of filling in the missing data prior to running your pca using the `gl.impute` function. 
+
+PCA is a hypothesis generating tool, not a tool for definitive decisions of the structure of populations.  
+
+Structure variants can also turn up on a PCA, like an inversion.
+
+PCA is sample size dependent - but this is more for the top two dimensions not all the informative dimensions.
+
+
+### Structure and FastStructure
+
+To run STRUCTURE from within R, we need to install the non-GUI executable (the version without frontend) for your operating system \[e.g windows, mac or linux\]. You can download STRUCTURE for your OS from <http://web.stanford.edu/group/pritchardlab/structure_software/release_versions/v2.3.4/html/structure.html>.
+
+To let R know where the executable is, you need to set the path to the executable. For example, under windows, if you have the executable in `d:/programms/structure/structure.exe`, you can use the command below.
+
+### Running STRUCTURE
+
+```{r eval = FALSE, echo=T}
+srnoad <- gl.run.structure(possums, k.range = 2:7, num.k.rep = 10, exec =
+                             './binaries/structure.exe',plot.out = FALSE,
+                           burnin=50, numreps=100, # this is just for a test run
+                         # burnin=50000, numreps=100000, # for robust results
+                           noadmix=FALSE)
+
+ev <- gl.evanno(srnoad)
+
+qmatnoad <- gl.plot.structure(srnoad2, K=4, clumpak = TRUE)
+
+
+gm <- gl.map.structure(qmat = qmatnoad, x = possums, K=3, scalex=1, scaley=0.5 )
+
+
+```
+
+::: callout-note
+## Exercise: Study the results using different Ks and with/without admixture
+
+![](images/task.png){.class width="48" height="48"} The above run was a structure run using the no-admixture model for a range of K=2:7. Study the results by plotting it for various Ks and try to interpret the results in the light of the simulated population structure.
+
+How about trying it on your own data or the example data provided.
+
+:::
+
+
+### snmf
+
+### Popclusture
+
+
+## Exercise
+
+Fun example on real data. 
+
 
 ## *Further Study*
 
+Pdfs/links
+
 ### Readings
+
+•	Evanno et al. 2005 – Detecting the number of clusters (ΔK).
+
+•	Lawson et al. 2018 – How not to over-interpret STRUCTURE/ADMIXTURE plots.
+
+•	Wang 2017 – Common pitfalls when using STRUCTURE.
+
+•	Raj et al. 2014 – fastSTRUCTURE.
+
+•	Frichot et al. 2014 – sNMF.
+
+•	Wang 2022 – POPCLUSTER.
+
+•	Kopelman et al. 2015 – CLUMPAK.
+
+•	Jakobsson & Rosenberg 2007 – CLUMPP.
+
+

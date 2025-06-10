@@ -15,6 +15,7 @@ title: "Importing and Handling Genomic Data"
 
 ```{r, warning=FALSE, message=FALSE}
 library(dartRverse)
+library(dartR.sexlinked)
 ```
 
 ## `dartR` Fundamentals
@@ -180,6 +181,114 @@ gl.smearplot(gl)
 
 ### Exercise
 
+#### Filtering out sex-linked markers
+
+For this exercise we will use the data of the Leadbeater's possum (LBP). This data is included in the package `dartR.sexlinked`
+
+![The Leadbeater's possum :)](images/Leadbeaters_possum.jpg)
+
+```{r results='hide'}
+# Load data
+LBP                   # Explore the dataset
+LBP@n.loc             # Number of SNPs
+length(LBP@ind.names) # Number of individuals
+
+```
+
+::: callout-note
+##### Question:
+
+![](images/task.png){.class width="48" height="48"} How many SNPs and individuals does the LBP genlight object have?
+
+Type the correct number into the blank boxes below:
+
+-   number of SNPs `r fitb(1000)`
+-   number of individuals `r fitb(376)`
+
+*boxes will go green if you have the answer correct*
+:::
+
+##### Run `gl.report.sexlinked`
+
+This function identifies sex-linked and autosomal loci present in a SNP dataset (i.e., genlight object) using individuals with known sex. It identifies five types of loci: w-linked or y-linked, sex-biased, z-linked or x-linked, gametologous and autosomal.
+
+::: callout-tip
+*The genlight object must contain in `gl\@other\$ind.metrics` a column named `id`, and a column named `sex` in which individuals with known-sex are assigned `M` for male, or `F` for female. The function ignores individuals that are assigned anything else or nothing at all (unknown-sex).*
+:::
+
+![](images/task.png){#id .class width="48" height="48"} Check that `ind.metrics` has the necessary columns:
+
+```{r output=FALSE}
+head(LBP@other$ind.metrics)
+```
+
+```{r}
+#| echo: false
+knitr::kable(head(LBP@other$ind.metrics)) 
+```
+
+![](images/task.png){.class width="48" height="48"} Check the manual of function `gl.report.sexlinked` to investigate its other requirements:
+
+```{r}
+help(gl.report.sexlinked)
+```
+
+![](images/task.png){.class width="48" height="48"} Run the function to identify sex-linked loci in the LBP genlight object:
+
+```{r}
+out <- gl.report.sexlinked(LBP, system = "xy")
+```
+
+::: callout-note
+#### Question time
+
+**Question:** Why are we using "xy"?
+
+**Question:** How many males and females does the dataset contain?
+
+**Question:** How many sex-linked loci were found?
+:::
+
+The output consists of two plots, plus a table. Examine the plots.
+
+::: callout-note
+**Question:** What do the colours mean in the plots? Look at the figure below for a hint.
+:::
+
+![Sex-linked loci in XY sex determination systems](images/XY.png)
+
+![](images/task.png){.class width="48" height="48"} Now check the output table:
+
+```{r output=FALSE}
+out
+
+```
+
+```{r}
+#| echo: false
+knitr::kable(head(out, n = 20))
+```
+
+*only showing the first 20 rows*
+
+##### Run `gl.drop.sexlinked`
+
+![](images/task.png){.class width="48" height="48"} Remove the sex-linked loci from the LBP genlight object:
+
+```{r output=FALSE}
+new.gl <- gl.drop.sexlinked(LBP, system = "xy")
+new.gl
+new.gl@n.loc
+```
+
+::: callout-note
+**Question:** How many SNPs are there left after removing sex-linked loci?
+
+-   number of SNPs `r fitb(923)`
+:::
+
+#### More filtering
+
 ::::: callout-note
 #### Knock yourself out trying all the different report and filtering functions
 
@@ -269,7 +378,7 @@ You can even try it with your own data.
 :::::
 
 | Report functions | description |
-|-------------------------|-----------------------------------------------|
+|--------------------------|----------------------------------------------|
 | gl.report.callrate | *summarises CallRate values* |
 | gl.report.reproducibility | *summarises repAvg (SNP) or reproducibility (SilicoDArT) values.* |
 | gl. report.monomorphs | *provides a count of polymorphic and monomorphic loci* |
@@ -283,7 +392,7 @@ You can even try it with your own data.
 : {.striped .bordered}
 
 | Filter functions | description |
-|------------------------|-----------------------------------------------|
+|-------------------------|-----------------------------------------------|
 | gl.filter.callrate | *filter out loci or individuals for which the call rate (rate of non-missing values) is less than a specified threshold, say threshold = 0.95* |
 | gl.filter.reproducibility | *filter out loci for which the reproducibility (strictly repeatability) is less than a specified threshold, say threshold = 0.99* |
 | gl. filter.monomorphs | *provides a count of polymorphic and monomorphic loci* |
@@ -301,6 +410,10 @@ You can even try it with your own data.
 
 For more tuturials see the [dartR Tutorials](tutorials.qmd) section.
 
+Check out the other functions contained in package `dartR.sexlinked`. What do they do?
+
+Keep your eyes peeled for Session 8!
+
 ### Readings
 
 @gruber2018
@@ -308,3 +421,5 @@ For more tuturials see the [dartR Tutorials](tutorials.qmd) section.
 @mijangos2022
 
 @jombart2015
+
+@robledo2023

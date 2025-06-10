@@ -1,8 +1,8 @@
-# Assigning Individuals to Populations
+# Kinship, Pedigrees & Mating Recommendations
 
-*Session Presenter*
+*Session Presenters*
 
-![](images/Presenters4.png)
+![](images/Presenters5.png)
 
 ## *Required packages*
 
@@ -13,6 +13,8 @@ library(dartR.data)
 
 ## Session Content
 
+
 ## *Further Study*
 
 ### Readings
+

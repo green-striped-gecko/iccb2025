@@ -1,20 +1,89 @@
-# Kinship, Pedigrees & Mating Recommendations
+# Assigning Individuals to Populations
 
-*Session Presenters*
+*Session Presenter*
 
-![](images/Presenters5.png)
+![](images/Presenters4.png)
 
 ## *Required packages*
 
 ```{r, warning=FALSE, message=FALSE}
-library(dartR.base)
-library(dartR.data)
+library(dartRverse)
+
 ```
 
 ## Session Content
 
+*This is a workflow associated with Session on Population Assignment in the dartR workshop*
+
+
+```{r}
+# We will first set the verbosity globally to level 3
+gl.set.verbosity(3)
+
+```
+
+```{r}
+# Read in the data set for the worked example
+gl <- readRDS("./data/assignment_example1.Rdata")
+# Familiarize yourself with its contents
+gl  
+nLoc(gl)
+nInd(gl)
+nPop(gl)
+# Display a list of populations and sample sizes
+table(pop(gl))
+```
+
+::: callout-tip
+##### Note that several populations have sample sizes less than 10 and will be discarded during the analysis
+:::
+
+### Analysis 1: Assignment by genotype likelihood
+```{r}
+#gen.result<-gl.assign.on.genotype(gl, unknown="AA011731", nmin=10)
+
+```
+
+### Analysis 2: Assignment by Private Alleles
+
+```{r}
+# pa.result <- gl.assign.pa(gl, unknown="AA011731", nmin=10, alpha=0.05)
+pa.result <- gl.assign.pa(gl, unknown="AA011731", nmin=10)
+
+```
+
+
+### Analysis 3: Assignment by PCA
+
+```{r}
+#pca_pa_result <-gl.assign.pca(pa.result, unknown="AA011731")
+```
+
+### Analysis 4: Assignment by Mahalanobis Distances
+
+```{r}
+#mahal_result <- gl.assign.mahalanobis(pa.result,unknown="AA011731")
+```
+
+
+## Exercise
+
+### The data
+
+```{r}
+gl
+# The unknown
+Unknown = "AA046092"
+# Preliminaries
+popNames(gl)
+
+gl2 <- gl.keep.pop(gl, pop.list=c("EmsubBamuAli", "EmsubFlyGuka", "EmsubFlyJikw",
+                                  "EmsubJardine", "EmsubKerema", "EmsubMorehead"))
+
+# Knock yourself out
+
+```
 
 ## *Further Study*
 
 ### Readings
-

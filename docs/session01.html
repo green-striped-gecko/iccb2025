@@ -215,13 +215,13 @@ div.csl-indent {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./session04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Assigning Individuals to Populations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Kinship, Pedigrees &amp; Mating Recommendations</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./session05.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Kinship, Pedigrees &amp; Mating Recommendations</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Assigning Individuals to Populations</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -284,13 +284,17 @@ div.csl-indent {
   <ul>
   <li><a href="#required-packages" id="toc-required-packages" class="nav-link active" data-scroll-target="#required-packages"><em>Required packages</em></a></li>
   <li><a href="#dartr-fundamentals" id="toc-dartr-fundamentals" class="nav-link" data-scroll-target="#dartr-fundamentals"><code>dartR</code> Fundamentals</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a>
+  <ul class="collapse">
+  <li><a href="#filtering-out-sex-linked-markers" id="toc-filtering-out-sex-linked-markers" class="nav-link" data-scroll-target="#filtering-out-sex-linked-markers">Filtering out sex-linked markers</a></li>
+  <li><a href="#more-filtering" id="toc-more-filtering" class="nav-link" data-scroll-target="#more-filtering">More filtering</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#further-study" id="toc-further-study" class="nav-link" data-scroll-target="#further-study"><em>Further Study</em></a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
   </ul></li>
   </ul>
@@ -323,7 +327,8 @@ div.csl-indent {
 <section id="required-packages" class="level2">
 <h2 class="anchored" data-anchor-id="required-packages"><em>Required packages</em></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartRverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartRverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartR.sexlinked)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="dartr-fundamentals" class="level2">
@@ -525,6 +530,862 @@ Tip
 </section>
 <section id="exercise" class="level3">
 <h3 class="anchored" data-anchor-id="exercise">Exercise</h3>
+<section id="filtering-out-sex-linked-markers" class="level4">
+<h4 class="anchored" data-anchor-id="filtering-out-sex-linked-markers">Filtering out sex-linked markers</h4>
+<p>For this exercise we will use the data of the Leadbeater’s possum (LBP). This data is included in the package <code>dartR.sexlinked</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Leadbeaters_possum.jpg" class="img-fluid figure-img"></p>
+<figcaption>The Leadbeater’s possum :)</figcaption>
+</figure>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>LBP                   <span class="co"># Explore the dataset</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>LBP<span class="sc">@</span>n.loc             <span class="co"># Number of SNPs</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(LBP<span class="sc">@</span>ind.names) <span class="co"># Number of individuals</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/task.png" class="class" width="48" height="48"> How many SNPs and individuals does the LBP genlight object have?</p>
+<p>Type the correct number into the blank boxes below:</p>
+<ul>
+<li>number of SNPs <input class="webex-solveme nospaces" size="4" data-answer="[&quot;1000&quot;]"></li>
+<li>number of individuals <input class="webex-solveme nospaces" size="3" data-answer="[&quot;376&quot;]"></li>
+</ul>
+<p><em>boxes will go green if you have the answer correct</em></p>
+</div>
+</div>
+<section id="run-gl.report.sexlinked" class="level5">
+<h5 class="anchored" data-anchor-id="run-gl.report.sexlinked">Run <code>gl.report.sexlinked</code></h5>
+<p>This function identifies sex-linked and autosomal loci present in a SNP dataset (i.e., genlight object) using individuals with known sex. It identifies five types of loci: w-linked or y-linked, sex-biased, z-linked or x-linked, gametologous and autosomal.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>The genlight object must contain in <code>gl\@other\$ind.metrics</code> a column named <code>id</code>, and a column named <code>sex</code> in which individuals with known-sex are assigned <code>M</code> for male, or <code>F</code> for female. The function ignores individuals that are assigned anything else or nothing at all (unknown-sex).</em></p>
+</div>
+</div>
+<p><img src="images/task.png" id="id" class="class" width="48" height="48"> Check that <code>ind.metrics</code> has the necessary columns:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(LBP<span class="sc">@</span>other<span class="sc">$</span>ind.metrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 15%">
+<col style="width: 23%">
+<col style="width: 20%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">id</th>
+<th style="text-align: left;">sex</th>
+<th style="text-align: left;">pop</th>
+<th style="text-align: right;">Year.collected</th>
+<th style="text-align: left;">service</th>
+<th style="text-align: left;">plate_location</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Y2</td>
+<td style="text-align: left;">Y2</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Yellingbo</td>
+<td style="text-align: right;">1997</td>
+<td style="text-align: left;">DLpos17-2786</td>
+<td style="text-align: left;">1-A1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Y16</td>
+<td style="text-align: left;">Y16</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Yellingbo</td>
+<td style="text-align: right;">2001</td>
+<td style="text-align: left;">DLpos17-2786</td>
+<td style="text-align: left;">1-A10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Y17</td>
+<td style="text-align: left;">Y17</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Yellingbo</td>
+<td style="text-align: right;">1997</td>
+<td style="text-align: left;">DLpos17-2786</td>
+<td style="text-align: left;">1-A11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Y18</td>
+<td style="text-align: left;">Y18</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Yellingbo</td>
+<td style="text-align: right;">1999</td>
+<td style="text-align: left;">DLpos17-2786</td>
+<td style="text-align: left;">1-A12</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Y3</td>
+<td style="text-align: left;">Y3</td>
+<td style="text-align: left;">F</td>
+<td style="text-align: left;">Yellingbo</td>
+<td style="text-align: right;">1997</td>
+<td style="text-align: left;">DLpos17-2786</td>
+<td style="text-align: left;">1-A2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Y4</td>
+<td style="text-align: left;">Y4</td>
+<td style="text-align: left;">M</td>
+<td style="text-align: left;">Yellingbo</td>
+<td style="text-align: right;">1997</td>
+<td style="text-align: left;">DLpos17-2786</td>
+<td style="text-align: left;">1-A3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="images/task.png" class="class" width="48" height="48"> Check the manual of function <code>gl.report.sexlinked</code> to investigate its other requirements:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(gl.report.sexlinked)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>starting httpd help server ... done</code></pre>
+</div>
+</div>
+<p><img src="images/task.png" class="class" width="48" height="48"> Run the function to identify sex-linked loci in the LBP genlight object:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">gl.report.sexlinked</span>(LBP, <span class="at">system =</span> <span class="st">"xy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.sexlinked 
+  Processing genlight object with SNP data</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Detected 162 females and 211 males.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Starting phase 1. May take a while...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Building call rate plot.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Done building call rate plot.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Starting phase 2. May take a while...</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Building heterozygosity plot.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Done building heterozygosity plot.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>**FINISHED** Total of analyzed loci: 1000.
+Found 77 sex-linked loci:
+   1 Y-linked loci
+   9 sex-biased loci
+   66 X-linked loci
+   1 gametologs.
+And 923 autosomal loci.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session01_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session01_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session01_files/figure-html/unnamed-chunk-16-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.report.sexlinked </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Question time
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> Why are we using “xy”?</p>
+<p><strong>Question:</strong> How many males and females does the dataset contain?</p>
+<p><strong>Question:</strong> How many sex-linked loci were found?</p>
+</div>
+</div>
+<p>The output consists of two plots, plus a table. Examine the plots.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> What do the colours mean in the plots? Look at the figure below for a hint.</p>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/XY.png" class="img-fluid figure-img"></p>
+<figcaption>Sex-linked loci in XY sex determination systems</figcaption>
+</figure>
+</div>
+<p><img src="images/task.png" class="class" width="48" height="48"> Now check the output table:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 3%">
+<col style="width: 3%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">index</th>
+<th style="text-align: right;">count.F.miss</th>
+<th style="text-align: right;">count.M.miss</th>
+<th style="text-align: right;">count.F.scored</th>
+<th style="text-align: right;">count.M.scored</th>
+<th style="text-align: right;">ratio</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">p.adjusted</th>
+<th style="text-align: right;">scoringRate.F</th>
+<th style="text-align: right;">scoringRate.M</th>
+<th style="text-align: left;">y.linked</th>
+<th style="text-align: left;">sex.biased</th>
+<th style="text-align: right;">count.F.het</th>
+<th style="text-align: right;">count.M.het</th>
+<th style="text-align: right;">count.F.hom</th>
+<th style="text-align: right;">count.M.hom</th>
+<th style="text-align: right;">stat</th>
+<th style="text-align: right;">stat.p.value</th>
+<th style="text-align: right;">stat.p.adjusted</th>
+<th style="text-align: right;">heterozygosity.F</th>
+<th style="text-align: right;">heterozygosity.M</th>
+<th style="text-align: left;">x.linked</th>
+<th style="text-align: left;">gametolog</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">28681424-34-G/T</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">162</td>
+<td style="text-align: right;">210</td>
+<td style="text-align: right;">1.2953770</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9952607</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">210</td>
+<td style="text-align: right;">1.3033972</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.0061728</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28678947-56-C/T</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">203</td>
+<td style="text-align: right;">2.0261283</td>
+<td style="text-align: right;">0.1638428</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9259259</td>
+<td style="text-align: right;">0.9620853</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">196</td>
+<td style="text-align: right;">1.7841965</td>
+<td style="text-align: right;">0.3044519</td>
+<td style="text-align: right;">0.9598961</td>
+<td style="text-align: right;">0.0600000</td>
+<td style="text-align: right;">0.0344828</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">28680567-32-T/G</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: right;">1.3256351</td>
+<td style="text-align: right;">0.5289429</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9259259</td>
+<td style="text-align: right;">0.9431280</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">188</td>
+<td style="text-align: right;">1.0906350</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.0600000</td>
+<td style="text-align: right;">0.0552764</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28688313-7-C/G</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">162</td>
+<td style="text-align: right;">211</td>
+<td style="text-align: right;">1.3015303</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">156</td>
+<td style="text-align: right;">211</td>
+<td style="text-align: right;">8.0761921</td>
+<td style="text-align: right;">0.0459068</td>
+<td style="text-align: right;">0.3917911</td>
+<td style="text-align: right;">0.0370370</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">28681679-51-C/T</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">0.9482168</td>
+<td style="text-align: right;">0.8814171</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.8641975</td>
+<td style="text-align: right;">0.8578199</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">139</td>
+<td style="text-align: right;">180</td>
+<td style="text-align: right;">1.2939001</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.0071429</td>
+<td style="text-align: right;">0.0055249</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28681994-14-G/A</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">162</td>
+<td style="text-align: right;">210</td>
+<td style="text-align: right;">1.2953770</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9952607</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">144</td>
+<td style="text-align: right;">191</td>
+<td style="text-align: right;">1.2557905</td>
+<td style="text-align: right;">0.6007790</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.1111111</td>
+<td style="text-align: right;">0.0904762</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">28687273-35-G/A</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">209</td>
+<td style="text-align: right;">1.3052926</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9876543</td>
+<td style="text-align: right;">0.9905213</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">128</td>
+<td style="text-align: right;">1.0533255</td>
+<td style="text-align: right;">0.8302485</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.4000000</td>
+<td style="text-align: right;">0.3875598</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28679824-59-A/G</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">151</td>
+<td style="text-align: right;">205</td>
+<td style="text-align: right;">2.4828757</td>
+<td style="text-align: right;">0.0823245</td>
+<td style="text-align: right;">0.9968818</td>
+<td style="text-align: right;">0.9320988</td>
+<td style="text-align: right;">0.9715640</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">143</td>
+<td style="text-align: right;">1.2108041</td>
+<td style="text-align: right;">0.4225316</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.3443709</td>
+<td style="text-align: right;">0.3024390</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">28684498-48-C/T</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">1.0521355</td>
+<td style="text-align: right;">0.8949886</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.8024691</td>
+<td style="text-align: right;">0.8104265</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">170</td>
+<td style="text-align: right;">1.3165942</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.0076923</td>
+<td style="text-align: right;">0.0058480</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28686771-26-C/T</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">211</td>
+<td style="text-align: right;">1.3095886</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9938272</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">107</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">0.8436386</td>
+<td style="text-align: right;">0.4470382</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.3354037</td>
+<td style="text-align: right;">0.3744076</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">28685826-39-C/A</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">151</td>
+<td style="text-align: right;">201</td>
+<td style="text-align: right;">1.4626962</td>
+<td style="text-align: right;">0.4976794</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9320988</td>
+<td style="text-align: right;">0.9526066</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">149</td>
+<td style="text-align: right;">201</td>
+<td style="text-align: right;">2.6904699</td>
+<td style="text-align: right;">0.5782830</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.0132450</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28685909-47-A/G</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">208</td>
+<td style="text-align: right;">0.4315262</td>
+<td style="text-align: right;">0.6359454</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9938272</td>
+<td style="text-align: right;">0.9857820</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">142</td>
+<td style="text-align: right;">193</td>
+<td style="text-align: right;">1.7189806</td>
+<td style="text-align: right;">0.1483226</td>
+<td style="text-align: right;">0.7656290</td>
+<td style="text-align: right;">0.1180124</td>
+<td style="text-align: right;">0.0721154</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">28684339-40-T/C</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">154</td>
+<td style="text-align: right;">201</td>
+<td style="text-align: right;">1.0440609</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9506173</td>
+<td style="text-align: right;">0.9526066</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">38</td>
+<td style="text-align: right;">121</td>
+<td style="text-align: right;">163</td>
+<td style="text-align: right;">1.1693320</td>
+<td style="text-align: right;">0.5934502</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.2142857</td>
+<td style="text-align: right;">0.1890547</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28679629-14-C/T</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">157</td>
+<td style="text-align: right;">205</td>
+<td style="text-align: right;">1.0878623</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9691358</td>
+<td style="text-align: right;">0.9715640</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">129</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">0.7947239</td>
+<td style="text-align: right;">0.4270510</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.1783439</td>
+<td style="text-align: right;">0.2146341</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">28679675-66-C/T</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">211</td>
+<td style="text-align: right;">2.6307469</td>
+<td style="text-align: right;">0.5810799</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9876543</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">155</td>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">0.7246290</td>
+<td style="text-align: right;">0.7844119</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.0312500</td>
+<td style="text-align: right;">0.0426540</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28679229-66-T/C</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">159</td>
+<td style="text-align: right;">208</td>
+<td style="text-align: right;">1.3072117</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9814815</td>
+<td style="text-align: right;">0.9857820</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">116</td>
+<td style="text-align: right;">143</td>
+<td style="text-align: right;">0.8159706</td>
+<td style="text-align: right;">0.4192173</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.2704403</td>
+<td style="text-align: right;">0.3125000</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">28690243-21-G/A</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">159</td>
+<td style="text-align: right;">196</td>
+<td style="text-align: right;">0.2473174</td>
+<td style="text-align: right;">0.0259465</td>
+<td style="text-align: right;">0.5976030</td>
+<td style="text-align: right;">0.9814815</td>
+<td style="text-align: right;">0.9289100</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136</td>
+<td style="text-align: right;">196</td>
+<td style="text-align: right;">32.9246419</td>
+<td style="text-align: right;">0.0000001</td>
+<td style="text-align: right;">0.0000013</td>
+<td style="text-align: right;">0.1446541</td>
+<td style="text-align: right;">0.0000000</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28681769-49-T/G</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">161</td>
+<td style="text-align: right;">211</td>
+<td style="text-align: right;">1.3095886</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9938272</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">0.9393419</td>
+<td style="text-align: right;">0.8931260</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.1801242</td>
+<td style="text-align: right;">0.1895735</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">28691027-42-G/A</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">208</td>
+<td style="text-align: right;">0.8670091</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9876543</td>
+<td style="text-align: right;">0.9857820</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">149</td>
+<td style="text-align: right;">207</td>
+<td style="text-align: right;">15.1955169</td>
+<td style="text-align: right;">0.0006362</td>
+<td style="text-align: right;">0.0095436</td>
+<td style="text-align: right;">0.0687500</td>
+<td style="text-align: right;">0.0048077</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">28681640-28-G/A</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">156</td>
+<td style="text-align: right;">206</td>
+<td style="text-align: right;">1.5826038</td>
+<td style="text-align: right;">0.5425067</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.9629630</td>
+<td style="text-align: right;">0.9763033</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">166</td>
+<td style="text-align: right;">0.7551270</td>
+<td style="text-align: right;">0.3339841</td>
+<td style="text-align: right;">0.9919948</td>
+<td style="text-align: right;">0.1538462</td>
+<td style="text-align: right;">0.1941748</td>
+<td style="text-align: left;">FALSE</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><em>only showing the first 20 rows</em></p>
+</section>
+<section id="run-gl.drop.sexlinked" class="level5">
+<h5 class="anchored" data-anchor-id="run-gl.drop.sexlinked">Run <code>gl.drop.sexlinked</code></h5>
+<p><img src="images/task.png" class="class" width="48" height="48"> Remove the sex-linked loci from the LBP genlight object:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>new.gl <span class="ot">&lt;-</span> <span class="fu">gl.drop.sexlinked</span>(LBP, <span class="at">system =</span> <span class="st">"xy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>new.gl</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>new.gl<span class="sc">@</span>n.loc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Question:</strong> How many SNPs are there left after removing sex-linked loci?</p>
+<ul>
+<li>number of SNPs <input class="webex-solveme nospaces" size="3" data-answer="[&quot;923&quot;]"></li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="more-filtering" class="level4">
+<h4 class="anchored" data-anchor-id="more-filtering">More filtering</h4>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -638,17 +1499,17 @@ Knock yourself out trying all the different report and filtering functions
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how to load a genlight object</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">gl.read.dart</span>(<span class="at">filename=</span><span class="st">"./data/sample_data_2Row.csv"</span>, </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ind.metafile=</span><span class="st">"./data/sample_metadata.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how to load a genlight object</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">gl.read.dart</span>(<span class="at">filename=</span><span class="st">"./data/sample_data_2Row.csv"</span>, </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ind.metafile=</span><span class="st">"./data/sample_metadata.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can even try it with your own data.</p>
 </div>
 </div>
 <table class="table-striped table-bordered caption-top table">
 <colgroup>
-<col style="width: 34%">
-<col style="width: 65%">
+<col style="width: 36%">
+<col style="width: 63%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -697,8 +1558,8 @@ Knock yourself out trying all the different report and filtering functions
 </table>
 <table class="table-striped table-bordered caption-top table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 66%">
+<col style="width: 34%">
+<col style="width: 65%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -751,14 +1612,18 @@ Knock yourself out trying all the different report and filtering functions
 </table>
 </section>
 </section>
+</section>
 <section id="further-study" class="level2">
 <h2 class="anchored" data-anchor-id="further-study"><em>Further Study</em></h2>
 <p>For more tuturials see the <a href="./tutorials.html">dartR Tutorials</a> section.</p>
+<p>Check out the other functions contained in package <code>dartR.sexlinked</code>. What do they do?</p>
+<p>Keep your eyes peeled for Session 8!</p>
 <section id="readings" class="level3">
 <h3 class="anchored" data-anchor-id="readings">Readings</h3>
 <p><span class="citation" data-cites="gruber2018">Gruber et al. (<a href="references.html#ref-gruber2018" role="doc-biblioref">2018</a>)</span></p>
 <p><span class="citation" data-cites="mijangos2022">Mijangos et al. (<a href="references.html#ref-mijangos2022" role="doc-biblioref">2022</a>)</span></p>
 <p><span class="citation" data-cites="jombart2015">Jombart and Ahmed (<a href="references.html#ref-jombart2015" role="doc-biblioref">2011</a>)</span></p>
+<p><span class="citation" data-cites="robledo2023">Robledo-Ruiz et al. (<a href="references.html#ref-robledo2023" role="doc-biblioref">2023</a>)</span></p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
@@ -770,6 +1635,9 @@ Jombart, T., and I. Ahmed. 2011. <span>“Adegenet 1.3-1: New Tools for the Anal
 </div>
 <div id="ref-mijangos2022" class="csl-entry" role="listitem">
 Mijangos, Jose Luis, Bernd Gruber, Oliver Berry, Carlo Pacioni, and Arthur Georges. 2022. <span>“<span class="nocase">dartR</span> V2: <span>An</span> Accessible Genetic Analysis Platform for Conservation, Ecology and Agriculture.”</span> <em>Methods in Ecology and Evolution</em> 13 (10): 2150–58. <a href="https://doi.org/10.1111/2041-210X.13918">https://doi.org/10.1111/2041-210X.13918</a>.
+</div>
+<div id="ref-robledo2023" class="csl-entry" role="listitem">
+Robledo-Ruiz, Diana A., Lana Austin, J. Nevil Amos, Jesús Castrejón-Figueroa, Daniel K. P. Harley, Michael J. L. Magrath, Paul Sunnucks, and Alexandra Pavlova. 2023. <span>“Easy-to-Use <span>R</span> Functions to Separate Reduced-Representation Genomic Datasets into Sex-Linked and Autosomal Loci, and Conduct Sex Assignment.”</span> <em>Molecular Ecology Resources</em> 0 (n/a). <a href="https://doi.org/10.1111/1755-0998.13844">https://doi.org/10.1111/1755-0998.13844</a>.
 </div>
 </div>
 </section>
