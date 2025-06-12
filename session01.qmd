@@ -1,5 +1,8 @@
 ---
 title: "Importing and Handling Genomic Data"
+format: html
+execute: 
+  cache: false
 ---
 
 *Session Presenters*
