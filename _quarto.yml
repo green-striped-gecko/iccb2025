@@ -39,5 +39,5 @@ format:
     link-external-icon: true
     link-external-newwindow: true
 execute: 
-  cache: false
+  cache: true
 editor: visual

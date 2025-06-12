@@ -262,6 +262,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#required-packages" id="toc-required-packages" class="nav-link active" data-scroll-target="#required-packages"><em>Required packages</em></a></li>
   <li><a href="#session-content" id="toc-session-content" class="nav-link" data-scroll-target="#session-content">Session Content</a></li>
+  <li><a href="#session-content-1" id="toc-session-content-1" class="nav-link" data-scroll-target="#session-content-1">Session Content</a></li>
+  <li><a href="#selecting-panels" id="toc-selecting-panels" class="nav-link" data-scroll-target="#selecting-panels">Selecting panels</a>
+  <ul>
+  <li><a href="#example-data" id="toc-example-data" class="nav-link" data-scroll-target="#example-data">Example data</a></li>
+  <li><a href="#filtering-for-quality" id="toc-filtering-for-quality" class="nav-link" data-scroll-target="#filtering-for-quality">Filtering for quality</a></li>
+  <li><a href="#filter-snps-with-sequences-that-are-less-than-30-characters-long" id="toc-filter-snps-with-sequences-that-are-less-than-30-characters-long" class="nav-link" data-scroll-target="#filter-snps-with-sequences-that-are-less-than-30-characters-long">Filter SNPs with sequences that are less than 30 characters long</a></li>
+  <li><a href="#blast-to-find-snps" id="toc-blast-to-find-snps" class="nav-link" data-scroll-target="#blast-to-find-snps">blast to find SNPs</a></li>
+  <li><a href="#selecting-informative-snps" id="toc-selecting-informative-snps" class="nav-link" data-scroll-target="#selecting-informative-snps">Selecting informative SNPs</a></li>
+  <li><a href="#run-gl.check.panel" id="toc-run-gl.check.panel" class="nav-link" data-scroll-target="#run-gl.check.panel">run gl.check.panel</a></li>
+  </ul></li>
   <li><a href="#further-study" id="toc-further-study" class="nav-link" data-scroll-target="#further-study"><em>Further Study</em></a>
   <ul>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
@@ -296,12 +306,341 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="required-packages" class="level2">
 <h2 class="anchored" data-anchor-id="required-packages"><em>Required packages</em></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartR.base)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartR.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartRverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="session-content" class="level2">
 <h2 class="anchored" data-anchor-id="session-content">Session Content</h2>
+</section>
+<section id="session-content-1" class="level2">
+<h2 class="anchored" data-anchor-id="session-content-1">Session Content</h2>
+<p>This session will cover the selection of SNP panels for conservation genetics. We will explore how to select SNPs that are informative for population structure, inbreeding, and other conservation-related analyses. The session will include practical exercises using R and the <code>dartRverse</code> packages.</p>
+</section>
+<section id="selecting-panels" class="level2">
+<h2 class="anchored" data-anchor-id="selecting-panels">Selecting panels</h2>
+<p>To select panels we will use an example dataset of a fish species as introduced by the slides. The idea is to select a SNP panel that helps to monitor the species. Key aspects to consider a panel is to think about the following:</p>
+<ul>
+<li>What is the purpose of the panel? (estimates of Ne, Ho, Fst or all of the above)</li>
+<li>How many SNPs can you afford to sequence?</li>
+</ul>
+<p>Once you decided on those aspects, you can use the <code>dartRverse</code> package to select a panel of SNPs. The package provides functions to - 1. filter SNPs based on various criteria, mainly for quality - 2. filter SNPs in accordance lab consideration (mainly can we get reliable sequences from the SNPs) - 3. select of the remaining SNPs an informative subsample for the purpose of the panel</p>
+<section id="example-data" class="level3">
+<h3 class="anchored" data-anchor-id="example-data">Example data</h3>
+<p>The first two decisions are that we would like to create a SNP panel that is informative for population structure (Fst) and we have resources to develop a panel of 50 SNPs.</p>
+<p>Lets load our example data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rfbe <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/rfbe.rds"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.basics</span>(rfbe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.basics 
+
+SUMMARY STATISTICS
+
+Datatype: SNP 
+Loci: 9849 
+Individuals: 383 
+Populations: 16 
+
+Average Read Depth: 28.70085
+Values: 3772167 
+           0    1    2   NA
+percent 65.5 22.0 11.2  1.3
+
+Monomorphic Loci: 2 
+Loci all NA: 0 
+Individuals all NA: 0 
+
+Sample Sizes:
+
+    BHA_A2       E504       E508       E509       E518       NW30       NW70 
+        19         19         20         20         20         20         20 
+      NW72       NW80 PJTub1.2.3   PJTub4.5     PJTub6       SE60       SW10 
+        10         10         64         51         33         20         19 
+      SW20       SW60 
+        18         20 
+
+Loci all NA across individuals by Population
+ BHA_A2 E504 E508 E509 E518 NW30 NW70 NW72 NW80 PJTub1.2.3 PJTub4.5 PJTub6 SE60
+      0    0    0    0    0    0    0    0    0          0        0      0    0
+ SW10 SW20 SW60
+    0    0    0
+
+Individuals all NA across loci by Population
+ BHA_A2 E504 E508 E509 E518 NW30 NW70 NW72 NW80 PJTub1.2.3 PJTub4.5 PJTub6 SE60
+      0    0    0    0    0    0    0    0    0          0        0      0    0
+ SW10 SW20 SW60
+    0    0    0
+
+Completed: gl.report.basics </code></pre>
+</div>
+</div>
+</section>
+<section id="filtering-for-quality" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-for-quality">Filtering for quality</h3>
+<p>So we have 9849 SNPs (they are prefiltered for quality already). You can check the looking at callrate, rdepth). So we already have high quality SNPs, with a low missing value rate across loci.</p>
+<p>our main aim is to find a panel of 50 SNPs that are informative for population structure (Fst).</p>
+<p>To be able to calculate Fst reliably we decided to have a threshold of more than 10 individuals per population so we filter the SNPs for a minimum of 11 individuals per population.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tt <span class="ot">&lt;-</span> <span class="fu">table</span>(<span class="fu">pop</span>(rfbe))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pop20 <span class="ot">&lt;-</span> <span class="fu">names</span>(tt)[tt<span class="sc">&gt;</span><span class="dv">10</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>rfbe20 <span class="ot">&lt;-</span> <span class="fu">gl.keep.pop</span>(rfbe, <span class="at">pop.list=</span>pop20)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.keep.pop 
+  Processing genlight object with SNP data
+  Checking for presence of nominated populations
+  Retaining only populations BHA_A2, E504, E508, E509, E518, NW30, NW70, PJTub1.2.3, PJTub4.5, PJTub6, SE60, SW10, SW20, SW60 
+  Warning: Resultant dataset may contain monomorphic loci
+  Locus metrics not recalculated
+Completed: gl.keep.pop </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">table</span>(<span class="fu">pop</span>(rfbe20)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Var1</th>
+<th style="text-align: right;">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">BHA_A2</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">E504</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">E508</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">E509</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">E518</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NW30</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NW70</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PJTub1.2.3</td>
+<td style="text-align: right;">64</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PJTub4.5</td>
+<td style="text-align: right;">51</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PJTub6</td>
+<td style="text-align: right;">33</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SE60</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SW10</td>
+<td style="text-align: right;">19</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SW20</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SW60</td>
+<td style="text-align: right;">20</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Because we have filtered the data by individual we want to make sure we have not created missing data in any of the populations and we want to filter also finally for minor allele frequency (MAF) using the count option as we want to make sure we have high quality SNPs which are not spurious in terms of aonly occuring in very low frequency.</p>
+<p>You can use the report function before filtering to test their effect.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>rfbe20_1 <span class="ot">&lt;-</span> <span class="fu">gl.filter.allna</span>(rfbe20, <span class="at">by.pop =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.filter.allna 
+  Identifying and removing loci that are all missing (NA) 
+                    in any one population
+  Deleting loci that are all missing (NA) in any one population
+  Warning: no loci listed to delete! Genlight object returned unchanged
+Completed: gl.filter.allna </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rfbe20_2 <span class="ot">&lt;-</span> <span class="fu">gl.filter.callrate</span>(rfbe20_1, <span class="at">threshold=</span><span class="fl">0.99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.filter.callrate 
+  Processing genlight object with SNP data
+  Warning: Data may include monomorphic loci in call rate 
+                    calculations for filtering
+  Recalculating Call Rate
+  Removing loci based on Call Rate, threshold = 0.99 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session06_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.filter.callrate </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>rfbe20_3 <span class="ot">&lt;-</span> <span class="fu">gl.filter.maf</span>(rfbe20_2, <span class="at">threshold =</span> <span class="dv">5</span>, <span class="at">by.pop =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.filter.maf 
+  Processing genlight object with SNP data
+  Warning: genlight object contains monomorphic loci
+  Removing loci with MAF &lt; 0.0068870523415978 over all the dataset
+                and recalculating FreqHoms and FreqHets</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session06_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.filter.maf </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nLoc</span>(rfbe20_3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6815</code></pre>
+</div>
+</div>
+<p>This should result in high quality SNPs.</p>
+<p>If you have a reference genome you would like to filter for SNPs that are 100% aligned and of a certain length. For example you want to make sure the sequences you have are at least of a certain length.</p>
+</section>
+<section id="filter-snps-with-sequences-that-are-less-than-30-characters-long" class="level3">
+<h3 class="anchored" data-anchor-id="filter-snps-with-sequences-that-are-less-than-30-characters-long">Filter SNPs with sequences that are less than 30 characters long</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">nchar</span>(<span class="fu">as.character</span>(rfbe20_3<span class="sc">@</span>other<span class="sc">$</span>loc.metrics<span class="sc">$</span>TrimmedSequence))<span class="sc">&gt;</span><span class="dv">29</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>rfbe20_4 <span class="ot">&lt;-</span> rfbe20_3[, index]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>As we have a reference genome we include another step, manly to filter for SNPs that are aligned very well to the reference genome. This is important and can help if your SNP is towards the beginning of your sequence but you want to design primers that have the SNP more towards the middle of a sequence.</p>
+</section>
+<section id="blast-to-find-snps" class="level3">
+<h3 class="anchored" data-anchor-id="blast-to-find-snps">blast to find SNPs</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#takes a while to run, hence load the pre run data set</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#rfbe20_5 &lt;- gl.blast(rfbe20_4,ref_genome = "d:/bernd/r/Elise_pansnp/final.genome.scf.fasta", task = "blastn", number_of_threads = 10 )</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#saveRDS(rfbe20_5, "d:/bernd/r/Elise_pansnp/rfbe20_5_blast.rds")</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>rfbe20_5 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/rfbe20_5_blast.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can now filter the SNPs based on the blast results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#bitscore &gt;=100</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> rfbe20_5<span class="sc">@</span>other<span class="sc">$</span>loc.metrics<span class="sc">$</span>bitscore <span class="sc">&gt;=</span> <span class="dv">100</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(index), <span class="cn">FALSE</span>, index)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>rfbe20_6 <span class="ot">&lt;-</span> rfbe20_5[,index]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Depending on your lab requirements you might want to filter for SNPs that are not too close to close to the beginning of the sequence. As we have a reference genome, that allows us to extend sequences, we do not do that here. In case you are interested we are currently have a semi-developed script that allows to do this, but it is not yet part of the package.</p>
+</section>
+<section id="selecting-informative-snps" class="level3">
+<h3 class="anchored" data-anchor-id="selecting-informative-snps">Selecting informative SNPs</h3>
+<p>We can now selected a subsample of SNPs using several different methods. Depending on the aim of your panel you might want to select SNPs that are informative for population structure (Fst) or inbreeding (Ho). It turns out that the dapc method is a good method to select SNPs that are informative for population structure. The code below uses this method to select 50 SNPs.</p>
+<p>###run gl.select.panel</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#takes a while to run</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>panel <span class="ot">&lt;-</span> <span class="fu">gl.select.panel</span>(rfbe20_6, <span class="at">method=</span><span class="st">"dapc"</span>, <span class="at">nl =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.select.panel 
+  Processing genlight object with SNP data</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Also defined by 'spam'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Also defined by 'spam'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.keep.loc 
+  Processing genlight object with SNP data
+  List of loci to keep has been specified
+  Deleting all but the specified loci
+Completed: gl.keep.loc 
+Completed: gl.select.panel </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nLoc</span>(panel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 66</code></pre>
+</div>
+</div>
+</section>
+<section id="run-gl.check.panel" class="level3">
+<h3 class="anchored" data-anchor-id="run-gl.check.panel">run gl.check.panel</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>outdapc <span class="ot">&lt;-</span> <span class="fu">gl.check.panel</span>(panel, rfbe20_6, <span class="at">parameter =</span> <span class="st">"Fst"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session06_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As we can see Fst values between populations is nicely reconstructed by selecting only 50 SNPs based on the dapc method. We can compare it to a random selection:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>panel_random <span class="ot">&lt;-</span> <span class="fu">gl.select.panel</span>(rfbe20_6, <span class="at">method=</span><span class="st">"random"</span>, <span class="at">nl =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.select.panel 
+  Processing genlight object with SNP data
+Starting gl.keep.loc 
+  Processing genlight object with SNP data
+  List of loci to keep has been specified
+  Deleting all but the specified loci
+Completed: gl.keep.loc 
+Completed: gl.select.panel </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>outrandom <span class="ot">&lt;-</span> <span class="fu">gl.check.panel</span>(panel_random, rfbe20_6, <span class="at">parameter =</span> <span class="st">"Fst"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session06_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Not as good so it pays off.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/task.png" id="id" class="class img-fluid" width="48"></p>
+<p>Now it is time for you to select a SNP panel. You can try differen methods and compare them. E.g How good is a random panel, or one based on PIC values.</p>
+</div>
+</div>
+</section>
 </section>
 <section id="further-study" class="level2">
 <h2 class="anchored" data-anchor-id="further-study"><em>Further Study</em></h2>
