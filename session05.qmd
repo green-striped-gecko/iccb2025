@@ -40,15 +40,14 @@ table(pop(gl))
 
 ### Analysis 1: Assignment by genotype likelihood
 ```{r}
-#gen.result<-gl.assign.on.genotype(gl, unknown="AA011731", nmin=10)
+gen.result<-gl.assign.on.genotype(gl, unknown="AA011731", nmin=10)
 
 ```
 
 ### Analysis 2: Assignment by Private Alleles
 
 ```{r}
-# pa.result <- gl.assign.pa(gl, unknown="AA011731", nmin=10, alpha=0.05)
-pa.result <- gl.assign.pa(gl, unknown="AA011731", nmin=10)
+pa.result <- gl.assign.pa(gl, unknown="AA011731", nmin=10, alpha=0.05)
 
 ```
 

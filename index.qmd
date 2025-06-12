@@ -18,7 +18,16 @@ So bring your resilience, your field-hardened humour, and your willingness to wr
 
 ## Program and Speakers
 
-We hope you are ready for a jam-packed [PROGRAM](schedule.qmd)! And before getting started why not check out the amazing [speakers](speakers.qmd) we have lined up. They are all excited to share their knowledge and expertise. 
+We hope you are ready for a jam-packed [PROGRAM](schedule.qmd)! And before getting started why not check out the amazing [speakers](speakers.qmd) we have lined up. They are all excited to share their knowledge and expertise.
+
+## Prerequistes
+
+Before getting started with the sessions how about checking out some tutorials to make sure you are all up to date: 
+
+1. [RStudio refresher](tutorials.qmd#tutorial-pres-one) 
+
+2. [installing dartR](tutorials.qmd#tutorial-pres-two).
+
 
 ## Here are some things you might see along your journey:
 

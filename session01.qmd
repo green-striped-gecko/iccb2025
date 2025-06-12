@@ -21,32 +21,8 @@ library(dartRverse)
 library(dartR.sexlinked)
 ```
 
-## `dartR` Fundamentals
 
-Just before you get started how about checking out some prerequisite tutorials if you are not up to date. These are the following two tutorials [RStudio refresher](tutorials.qmd#tutorial-pres-one) and [installing dartR](tutorials.qmd#tutorial-pres-two).
-
-::: callout-tip
-##### Also a little reminder about `dartRverse`:
-
-*An accessible genetic analysis platform for conservation, ecology and agriculture*
-
-`dartRverse` aims to support the installation of R packages of the dartRverse that are user-friendly and deliver a variety of analyses and pipelines on the one platform. Currently there are two core R packages that need to be installed to use dartR:
-
--   dartR.base
--   dartR.data
-
-Additional packages are
-
--   dartR.sim (functions to simulate SNP data)
--   dartR.spatial (spatial analysis)
--   dartR.popgenomics (popgenomics analysis)
--   dartR.captive
--   dartR.sexlinked
-
-`dartR` is a collaboration between the University of Canberra, CSIRO and Diversity Arrays Technology, and is supported with funding from the ACT Priority Investment Program, CSIRO and the University of Canberra.
-:::
-
-### Introduction
+## Introduction
 
 SNPs, or single nucleotide polymorphisms, are single base pair mutations at a nuclear locus (Figure 2). That nuclear locus is represented in the dataset by two sequence tags which, at a heterozygous locus, take on two allelic states, one referred to as the reference state, the other as the alternate or SNP state.
 
@@ -64,7 +40,7 @@ Here is an example of the data structure of a genlight object
 
 For further details go check out the [Data Structure](tutorials.qmd#tutorial-begin-one) tutorial.
 
-### Example
+## `dartR` Fundamentals
 
 To help us get our head around data interrogation, subsetting, and basic filtering we are going to work through a worked example using a test dataset.
 
@@ -74,12 +50,11 @@ To help us get our head around data interrogation, subsetting, and basic filteri
 testset.gl
 ```
 
-How many individuals have been genotyped? How many SNP loci have been scored? What is the percentage of missing data?
 
 ::: callout-note
-#### Quiz!
+#### Question time
 
-![](images/task.png){.class width="48" height="48"}This quiz is referring to the `testset.gl` data set you have interrogated above.
+![](images/task.png){.class width="48" height="48"} How many individuals have been genotyped? How many SNP loci have been scored? What is the percentage of missing data? This is referring to the `testset.gl` data set you have interrogated above.
 
 Type the correct number into the blank boxes below:
 
@@ -111,18 +86,21 @@ table(pop(gl))
 
 We have learned that typing the name of the genlight object gives its attributes. How do we examine the genotypes in a genlight object. This is done by converting it to a matrix.
 
-```{r output=FALSE}
-as.matrix(gl)[1:7,1:5]
+```{r}
+as.matrix(gl)[1:7,1:4]
 ```
 
-What do you see. Is it what you expected for the coding of the SNP scores?
+*What do you see? Is it what you expected for the coding of the SNP scores?*
 
-Lets start again.
+### Reporting
 
-```{r output=FALSE}
+Lets start over with a focus on reporting.
+
+```{r results='hide',fig.keep='all'}
 # Copy the original testset.gl
 gl <- testset.gl
-# Set the global verbosity to 3 – this will result in some detailed comments as you run each # script
+# Set the global verbosity to 3 – this will result in some detailed comments 
+#  as you run each # script
 gl.set.verbosity(3)
 # Now lets use a report function to report the call rate for genlight object gl
 gl.report.callrate(gl)
@@ -130,21 +108,21 @@ gl.report.callrate(gl)
 
 ::: callout-tip
 Note that the call rate is reported against locus. This is the default. Both a tabulated result and a graph is produced. You can use both to determine a suitable threshold for filtering on callrate.
-
-What threshold do you think might be appropriate?
 :::
 
-Now let's report the call rate for genlight object gl by individual.
+*What threshold do you think might be appropriate?*
 
-```{r output=FALSE}
+Now let's report the call rate for genlight object gl by **individual**.
+
+```{r results='hide',fig.keep='all'}
 gl.report.callrate(gl,method="ind")
 ```
 
 Can you see the difference. Again, both a tabulated result and a graph is produced. You can use both to determine a suitable threshold for filtering on callrate. What threshold do you think might be appropriate?
 
-What about reproducibility?
+*What about reproducibility?*
 
-```{r output=FALSE}
+```{r results='hide',fig.keep='all'}
 gl.report.reproducibility(gl)
 ```
 
@@ -154,7 +132,9 @@ Recall that DArT runs a series of technical replicates as part of its routine wo
 
 Now let's try some filtering. Return to call rate.
 
-```{r output=FALSE}
+### Filtering
+
+```{r}
 # First look at a report to decide a threshold
 gl.report.callrate(gl,method="ind")
 
@@ -163,7 +143,7 @@ gl <- gl.filter.callrate(gl, method="ind", threshold=0.80)
 
 # Use a smear plot for a visual assessment of the effectiveness of filtering
 gl <- testset.gl
-gl.smearplot(gl)
+smear_pre <- gl.smearplot(gl)
 
 ```
 
@@ -171,27 +151,25 @@ gl.smearplot(gl)
 Note the whitespace, which indicates missing data.
 :::
 
-```{r output=FALSE}
+```{r results='hide',fig.keep='all'}
 # Filter on callrate by locus, then on individual
 gl <- gl.filter.callrate(gl,verbose=0)
 gl <- gl.filter.callrate(gl, method= "ind", threshold=0.80, verbose=0)
 
 # Examine the smearplot again
-gl.smearplot(gl)
+smear_post <- gl.smearplot(gl)
 ```
 
 *What has happened. What do you conclude?*
 
-### Exercise
-
-#### Filtering out sex-linked markers
+## Filtering out sex-linked markers
 
 For this exercise we will use the data of the Leadbeater's possum (LBP). This data is included in the package `dartR.sexlinked`
 
 ![The Leadbeater's possum :)](images/Leadbeaters_possum.jpg)
 
+### Load data
 ```{r results='hide'}
-# Load data
 LBP                   # Explore the dataset
 LBP@n.loc             # Number of SNPs
 length(LBP@ind.names) # Number of individuals
@@ -199,7 +177,7 @@ length(LBP@ind.names) # Number of individuals
 ```
 
 ::: callout-note
-##### Question:
+##### Question time
 
 ![](images/task.png){.class width="48" height="48"} How many SNPs and individuals does the LBP genlight object have?
 
@@ -211,15 +189,21 @@ Type the correct number into the blank boxes below:
 *boxes will go green if you have the answer correct*
 :::
 
-##### Run `gl.report.sexlinked`
+### Run `gl.report.sexlinked`
 
 This function identifies sex-linked and autosomal loci present in a SNP dataset (i.e., genlight object) using individuals with known sex. It identifies five types of loci: w-linked or y-linked, sex-biased, z-linked or x-linked, gametologous and autosomal.
 
 ::: callout-tip
-*The genlight object must contain in `gl\@other\$ind.metrics` a column named `id`, and a column named `sex` in which individuals with known-sex are assigned `M` for male, or `F` for female. The function ignores individuals that are assigned anything else or nothing at all (unknown-sex).*
+
+The genlight object must contain in `gl@other$ind.metrics` a column named `id`, and a column named `sex` in which individuals with known-sex are assigned `M` for male, or `F` for female. The function ignores individuals that are assigned anything else or nothing at all (unknown-sex).
+
 :::
 
-![](images/task.png){#id .class width="48" height="48"} Check that `ind.metrics` has the necessary columns:
+::: callout-caution
+#### Check
+
+![](images/reading.png){#id .class width="48" height="48"} Check that `ind.metrics` has the necessary columns:
+::: 
 
 ```{r output=FALSE}
 head(LBP@other$ind.metrics)
@@ -230,37 +214,50 @@ head(LBP@other$ind.metrics)
 knitr::kable(head(LBP@other$ind.metrics)) 
 ```
 
-![](images/task.png){.class width="48" height="48"} Check the manual of function `gl.report.sexlinked` to investigate its other requirements:
+::: callout-caution
+#### Check
 
-```{r}
+![](images/reading.png){.class width="48" height="48"} Check the manual of function `gl.report.sexlinked` to investigate its other requirements:
+
+
+```{r eval = FALSE, echo = TRUE}
 help(gl.report.sexlinked)
 ```
 
-![](images/task.png){.class width="48" height="48"} Run the function to identify sex-linked loci in the LBP genlight object:
+:::
+
+
+Run the function to identify sex-linked loci in the LBP genlight object:
 
 ```{r}
 out <- gl.report.sexlinked(LBP, system = "xy")
 ```
 
+
 ::: callout-note
 #### Question time
+
+![](images/task.png){.class width="48" height="48"} 
 
 **Question:** Why are we using "xy"?
 
 **Question:** How many males and females does the dataset contain?
 
 **Question:** How many sex-linked loci were found?
-:::
+
 
 The output consists of two plots, plus a table. Examine the plots.
 
-::: callout-note
 **Question:** What do the colours mean in the plots? Look at the figure below for a hint.
-:::
 
 ![Sex-linked loci in XY sex determination systems](images/XY.png)
 
-![](images/task.png){.class width="48" height="48"} Now check the output table:
+:::
+
+
+#### output dataframe
+
+Now check the output talble
 
 ```{r output=FALSE}
 out
@@ -269,14 +266,13 @@ out
 
 ```{r}
 #| echo: false
-knitr::kable(head(out, n = 20))
+knitr::kable(head(out, n = 7))
 ```
 
-*only showing the first 20 rows*
+*only showing the first 7 rows*
 
-##### Run `gl.drop.sexlinked`
-
-![](images/task.png){.class width="48" height="48"} Remove the sex-linked loci from the LBP genlight object:
+### Run `gl.drop.sexlinked`
+Remove the sex-linked loci from the LBP genlight object:
 
 ```{r output=FALSE}
 new.gl <- gl.drop.sexlinked(LBP, system = "xy")
@@ -285,17 +281,62 @@ new.gl@n.loc
 ```
 
 ::: callout-note
-**Question:** How many SNPs are there left after removing sex-linked loci?
+##### Question time
+![](images/task.png){.class width="48" height="48"} How many SNPs are there left after removing sex-linked loci?
+
 
 -   number of SNPs `r fitb(923)`
+
 :::
 
-#### More filtering
+## More filtering
 
-::::: callout-note
-#### Knock yourself out trying all the different report and filtering functions
+**Knock yourself out trying all the different report and filtering functions**
+
+::: callout-tip
 
 Remember to use them as pairs – report function to decide a threshold, filter function to apply the threshold (where appropriate)
+
+:::
+
+Below are two tables with a number of report and filter functions you can try.
+
+### Report functions
+
+| Report functions | description |
+|--------------------------|----------------------------------------------|
+| gl.report.callrate | *summarises CallRate values* |
+| gl.report.reproducibility | *summarises repAvg (SNP) or reproducibility (SilicoDArT) values.* |
+| gl. report.monomorphs | *provides a count of polymorphic and monomorphic loci* |
+| gl.report.secondaries | *provides a count of loci that are secondaries, that is, loci that reside on the one sequence tag.* |
+| gl.report.rdepth | *reports the estimate of average read depth for each locus* |
+| gl.report.hamming | *reports on Hamming distances between sequence tags* |
+| gl.report.overshoot | *reports loci for which the SNP has been trimmed along with the adaptor sequence* |
+| gl.report.taglength | *reports a frequency tabulation of sequence tag lengths* |
+| gl.report.sexlinked | *reports the number and type of loci likely to be in sex chromosomes* |
+
+: {.striped .bordered}
+
+### Filtering functions
+
+| Filter functions | description |
+|-------------------------|-----------------------------------------------|
+| gl.filter.callrate | *filter out loci or individuals for which the call rate (rate of non-missing values) is less than a specified threshold, say threshold = 0.95* |
+| gl.filter.reproducibility | *filter out loci for which the reproducibility (strictly repeatability) is less than a specified threshold, say threshold = 0.99* |
+| gl. filter.monomorphs | *provides a count of polymorphic and monomorphic loci* |
+| gl.filter.allna | *filter out loci that are all missing values (NA)* |
+| gl.filter.secondaries | *filter out SNPs that share a sequence tag, except one retained at random \[or the best based on reproducibility (RepAvg) and information content (AvgPIC)\].* |
+| gl.filter.rdepth | *filter out loci with exceptionally low or high read depth (coverage)* |
+| gl.filter.hamming | *filter out loci that differ from each other by less than a specified number of base pairs* |
+| gl.filter.overshoot | *filter out loci where the SNP location lies outside the trimmed sequence tag* |
+| gl.filter.taglength | *filter out loci for which the tag length is less that a threshold* |
+| gl.filter.sexlinked | *filter out loci that are likely to be in sex chromosomes* |
+
+: {.striped .bordered}
+
+
+::::: callout-note
+#### Exercise
 
 How about trying it with a different dataset?
 
@@ -380,34 +421,7 @@ gl <- gl.read.dart(filename="./data/sample_data_2Row.csv",
 You can even try it with your own data.
 :::::
 
-| Report functions | description |
-|--------------------------|----------------------------------------------|
-| gl.report.callrate | *summarises CallRate values* |
-| gl.report.reproducibility | *summarises repAvg (SNP) or reproducibility (SilicoDArT) values.* |
-| gl. report.monomorphs | *provides a count of polymorphic and monomorphic loci* |
-| gl.report.secondaries | *provides a count of loci that are secondaries, that is, loci that reside on the one sequence tag.* |
-| gl.report.rdepth | *reports the estimate of average read depth for each locus* |
-| gl.report.hamming | *reports on Hamming distances between sequence tags* |
-| gl.report.overshoot | *reports loci for which the SNP has been trimmed along with the adaptor sequence* |
-| gl.report.taglength | *reports a frequency tabulation of sequence tag lengths* |
-| gl.report.sexlinked | *reports the number and type of loci likely to be in sex chromosomes* |
 
-: {.striped .bordered}
-
-| Filter functions | description |
-|-------------------------|-----------------------------------------------|
-| gl.filter.callrate | *filter out loci or individuals for which the call rate (rate of non-missing values) is less than a specified threshold, say threshold = 0.95* |
-| gl.filter.reproducibility | *filter out loci for which the reproducibility (strictly repeatability) is less than a specified threshold, say threshold = 0.99* |
-| gl. filter.monomorphs | *provides a count of polymorphic and monomorphic loci* |
-| gl.filter.allna | *filter out loci that are all missing values (NA)* |
-| gl.filter.secondaries | *filter out SNPs that share a sequence tag, except one retained at random \[or the best based on reproducibility (RepAvg) and information content (AvgPIC)\].* |
-| gl.filter.rdepth | *filter out loci with exceptionally low or high read depth (coverage)* |
-| gl.filter.hamming | *filter out loci that differ from each other by less than a specified number of base pairs* |
-| gl.filter.overshoot | *filter out loci where the SNP location lies outside the trimmed sequence tag* |
-| gl.filter.taglength | *filter out loci for which the tag length is less that a threshold* |
-| gl.filter.sexlinked | *filter out loci that are likely to be in sex chromosomes* |
-
-: {.striped .bordered}
 
 ## *Further Study*
 
