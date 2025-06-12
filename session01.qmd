@@ -1,8 +1,5 @@
 ---
 title: "Importing and Handling Genomic Data"
-format: html
-execute: 
-  cache: false
 ---
 
 *Session Presenters*
@@ -10,11 +7,6 @@ execute:
 ![](images/Presenters1.png)
 
 ## *Required packages*
-
-```{r}
-#| include: false
- library(webexercises)
-```
 
 ```{r, warning=FALSE, message=FALSE}
 library(dartRverse)
@@ -54,15 +46,14 @@ testset.gl
 ::: callout-note
 #### Question time
 
-![](images/task.png){.class width="48" height="48"} How many individuals have been genotyped? How many SNP loci have been scored? What is the percentage of missing data? This is referring to the `testset.gl` data set you have interrogated above.
+![](images/task.png){.class width="48" height="48"} This is referring to the `testset.gl` data set you have interrogated above.
 
-Type the correct number into the blank boxes below:
+How many individuals have been genotyped? 
 
--   number of SNPs `r fitb(255)`
--   number of individuals `r fitb(250)`
--   percent missing data `r fitb(12.34)`
+How many SNP loci have been scored? 
 
-*boxes will go green if you have the answer correct*
+What is the percentage of missing data? 
+
 :::
 
 ```{r output=FALSE}
@@ -130,9 +121,11 @@ gl.report.reproducibility(gl)
 Recall that DArT runs a series of technical replicates as part of its routine workflow. This enables an assessment of the quality of data associated with each locus. What threshold do you think might be appropriate for a filter of reproducability?
 :::
 
-Now let's try some filtering. Return to call rate.
+
 
 ### Filtering
+
+Now let's try some filtering. Return to call rate.
 
 ```{r}
 # First look at a report to decide a threshold
@@ -179,14 +172,10 @@ length(LBP@ind.names) # Number of individuals
 ::: callout-note
 ##### Question time
 
-![](images/task.png){.class width="48" height="48"} How many SNPs and individuals does the LBP genlight object have?
+![](images/task.png){.class width="48" height="48"} 
 
-Type the correct number into the blank boxes below:
+How many SNPs and individuals does the LBP genlight object have?
 
--   number of SNPs `r fitb(1000)`
--   number of individuals `r fitb(376)`
-
-*boxes will go green if you have the answer correct*
 :::
 
 ### Run `gl.report.sexlinked`
@@ -283,9 +272,6 @@ new.gl@n.loc
 ::: callout-note
 ##### Question time
 ![](images/task.png){.class width="48" height="48"} How many SNPs are there left after removing sex-linked loci?
-
-
--   number of SNPs `r fitb(923)`
 
 :::
 

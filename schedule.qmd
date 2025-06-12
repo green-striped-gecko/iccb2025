@@ -6,14 +6,14 @@ editor: visual
 # Program {.unnumbered}
 
 | \# | Day | Time | Topic | Presenters |
-|:-------------:|---------------|:-------------:|:-------------:|:-------------:|
+|:--:|----|:--:|:--:|:--:|
 | 1 | Saturday | 9 am -- 11 am | [**Importing and Handling Genomic Data**](session01.qmd) | Arthur Georges, Diana Robledo |
 | 2 |  | 11:20 am -- 12:50 pm | [**Estimating Effective Population Size and Key Stats**](session02.qmd) | Bernd Gruber, Luis Mijangos |
 | 3 |  | 1:30 pm -- 3 pm | [**Identifying Population Structure**](session03.qmd) | Luis Mijangos, Emily Stringer |
 | 4 |  | 3:30 pm -- 5 pm | [**Kinship, Pedigrees & Mating Recommendations**](session04.qmd) | Luis Mijangos, Bernd Gruber |
 | 5 | Sunday | 9 am -- 11 am | [**Assigning Individuals to Populations**](session05.qmd) | Arthur Georges, Elise Furlan |
 | 6 |  | 11:30 am -- 12:30 pm | [**SNP Panel Selection**](session06.qmd) | Elise Furlan, Bernd Gruber, Andrzej Killian |
-| 7 |  | 1:10 pm – 2:10 pm | [**Simulations for Conservation**](session07.qmd) |  Bernd Gruber, Luis Mijangos |
+| 7 |  | 1:10 pm – 2:10 pm | [**Simulations for Conservation**](session07.qmd) | Bernd Gruber, Luis Mijangos |
 | Bonus! |  | 2:10 pm – 3 pm | [**Sex Linked Markers**](session08.qmd) | Diana Robledo |
 
 : {tbl-colwidths="\[5,5,26, 28, 36\]" .striped .bordered}
