@@ -20,6 +20,7 @@ book:
   - session07.qmd
   - session08.qmd
   - break.qmd
+  - materials.qmd
   - tutorials.qmd
   - references.qmd
   - feedback.qmd

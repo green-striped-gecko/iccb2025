@@ -136,16 +136,16 @@ hist(relpo, main = "Relatedness between offsprings and parents", xlab = "Related
 
 ## ---------------------------------------------------------------------------------------------------------------
 
-emib_dir <- tempdir()
+binary_dir <- './binaries/'
 #install emibd9 from Wang 2022 in the temporary directory
-dir <- gl.download.binary("emibd9", out.dir = emib_dir)
+dir <- gl.download.binary("emibd9", out.dir = binary_dir)
 
 
 
 ## ---------------------------------------------------------------------------------------------------------------
 
 #ignore the warnings...
-kinmat <- gl.run.EMIBD9(glsimoff, Inbreed = 1, emibd9.path = emib_dir)
+kinmat <- gl.run.EMIBD9(glsimoff, Inbreed = 1, emibd9.path = binary_dir)
 
 
 
@@ -181,7 +181,7 @@ plot(Arel, kinrel,
 ## ---------------------------------------------------------------------------------------------------------------
 #install the Neestimator package
 
-dir <- dartRverse::gl.download.binary("neestimator", out.dir = tempdir())
+dir <- dartRverse::gl.download.binary("neestimator", out.dir = binary_dir)
 
 
 ## ---------------------------------------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ gg <-gl.LDNe(sim50, neest.path = dir, mating = "random", critical = c(0.1,0.05))
 ## ---------------------------------------------------------------------------------------------------------------
 #install the Neestimator package
 
-dir <- dartRverse::gl.download.binary("epos", out.dir = tempdir())
+dir <- dartRverse::gl.download.binary("epos", out.dir = binary_dir)
 
 ## ---------------------------------------------------------------------------------------------------------------
 gl.sfs(sim50)

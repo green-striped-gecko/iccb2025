@@ -60,3 +60,5 @@ session_organise
 
 *.pptx
 
+# popcluster files
+output.popcluster*

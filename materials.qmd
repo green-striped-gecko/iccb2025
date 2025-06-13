@@ -1,0 +1,41 @@
+# Session Materials {.unnumbered}
+
+## Code
+
+```{r}
+# downloadable zip to come...
+```
+
+
+## Data
+
+```{r}
+# downloadable zip to come...
+```
+
+
+## Slides 
+
+### Session 1 PowerPoint 
+
+{{< pdf extra/ICCB_session_1.pdf width=100% height=500 >}}
+
+
+### Session 2 PowerPoint 
+
+{{< pdf extra/ICCB_session_2.pdf width=100% height=500 >}}
+
+
+### Session 5 PowerPoint 
+
+{{< pdf extra/ICCB_session_5.pdf width=100% height=500 >}}
+
+
+### Session 6 PowerPoint 
+
+{{< pdf extra/ICCB_session_6.pdf width=100% height=500 >}}
+
+### Session 8 PowerPoint 
+
+{{< pdf extra/ICCB_session_8.pdf width=100% height=500 >}}
+
