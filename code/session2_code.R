@@ -184,6 +184,8 @@ plot(Arel, kinrel,
 dir <- dartRverse::gl.download.binary("neestimator", out.dir = binary_dir)
 
 
+dir_Ne <- './binaries/Neestimator/'
+
 ## ---------------------------------------------------------------------------------------------------------------
 #simulate a population of 50 individuals with 1000 loci
 
@@ -197,7 +199,7 @@ sim50 <- gl.sim.offspring(sim50, sim50, noffpermother = 1) #ideal population
 sim50 <- gl.sim.offspring(sim50, sim50, noffpermother = 1) #ideal population
 
 
-gg <-gl.LDNe(sim50, neest.path = dir, mating = "random", critical = c(0.1,0.05))
+gg <-gl.LDNe(sim50, neest.path = dir_Ne, mating = "random", critical = c(0.1,0.05))
          
 
 
