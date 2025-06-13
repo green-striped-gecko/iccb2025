@@ -38,8 +38,124 @@ library(downloadthis)
 ```
 :::
 
-## Session 8
 
+## Session 2
+
+::: download_btn
+```{css}
+#| echo: false
+
+.btn-default,
+.btn-default:hover,
+.btn-default:active {
+  font-size: 20px;
+  color: black;
+  background-color: transparent;
+  border-color: lightblue;
+}
+
+.btn-default:hover {
+  color: grey;
+  transition: 0.2s;
+}
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+library(downloadthis)
+
+
+  download_file(path = './extra/ICCB_Session_2.pptx',
+    output_name = "ICCB_dartR_session02",
+    output_extension = ".pptx",
+    button_label = "Download Session 2 powerpoint",
+    button_type = "default",
+    has_icon = TRUE,
+    icon = "fa fa-file-powerpoint"
+  )
+
+```
+:::
+
+## Session 5
+
+::: download_btn
+```{css}
+#| echo: false
+
+.btn-default,
+.btn-default:hover,
+.btn-default:active {
+  font-size: 20px;
+  color: black;
+  background-color: transparent;
+  border-color: lightblue;
+}
+
+.btn-default:hover {
+  color: grey;
+  transition: 0.2s;
+}
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+library(downloadthis)
+
+
+  download_file(path = './extra/ICCB_Session_5.pptx',
+    output_name = "ICCB_dartR_session05",
+    output_extension = ".pptx",
+    button_label = "Download Session 5 powerpoint",
+    button_type = "default",
+    has_icon = TRUE,
+    icon = "fa fa-file-powerpoint"
+  )
+
+```
+:::
+
+
+## Session 6
+
+::: download_btn
+```{css}
+#| echo: false
+
+.btn-default,
+.btn-default:hover,
+.btn-default:active {
+  font-size: 20px;
+  color: black;
+  background-color: transparent;
+  border-color: lightblue;
+}
+
+.btn-default:hover {
+  color: grey;
+  transition: 0.2s;
+}
+
+```
+
+```{r, echo=FALSE, warning=FALSE}
+library(downloadthis)
+
+
+  download_file(path = './extra/ICCB_Session_6.pptx',
+    output_name = "ICCB_dartR_session06",
+    output_extension = ".pptx",
+    button_label = "Download Session 6 powerpoint",
+    button_type = "default",
+    has_icon = TRUE,
+    icon = "fa fa-file-powerpoint"
+  )
+
+```
+:::
+
+
+## Session 8
 
 ::: download_btn
 ```{css}
@@ -76,4 +192,3 @@ library(downloadthis)
 
 ```
 :::
-
