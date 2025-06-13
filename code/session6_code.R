@@ -1,6 +1,10 @@
-## ----warning=FALSE, message=FALSE-------------------------------------------------------------------------------
+## Session 6 -  SNP Panel Selection & Simulations for Conservation
+
+# follow the links (ctrl click) to find the accompanying session material
+# https://green-striped-gecko.github.io/iccb2025/session06.html
+
+## -----------------------------------------------------------------------------------
 library(dartRverse)
-library(webexercises)
 library(knitr)
 
 

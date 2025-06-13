@@ -1,11 +1,14 @@
-## ----warning=FALSE, message=FALSE-------------------------------------------------------------------------------
+## Session 2 - Estimating Effective Population Size and Key Stats
+
+# follow the links (ctrl click) to find the accompanying session material
+# https://green-striped-gecko.github.io/iccb2025/session02.html
+
+## ----------------------------------------------------------------------------------
 library(dartRverse)
 
 
 ## ---------------------------------------------------------------------------------------------------------------
 gls <- possums.gl[c(1:5,31:35),1:7]  #small data set 
-
-
 
 
 
@@ -20,8 +23,6 @@ nas1 <- gl.report.allelerich(gls)
 nas1$`Allelic Richness per population`
 
 nas2 <- gl.report.diversity(gls, table = "D")
-
-
 
 
 
