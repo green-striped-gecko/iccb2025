@@ -13,7 +13,6 @@ library(dartRverse)
 library(dartR.sexlinked)
 ```
 
-
 ## Introduction
 
 SNPs, or single nucleotide polymorphisms, are single base pair mutations at a nuclear locus (Figure 2). That nuclear locus is represented in the dataset by two sequence tags which, at a heterozygous locus, take on two allelic states, one referred to as the reference state, the other as the alternate or SNP state.
@@ -42,18 +41,16 @@ To help us get our head around data interrogation, subsetting, and basic filteri
 testset.gl
 ```
 
-
 ::: callout-note
 #### Question time
 
 ![](images/task.png){.class width="48" height="48"} This is referring to the `testset.gl` data set you have interrogated above.
 
-How many individuals have been genotyped? 
+How many individuals have been genotyped?
 
-How many SNP loci have been scored? 
+How many SNP loci have been scored?
 
-What is the percentage of missing data? 
-
+What is the percentage of missing data?
 :::
 
 ```{r output=FALSE}
@@ -121,8 +118,6 @@ gl.report.reproducibility(gl)
 Recall that DArT runs a series of technical replicates as part of its routine workflow. This enables an assessment of the quality of data associated with each locus. What threshold do you think might be appropriate for a filter of reproducability?
 :::
 
-
-
 ### Filtering
 
 Now let's try some filtering. Return to call rate.
@@ -162,6 +157,7 @@ For this exercise we will use the data of the Leadbeater's possum (LBP). This da
 ![The Leadbeater's possum :)](images/Leadbeaters_possum.jpg)
 
 ### Load data
+
 ```{r results='hide'}
 LBP                   # Explore the dataset
 LBP@n.loc             # Number of SNPs
@@ -172,10 +168,9 @@ length(LBP@ind.names) # Number of individuals
 ::: callout-note
 ##### Question time
 
-![](images/task.png){.class width="48" height="48"} 
+![](images/task.png){.class width="48" height="48"}
 
 How many SNPs and individuals does the LBP genlight object have?
-
 :::
 
 ### Run `gl.report.sexlinked`
@@ -183,16 +178,14 @@ How many SNPs and individuals does the LBP genlight object have?
 This function identifies sex-linked and autosomal loci present in a SNP dataset (i.e., genlight object) using individuals with known sex. It identifies five types of loci: w-linked or y-linked, sex-biased, z-linked or x-linked, gametologous and autosomal.
 
 ::: callout-tip
-
 The genlight object must contain in `gl@other$ind.metrics` a column named `id`, and a column named `sex` in which individuals with known-sex are assigned `M` for male, or `F` for female. The function ignores individuals that are assigned anything else or nothing at all (unknown-sex).
-
 :::
 
 ::: callout-caution
 #### Check
 
 ![](images/reading.png){#id .class width="48" height="48"} Check that `ind.metrics` has the necessary columns:
-::: 
+:::
 
 ```{r output=FALSE}
 head(LBP@other$ind.metrics)
@@ -208,13 +201,10 @@ knitr::kable(head(LBP@other$ind.metrics))
 
 ![](images/reading.png){.class width="48" height="48"} Check the manual of function `gl.report.sexlinked` to investigate its other requirements:
 
-
 ```{r eval = FALSE, echo = TRUE}
 help(gl.report.sexlinked)
 ```
-
 :::
-
 
 Run the function to identify sex-linked loci in the LBP genlight object:
 
@@ -222,11 +212,10 @@ Run the function to identify sex-linked loci in the LBP genlight object:
 out <- gl.report.sexlinked(LBP, system = "xy")
 ```
 
-
 ::: callout-note
 #### Question time
 
-![](images/task.png){.class width="48" height="48"} 
+![](images/task.png){.class width="48" height="48"}
 
 **Question:** Why are we using "xy"?
 
@@ -234,15 +223,12 @@ out <- gl.report.sexlinked(LBP, system = "xy")
 
 **Question:** How many sex-linked loci were found?
 
-
 The output consists of two plots, plus a table. Examine the plots.
 
 **Question:** What do the colours mean in the plots? Look at the figure below for a hint.
 
 ![Sex-linked loci in XY sex determination systems](images/XY.png)
-
 :::
-
 
 #### Output dataframe
 
@@ -272,8 +258,8 @@ new.gl@n.loc
 
 ::: callout-note
 ##### Question time
-![](images/task.png){.class width="48" height="48"} How many SNPs are there left after removing sex-linked loci?
 
+![](images/task.png){.class width="48" height="48"} How many SNPs are there left after removing sex-linked loci?
 :::
 
 ## More filtering
@@ -281,9 +267,7 @@ new.gl@n.loc
 **Knock yourself out trying all the different report and filtering functions**
 
 ::: callout-tip
-
 Remember to use them as pairs – report function to decide a threshold, filter function to apply the threshold (where appropriate)
-
 :::
 
 Below are two tables with a number of report and filter functions you can try.
@@ -320,7 +304,6 @@ Below are two tables with a number of report and filter functions you can try.
 | gl.filter.sexlinked | *filter out loci that are likely to be in sex chromosomes* |
 
 : {.striped .bordered}
-
 
 ::::: callout-note
 #### Exercise
@@ -401,14 +384,12 @@ library(downloadthis)
 
 ```{r output=FALSE}
 # how to load a genlight object
-gl <- gl.read.dart(filename="./data/sample_data_2Row.csv", 
+gl <- gl.read.dart(filename="./data/sample_data_2row.csv", 
                    ind.metafile="./data/sample_metadata.csv")
 ```
 
 You can even try it with your own data.
 :::::
-
-
 
 ## *Further Study*
 

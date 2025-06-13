@@ -104,7 +104,7 @@ new.gl@n.loc
 # load data ---------------------------------------------------------------
 
 # how to load a genlight object
-gl <- gl.read.dart(filename="./data/sample_data_2Row.csv", 
+gl <- gl.read.dart(filename="./data/sample_data_2row.csv", 
                    ind.metafile="./data/sample_metadata.csv")
 
 
