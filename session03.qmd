@@ -102,7 +102,7 @@ Structure variants can also turn up on a PCA, like an inversion.
 
 PCA is sample size dependent - but this is more for the top two dimensions not all the informative dimensions.
 
-### Structure and FastStructure (Bayesian clustering models)
+## Structure and FastStructure (Bayesian clustering models)
 
 Structure attempts to find the number of populations or sources (K ) at which population genetics parameters (i.e. Hardy–Weinberg equilibrium within populations and linkage equilibrium between loci) are maximized.
 
@@ -146,7 +146,7 @@ The possible arguments are listed below:
 | popflag | a vector of integers (0, 1) or logicals identifiying whether or not to use strata information. Only used when pop.prior = "usepopinfo". |
 | pops | vector of population labels to be used in place of numbers in STRUCTURE file. |
 
-### Running STRUCTURE
+## Running STRUCTURE
 
 ```{r }
 
@@ -160,7 +160,7 @@ srnoad <- gl.run.structure(possums.gl, k.range = 2:7, num.k.rep = 2,
 
 ```
 
-## Structure Results
+### Structure Results
 
 Okay now that we got that out of our way lets see how to interpret the results of the structure run. However, to really trust our results we would want to run `gl.run.structure` with larger burn in and number of reps, more like burnin=50000 and numreps=100000. But this takes a while, so we will not be doing that today.  
 
@@ -193,6 +193,7 @@ head(qmatnoad[[1]])
 
 ```{r structure map}
 gm <- gl.map.structure(qmat = qmatnoad, x = possums.gl,K=5, scalex=1, scaley=0.5 )
+
 ```
 
 ::: callout-note
@@ -235,16 +236,16 @@ gl.map.interactive(platypus.gl)
 
 Here we can check the marginal likelihoods for the different K values. The recommended K is then the one with the highest marginal likelihood at the lowest K possible. So here we would decide on K=4. As before we can plot the Q matrix and the spatial structure plot.
 
-### Running snmf
+## Running snmf
 
-```{r eval = FALSE, echo=T}
+```{r results='hide', fig.keep='all'}
 my_snmf <- gl.run.snmf(possums.gl, minK = 2, maxK = 7, rep = 2, regularization = 10)
 
 gl.plot.snmf(snmf_result = my_snmf,plot.K = 3, border_ind = 0)
 
 ```
 
-### Popcluster
+## Popcluster
 
 ```{r}
 my_popcluster <- gl.run.popcluster(x = possums.gl, minK = 2, maxK = 7, rep = 2, popcluster.path = './binaries/')
