@@ -103,7 +103,7 @@ Note that the call rate is reported against locus. This is the default. Both a t
 
 *What threshold do you think might be appropriate?*
 
-Now let's report the call rate for genlight object gl by **individual**.
+Now let's report the call rate for genlight object `gl` by **individual**.
 
 ```{r results='hide',fig.keep='all'}
 gl.report.callrate(gl,method="ind")
@@ -244,9 +244,9 @@ The output consists of two plots, plus a table. Examine the plots.
 :::
 
 
-#### output dataframe
+#### Output dataframe
 
-Now check the output talble
+Now check the output table
 
 ```{r output=FALSE}
 out
@@ -261,6 +261,7 @@ knitr::kable(head(out, n = 7))
 *only showing the first 7 rows*
 
 ### Run `gl.drop.sexlinked`
+
 Remove the sex-linked loci from the LBP genlight object:
 
 ```{r output=FALSE}

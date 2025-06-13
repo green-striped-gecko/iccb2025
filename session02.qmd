@@ -10,20 +10,20 @@
 library(dartRverse)
 ```
 
-## Session Content
+## Introduction
 
 This session will cover the basic statistics that are used to study populations, mainly towards a conservation perspective. We will explore how to estimate effective population size (Ne), heterozygosity (Ho, He), and other key statistics using genomic data. The session will include practical exercises using R and the `dartRverse` packages.
+
+![[Hoban et al. 2022](https://onlinelibrary.wiley.com/doi/10.1111/brv.12852)](images/genetic_comp.jpg)
 
 for this session you can use your own data, but feel free to use the example data provided in the `dartRverse` package.
 
 ```{r}
 gls <- possums.gl[c(1:5,31:35),1:7]  #small data set 
 
-
-
 ```
 
-### Calculating the number of Alleles
+## Calculating the number of Alleles
 
 In conservation genetics, the number of alleles (allelic richness) is important because it reflects the genetic diversity within a population. This diversity is crucial for:
 
@@ -37,33 +37,32 @@ In short: more alleles = higher evolutionary potential.
 
 There are two ways to meassure this quantity.
 
-#### Number of Alleles (Na) for SNPs:
+### Number of Alleles (Na) for SNPs:
 
 Since SNPs are biallelic by design, Na is either 1 or 2.
 
 -   If everyone has the same allele → Na = 1 (monomorphic)\
 -   If both alleles are present → Na = 2 (polymorphic)
 
-#### Allelic Richness (Ar) for SNPs:
+### Allelic Richness (Ar) for SNPs:
 
 Still measures how many alleles are present, but adjusted for sample size via rarefaction. In biallelic SNPs, Ar also ranges from 1 to 2, but:
 
 -   In small samples, rare alleles might be missed → Ar \< Na
 -   Ar estimates the expected number of alleles if the sample had fewer individuals.
 
-```{r}
+```{r results='hide', fig.keep='all'}
 #by hand number of alleles
 as.matrix(gls[1:5,])
-#count the number of alleles per locus in each popu
-
- 
+#count the number of alleles per locus in each population
 
 nas1 <- gl.report.allelerich(gls)
+```
+
+```{r}
 nas1$`Allelic Richness per population`
 
 nas2 <- gl.report.diversity(gls, table = "D")
-
-
 
 
 ```
@@ -74,11 +73,15 @@ A nice function to have is to run a bootstrapped simulation that selects a rando
 gg <- gl.report.nall(gls, simlevels = 1:10, reps = 20, ncores = 1)  #change the number of cores if you have more available
 ```
 
-Task: rerun the analysis with your own data (or use the glb dataset provided here)
+::: callout-note
+#### Task
 
-### Calculating Heterozygosity
+![](images/task.png){#id .class width="48"} Rerun the analysis with your own data (or use the glb dataset provided here)
+:::
 
-#### Observed Heterozygosity (Ho):
+## Calculating Heterozygosity
+
+### Observed Heterozygosity (Ho):
 
 Observed heterozygosity (Ho) is the proportion of individuals in a population that are heterozygous at a given locus. It is calculated as per individual and often averaged per population.
 
@@ -86,13 +89,13 @@ Observed heterozygosity (Ho) is the proportion of individuals in a population th
 gl.report.heterozygosity(gls, method = "ind")
 gl.report.heterozygosity(gls, method = "pop")
 
-
 ```
 
-There is a lot of discussion no the best way to calculate heterozygosity, but the most common method is to use the proportion of heterozygous individuals at each locus. This is "okay" if you compare individuals and populations of the same species (but see Sopniewski and Catullo 2022 and Schmidt et al. 2021 for a discussion on the limitations of this approach). The main problem is that when filtering for low quality (low read depth) often heterozygous loci are lost, which can bias the results. In addition to calculate a comparable heterozygosity across species, we would need to know the number of invariant sites, which are not easily obtained. dartR aims to estimate this number from closely neighbouring loci, if you are using dartR data (secondaries). This estimate is based on a Poisson distribution assumption which is most likely not a good idea as it underestimates the number of invariant sites. We are currently aiming to implement a better method to estimate the number of invariant sites, but for now we will use the `gl.report.heterozygosity` function to calculate Ho. Schmidt et al. (2021) suggests to calculate genome-wide/autosomal heterozygosity, but it basically means you need whole genome sequences, which is often not available. In summary be careful to calculate Heterozygosity, especially when comparing across species or uneven sampled populations. A rarefaction approach is often used to standardise the sample size. We can do that with the `gl.report.heterozygosity` function, which allows us to calculate Ho for each individual and then average it per population in combination of `gl.subsample.ind()` function.
+**There is a lot of discussion on the best way to calculate heterozygosity**, but the most common method is to use the proportion of heterozygous individuals at each locus. This is "okay" if you compare individuals and populations of the same species (but see Sopniewski and Catullo 2022 and Schmidt et al. 2021 for a discussion on the limitations of this approach). The main problem is that when filtering for low quality (low read depth) often heterozygous loci are lost, which can bias the results. In addition to calculate a comparable heterozygosity across species, we would need to know the number of invariant sites, which are not easily obtained. dartR aims to estimate this number from closely neighbouring loci, if you are using dartR data (secondaries). This estimate is based on a Poisson distribution assumption which is most likely not a good idea as it underestimates the number of invariant sites. We are currently aiming to implement a better method to estimate the number of invariant sites, but for now we will use the `gl.report.heterozygosity` function to calculate Ho. Schmidt et al. (2021) suggests to calculate genome-wide/autosomal heterozygosity, but it basically means you need whole genome sequences, which is often not available. In summary be careful to calculate Heterozygosity, especially when comparing across species or uneven sampled populations. A rarefaction approach is often used to standardise the sample size. We can do that with the `gl.report.heterozygosity` function, which allows us to calculate Ho for each individual and then average it per population in combination of `gl.subsample.ind()` function.
 
 ```{r}
-#create a sample data sets (two populations, once with 10 individuals and one with 5 individuals)
+#Create a sample data sets 
+# (two populations, once with 10 individuals and one with 5 individuals)
 
 gls1 <- possums.gl[c(1:10, 31:35),]
 
@@ -106,20 +109,28 @@ subfun <- function(x) {
 
 subfun(gls1)
 subfun(gls1)
-#ignore the warning
-res <- sapply(1:50, function(x) subfun(gls1) ) 
+```
+
+```{r results='hide'}
+#ignore the warnings
+res <- sapply(1:50, function(x) subfun(gls1)) 
+
+```
+
+```{r}
 rownames(res) <- popNames(gls1)
 boxplot(t(res))
 summary(t(res))
 
-
 ```
 
-#### Task: Try with your own data set
+::: callout-note
+#### Task
 
-#### Expected Heterozygosity (He):
+![](images/task.png){.class width="48"} Try with your own data set
+:::
 
-### Expected Heterozygosity
+### Expected Heterozygosity (He)
 
 Expected heterozygosity (He) is a key measure of genetic diversity in conservation genetics, representing the probability that two alleles randomly drawn from a population are different. High He indicates a genetically diverse population, which is critical for adaptive potential and long-term viability. In contrast, low He can signal inbreeding, genetic drift, or population bottlenecks. Monitoring He helps conservationists assess population health, guide management actions such as translocations or genetic rescue, and evaluate the success of captive breeding programs in maintaining genetic variation..
 
@@ -136,7 +147,7 @@ $$
 -   ( N_e ): effective population size\
 -   ( \left(1 - \frac{1}{2N_e} \right) ): per-generation retention of heterozygosity
 
-### Interpretation
+#### **Interpretation**
 
 -   Larger ( N_e ) → slower loss of He\
 -   Small ( N_e ) → rapid loss of He due to drift
@@ -145,18 +156,19 @@ This law underscores why **maintaining a large Ne** is a central goal in conserv
 
 Expected heterozygosity (He) is a key measure of genetic diversity in conservation genetics, representing the probability that two alleles randomly drawn from a population are different. High He indicates a genetically diverse population, which is critical for adaptive potential and long-term viability. In contrast, low He can signal inbreeding, genetic drift, or population bottlenecks. Monitoring He helps conservationists assess population health, guide management actions such as translocations or genetic rescue, and evaluate the success of captive breeding programs in maintaining genetic variation.
 
-```{r}
+```{r results='hide', fig.keep='all'}
 gg <- gl.report.heterozygosity(gls)
 
+```
+
+```{r}
 gg
-
-
 
 ```
 
 Expected heterozygosity can be standardised by sample size (because allele frequencies are estimated and they are missing rare alleles at low sample size, hence is biased downwards. Therefore the correction is 2n/(2n-1) where n is the number of individuals. This is then called uHe, but is mainly important due to low sample sizes. Again you can use a rarefaction approach to standardise the sample size, which is implemented in the `gl.report.heterozygosity` function.
 
-### Hardy-Weinberg Equilibrium (HWE)
+## Hardy-Weinberg Equilibrium (HWE)
 
 HWE is a principle that describes the genetic variation in a population under certain conditions. It states that allele and genotype frequencies will remain constant from generation to generation in the absence of evolutionary influences.
 
@@ -170,17 +182,19 @@ To test for HWE, we can use the `gl.report.hwe` function, which performs a chi-s
 
 This can be done on population level (subset="each") or on the whole dataset (subset="all").
 
-```{r}
+```{r results='hide', fig.keep='all'}
 #does not make much sense (sample size too low)
 gl.report.hwe(gls,subset = "each",min_sample_size = 1 )
+```
 
-# only 10 loci...
+```{r}
+# only 10 loci... Lets try with more
 gl.report.hwe(possums.gl[1:90,],subset = "each")
 ```
 
-### Inbreeding Fis
+## Inbreeding *F*~IS~
 
-Inbreeding coefficient (Fis) is a measure of the degree of inbreeding in a population. It quantifies the reduction in heterozygosity due to inbreeding compared to a randomly mating population. A positive Fis indicates inbreeding, while a negative value suggests outbreeding or excess heterozygosity.
+Inbreeding coefficient (*F*~IS~) is a measure of the degree of inbreeding in a population. It quantifies the reduction in heterozygosity due to inbreeding compared to a randomly mating population. A positive *F*~IS~ indicates inbreeding, while a negative value suggests outbreeding or excess heterozygosity.
 
 ```{r}
 gl.report.heterozygosity(gls)
@@ -188,20 +202,24 @@ gl.report.heterozygosity(gls)
 
 ```
 
-#### Fixed and private Alleles
+## Fixed and private Alleles
 
 Private alleles are alleles found only in a single population, while fixed alleles are alleles that occur at 100% frequency within a population. In conservation genetics, private alleles can indicate unique evolutionary history or local adaptation and are useful for identifying distinct populations or units for conservation. Fixed alleles, on the other hand, may signal a loss of genetic diversity due to drift or inbreeding. Monitoring both helps assess population structure, track gene flow, and guide decisions about mixing or isolating populations. Private alleles can also be used to identify assymetry in geneflow (Campbell et al. 2021).
 
-#### Private Alleles
+### Private Alleles
 
 ```{r}
 gl.map.interactive(possums.gl[1:120,])
 gl.report.pa(possums.gl[1:120,] )
+```
 
+### Fixed Alleles
+
+```{r}
 gl.fixed.diff(possums.gl[1:120,])  
 ```
 
-#### Relatedness and Kinship
+## Relatedness and Kinship
 
 Relatedness and kinship are measures of genetic relatedness between individuals in a population. They are crucial for understanding population structure, mating systems, and the potential for inbreeding.
 
@@ -225,12 +243,9 @@ relA <- Amat
 diag(relA)<-NA 
 hist(relA)
 
-
-
-
 ```
 
-So we have created a population of 50 individuals with 1000 loci, and calculated the Amat. The diagonal entries represent the inbreeding coefficient (1+Fi), so Fi is centered around 0, indicating that individuals are not highly inbred. The off-diagonal entries represent the proportion of alleles shared IBD between individuals, which is centered around 0, indicating that individuals are not closely related. As we have simulated theindividuals, we know that they are not related, so this is expected.
+So we have created a population of **50 individuals** with **1000 loci**, and calculated the Amat. The diagonal entries represent the inbreeding coefficient (1+Fi), so Fi is centered around 0, indicating that individuals are not highly inbred. The off-diagonal entries represent the proportion of alleles shared IBD between individuals, which is centered around 0, indicating that individuals are not closely related. As we have simulated theindividuals, we know that they are not related, so this is expected.
 
 Now lets add some offsprings to the mix and see how the turn up in the A mat.
 
@@ -270,11 +285,11 @@ dir <- gl.download.binary("emibd9", out.dir = dir_emibd)
 
 ```
 
-When estimating relatedness and kinship, there is one major difficulty. We need to have a good estimate of the allele frequencies in the population. If we have a population with a lot of missing data, or if we have a population with a lot of inbred individuals the estimates of relatedness and kinship will be biased. In the best case you would estimate allele frequencies from a sample of unrelated individuals and then use these allele frequencies to estimate relatedness and kinship in the whole population. However, this is rarely possible, especially in conservation genetics where we often work with small populations and have only one sample
+When estimating relatedness and kinship, there is **one major difficulty**. We need to have a good estimate of the **allele frequencies** in the population. If we have a population with a lot of missing data, or if we have a population with a lot of inbred individuals the estimates of relatedness and kinship will be biased. In the best case you would estimate allele frequencies from a sample of unrelated individuals and then use these allele frequencies to estimate relatedness and kinship in the whole population. However, this is rarely possible, especially in conservation genetics where we often work with small populations and have only one sample
 
-EMIBD9 is aiming to take care of that, but using an algorithm that aims to estimate allele frequencies and kinship in a 'shinkage' fashion so both at the same time and optimising the result. It performs really well in simulations. Please note there are many other relatedness estimates, but they all suffer from this problem and often give negative results, which in principle should not happen. Lets use EMIBD9 to estimate the kinship matrix for our simulated population.
+**EMIBD9** is aiming to take care of that, but using an algorithm that aims to estimate allele frequencies and kinship in a 'shinkage' fashion so both at the same time and optimising the result. It performs really well in simulations. Please note there are many other relatedness estimates, but they all suffer from this problem and often give negative results, which in principle should not happen. Lets use EMIBD9 to estimate the kinship matrix for our simulated population.
 
-```{r}
+```{r warning=FALSE}
 
 #ignore the warnings...
 kinmat <- gl.run.EMIBD9(glsimoff, Inbreed = 1, emibd9.path = dir_emibd)
@@ -297,8 +312,6 @@ hist(kinpo, main = "Kinship between offsprings and parents", xlab = "Kinship", y
 #variance is different. 
 #Parent off spring variance is zero.
 
-
-
 ```
 
 Finally lets compare the relatedness estimates using gl.grm and EMIBD9. The results are very similar, but in theory the EMIBD9 estimates should be more precise, as they take into account the non independence of allele frequencies in the population.
@@ -314,9 +327,9 @@ plot(Arel, kinrel,
      pch = 19, col = "blue")
 ```
 
-### Effective Population Size
+## Effective Population Size
 
-#### Current effective population size
+### Current effective population size
 
 Effective population size (Ne) is the size of an idealized population that would experience genetic drift or inbreeding at the same rate as the observed population.
 
@@ -347,7 +360,7 @@ gg <-gl.LDNe(sim50, neest.path = dir, mating = "random", critical = c(0.1,0.05))
 
 ```
 
-#### Historic population sizes
+### Historic population sizes
 
 ```{r}
 #install the Neestimator package
@@ -402,7 +415,8 @@ mu = 16.17e-9
 
 
 # takes a minute or so
-gg <- gl.run.epos(north5, epos.path = dir,L = L, u = mu, method = "greedy", depth = 2, boot=5)
+gg <- gl.run.epos(north5, epos.path = dir,L = L, u = mu, 
+                  method = "greedy", depth = 2, boot=5)
 
 gg$plot
 ```
@@ -412,10 +426,8 @@ gg$plot
 ::: callout-note
 ### Exercise
 
-![](images/task.png){#id .class width="48"} Now run your own data set (or use the tympo data set) to study any of the topics from the tutorial. Have fun !!!
+![](images/task.png){.class width="48"} Now run your own data set (or use the tympo data set) to study any of the topics from the tutorial. Have fun !!!
 :::
-
-## *Further Study*
 
 ### Readings
 

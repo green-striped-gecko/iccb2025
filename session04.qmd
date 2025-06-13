@@ -2,7 +2,7 @@
 
 *Session Presenters*
 
-![](images/Presenters5.png)
+![](images/Presenters4.png)
 
 ## *Required packages*
 
@@ -13,8 +13,6 @@ library(dartR.data)
 
 ## Session Content
 
-
 ## *Further Study*
 
 ### Readings
-

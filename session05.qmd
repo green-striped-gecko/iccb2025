@@ -2,7 +2,7 @@
 
 *Session Presenter*
 
-![](images/Presenters4.png)
+![](images/Presenters5.png)
 
 ## *Required packages*
 
@@ -11,10 +11,29 @@ library(dartRverse)
 
 ```
 
-## Session Content
+## Introduction
 
-*This is a workflow associated with Session on Population Assignment in the dartR workshop*
+![*Emydura* River Turtle](images/turtle.jpg)
 
+We will explore four analysis for assignment of an individual of unknown provenance to a source population.
+
+-   **Genotype Likelihood**: The likelihood of drawing the unknown from a population with the observed allele frequencies is calculated assuming Hardy-Weinberg equilibrium.
+
+-   **Private Alleles**: A focal unknown individual is likely to have fewer private alleles in comparison with its source population than in comparison with other putative source populations.
+
+-   **PCA**: The genotype of a focal unknown individual is likely to lie within the confidence envelope of its source population than within the confidence envelope of other putative source populations.
+
+-   **Mahalanobis Distance**: The distances of the focal unknown individual from the centroids of the standardized confidence envelops of its putative source populations are used to calculate a z-scores and associated probabilities of assignment.
+
+## *Emydura* population assignment
+
+Here is some context for our turtle example, below are two maps. The first is a map of eastern mainland Australia showing the distribution of the *Emydura macquarii* complex, the river drainage basins in which it occurs, and the broad regions, The second is of Northern Australia and Papua New Guinea.
+
+![[Georges *et al.* 2018](https://onlinelibrary.wiley.com/doi/10.1111/mec.14925)](images/turtle_map1.jpg)
+
+![Georges *et al.* 2025, in review](images/turtle_map2.jpg)
+
+### Load data
 
 ```{r}
 # We will first set the verbosity globally to level 3
@@ -35,41 +54,50 @@ table(pop(gl))
 ```
 
 ::: callout-tip
-##### Note that several populations have sample sizes less than 10 and will be discarded during the analysis
+##### Note
+
+Several populations have sample sizes less than 10 and will be discarded during the analysis
 :::
 
-### Analysis 1: Assignment by genotype likelihood
+### Assignment by genotype likelihood
+
 ```{r}
 gen.result<-gl.assign.on.genotype(gl, unknown="AA011731", nmin=10)
 
 ```
 
-### Analysis 2: Assignment by Private Alleles
+### Assignment by Private Alleles
 
 ```{r}
 pa.result <- gl.assign.pa(gl, unknown="AA011731", nmin=10, alpha=0.05)
 
 ```
 
-
-### Analysis 3: Assignment by PCA
+### Assignment by PCA
 
 ```{r}
-#pca_pa_result <-gl.assign.pca(pa.result, unknown="AA011731")
+pca_pa_result <-gl.assign.pca(pa.result, unknown="AA011731")
 ```
 
-### Analysis 4: Assignment by Mahalanobis Distances
+### Assignment by Mahalanobis Distances
 
 ```{r}
 #mahal_result <- gl.assign.mahalanobis(pa.result,unknown="AA011731")
 ```
 
+## Scenario
 
-## Exercise
+The authorities have recently raided a premises in Brisbane and found a number of reptiles held without permit. One of these is the painted turtle **Emydura subglobosa**. This species is widespread and common in southern New Guinea, but restricted in Australia to the Jardine River at the tip of Cape York. The Australian population is considered critically endangered under the EPBC Act. The question is, was the animal sourced from Cape York or imported from New Guinea? The specimen was genotyped and run in a service with the other available specimens from localities shown in Figure 1. The datafile is `assignment_example1.Rdata`. The SpecimenID is "AA046092“. Before you begin the analysis, restrict the populations under consideration to Emydura subglobosa.
+
+::: callout-note
+#### Exercise
+
+![](images/task.png){.class width="48"} Can you confidently decide if the animal was sourced from Cape York or New Guinea using the tools we have provided you via dartR?
+:::
 
 ### The data
 
-```{r}
+```{r results='hide'}
 gl
 # The unknown
 Unknown = "AA046092"
@@ -84,5 +112,7 @@ gl2 <- gl.keep.pop(gl, pop.list=c("EmsubBamuAli", "EmsubFlyGuka", "EmsubFlyJikw"
 ```
 
 ## *Further Study*
+
+Tutorial yet to come...
 
 ### Readings

@@ -261,16 +261,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#required-packages" id="toc-required-packages" class="nav-link active" data-scroll-target="#required-packages"><em>Required packages</em></a></li>
-  <li><a href="#session-content" id="toc-session-content" class="nav-link" data-scroll-target="#session-content">Session Content</a></li>
-  <li><a href="#session-content-1" id="toc-session-content-1" class="nav-link" data-scroll-target="#session-content-1">Session Content</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#selecting-panels" id="toc-selecting-panels" class="nav-link" data-scroll-target="#selecting-panels">Selecting panels</a>
   <ul>
-  <li><a href="#example-data" id="toc-example-data" class="nav-link" data-scroll-target="#example-data">Example data</a></li>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
   <li><a href="#filtering-for-quality" id="toc-filtering-for-quality" class="nav-link" data-scroll-target="#filtering-for-quality">Filtering for quality</a></li>
   <li><a href="#filter-snps-with-sequences-that-are-less-than-30-characters-long" id="toc-filter-snps-with-sequences-that-are-less-than-30-characters-long" class="nav-link" data-scroll-target="#filter-snps-with-sequences-that-are-less-than-30-characters-long">Filter SNPs with sequences that are less than 30 characters long</a></li>
   <li><a href="#blast-to-find-snps" id="toc-blast-to-find-snps" class="nav-link" data-scroll-target="#blast-to-find-snps">blast to find SNPs</a></li>
-  <li><a href="#selecting-informative-snps" id="toc-selecting-informative-snps" class="nav-link" data-scroll-target="#selecting-informative-snps">Selecting informative SNPs</a></li>
-  <li><a href="#run-gl.check.panel" id="toc-run-gl.check.panel" class="nav-link" data-scroll-target="#run-gl.check.panel">run gl.check.panel</a></li>
+  <li><a href="#selecting-informative-snps" id="toc-selecting-informative-snps" class="nav-link" data-scroll-target="#selecting-informative-snps">Selecting informative SNPs</a>
+  <ul class="collapse">
+  <li><a href="#run-gl.select.panel" id="toc-run-gl.select.panel" class="nav-link" data-scroll-target="#run-gl.select.panel"><strong>run</strong> <code>gl.select.panel</code></a></li>
+  <li><a href="#run-gl.check.panel" id="toc-run-gl.check.panel" class="nav-link" data-scroll-target="#run-gl.check.panel"><strong>run</strong> <code>gl.check.panel</code></a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#further-study" id="toc-further-study" class="nav-link" data-scroll-target="#further-study"><em>Further Study</em></a>
   <ul>
@@ -310,23 +312,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="session-content" class="level2">
-<h2 class="anchored" data-anchor-id="session-content">Session Content</h2>
-</section>
-<section id="session-content-1" class="level2">
-<h2 class="anchored" data-anchor-id="session-content-1">Session Content</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/snps_genome.png" class="img-fluid figure-img"></p>
+<figcaption>How to go from tens of thousands of SNPs across the genome to just 100?</figcaption>
+</figure>
+</div>
 <p>This session will cover the selection of SNP panels for conservation genetics. We will explore how to select SNPs that are informative for population structure, inbreeding, and other conservation-related analyses. The session will include practical exercises using R and the <code>dartRverse</code> packages.</p>
+<p>SNP panels can be used to address either specific questions or to span multiple conservation genetic applications</p>
+<ul>
+<li>Population assignment</li>
+<li>Parentage or relatedness</li>
+<li>Individual ID</li>
+<li>Hybridisation</li>
+<li>Additional metrics
+<ul>
+<li>Sex-linked SNPs</li>
+<li>Candidate adaptive markers</li>
+<li>Diagnostic SNPs for population ID</li>
+<li>Phenotypic markers</li>
+</ul></li>
+</ul>
+<p>There are a few requirements, like an existing genome wide SNP dataset and good geographical coverage.</p>
 </section>
 <section id="selecting-panels" class="level2">
 <h2 class="anchored" data-anchor-id="selecting-panels">Selecting panels</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fish.jpg" class="img-fluid figure-img"></p>
+<figcaption>Redfin blue eye</figcaption>
+</figure>
+</div>
 <p>To select panels we will use an example dataset of a fish species as introduced by the slides. The idea is to select a SNP panel that helps to monitor the species. Key aspects to consider a panel is to think about the following:</p>
 <ul>
 <li>What is the purpose of the panel? (estimates of Ne, Ho, Fst or all of the above)</li>
 <li>How many SNPs can you afford to sequence?</li>
 </ul>
 <p>Once you decided on those aspects, you can use the <code>dartRverse</code> package to select a panel of SNPs. The package provides functions to - 1. filter SNPs based on various criteria, mainly for quality - 2. filter SNPs in accordance lab consideration (mainly can we get reliable sequences from the SNPs) - 3. select of the remaining SNPs an informative subsample for the purpose of the panel</p>
-<section id="example-data" class="level3">
-<h3 class="anchored" data-anchor-id="example-data">Example data</h3>
+<section id="load-data" class="level3">
+<h3 class="anchored" data-anchor-id="load-data">Load data</h3>
 <p>The first two decisions are that we would like to create a SNP panel that is informative for population structure (Fst) and we have resources to develop a panel of 50 SNPs.</p>
 <p>Lets load our example data</p>
 <div class="cell">
@@ -534,10 +560,11 @@ Completed: gl.filter.allna </code></pre>
 <h3 class="anchored" data-anchor-id="blast-to-find-snps">blast to find SNPs</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#takes a while to run, hence load the pre run data set</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#rfbe20_5 &lt;- gl.blast(rfbe20_4,ref_genome = "d:/bernd/r/Elise_pansnp/final.genome.scf.fasta", task = "blastn", number_of_threads = 10 )</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#saveRDS(rfbe20_5, "d:/bernd/r/Elise_pansnp/rfbe20_5_blast.rds")</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>rfbe20_5 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/rfbe20_5_blast.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#rfbe20_5 &lt;- gl.blast(rfbe20_4,ref_genome="d:/bernd/r/Elise_pansnp/final.genome.scf.fasta", </span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                     task = "blastn", number_of_threads = 10 )</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#saveRDS(rfbe20_5, "d:/bernd/r/Elise_pansnp/rfbe20_5_blast.rds")</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>rfbe20_5 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/rfbe20_5_blast.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now filter the SNPs based on the blast results.</p>
 <div class="cell">
@@ -550,8 +577,9 @@ Completed: gl.filter.allna </code></pre>
 </section>
 <section id="selecting-informative-snps" class="level3">
 <h3 class="anchored" data-anchor-id="selecting-informative-snps">Selecting informative SNPs</h3>
-<p>We can now selected a subsample of SNPs using several different methods. Depending on the aim of your panel you might want to select SNPs that are informative for population structure (Fst) or inbreeding (Ho). It turns out that the dapc method is a good method to select SNPs that are informative for population structure. The code below uses this method to select 50 SNPs.</p>
-<p>###run gl.select.panel</p>
+<p>We can now select a subsample of SNPs using several different methods. Depending on the aim of your panel you might want to select SNPs that are informative for population structure (Fst) or inbreeding (Ho). It turns out that the dapc method is a good method to select SNPs that are informative for population structure. The code below uses this method to select 50 SNPs.</p>
+<section id="run-gl.select.panel" class="level4">
+<h4 class="anchored" data-anchor-id="run-gl.select.panel"><strong>run</strong> <code>gl.select.panel</code></h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#takes a while to run</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>panel <span class="ot">&lt;-</span> <span class="fu">gl.select.panel</span>(rfbe20_6, <span class="at">method=</span><span class="st">"dapc"</span>, <span class="at">nl =</span> <span class="dv">50</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -585,8 +613,8 @@ Completed: gl.select.panel </code></pre>
 </div>
 </div>
 </section>
-<section id="run-gl.check.panel" class="level3">
-<h3 class="anchored" data-anchor-id="run-gl.check.panel">run gl.check.panel</h3>
+<section id="run-gl.check.panel" class="level4">
+<h4 class="anchored" data-anchor-id="run-gl.check.panel"><strong>run</strong> <code>gl.check.panel</code></h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>outdapc <span class="ot">&lt;-</span> <span class="fu">gl.check.panel</span>(panel, rfbe20_6, <span class="at">parameter =</span> <span class="st">"Fst"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -625,7 +653,12 @@ Completed: gl.select.panel </code></pre>
 </div>
 </div>
 </div>
-<p>Not as good so it pays off.</p>
+<p><strong>Not as good so it pays off.</strong></p>
+</section>
+</section>
+</section>
+<section id="further-study" class="level2">
+<h2 class="anchored" data-anchor-id="further-study"><em>Further Study</em></h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -636,14 +669,10 @@ Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><img src="images/task.png" id="id" class="class img-fluid" width="48"></p>
-<p>Now it is time for you to select a SNP panel. You can try differen methods and compare them. E.g How good is a random panel, or one based on PIC values.</p>
+<p><img src="images/task.png" id="id" class="class img-fluid" width="48"> Now it is time for you to select a SNP panel.</p>
+<p>You can try different methods and compare them. E.g How good is a random panel, or one based on PIC values.</p>
 </div>
 </div>
-</section>
-</section>
-<section id="further-study" class="level2">
-<h2 class="anchored" data-anchor-id="further-study"><em>Further Study</em></h2>
 <section id="readings" class="level3">
 <h3 class="anchored" data-anchor-id="readings">Readings</h3>
 

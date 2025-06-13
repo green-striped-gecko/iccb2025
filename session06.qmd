@@ -11,14 +11,29 @@ library(dartRverse)
 library(knitr)
 ```
 
-## Session Content
+## Introduction
 
-
-## Session Content
+![How to go from tens of thousands of SNPs across the genome to just 100?](images/snps_genome.png)
 
 This session will cover the selection of SNP panels for conservation genetics. We will explore how to select SNPs that are informative for population structure, inbreeding, and other conservation-related analyses. The session will include practical exercises using R and the `dartRverse` packages.
 
+SNP panels can be used to address either specific questions or to span multiple conservation genetic applications
+
+-   Population assignment
+-   Parentage or relatedness
+-   Individual ID
+-   Hybridisation
+-   Additional metrics
+    -   Sex-linked SNPs
+    -   Candidate adaptive markers
+    -   Diagnostic SNPs for population ID
+    -   Phenotypic markers
+
+There are a few requirements, like an existing genome wide SNP dataset and good geographical coverage.
+
 ## Selecting panels
+
+![Redfin blue eye](images/fish.jpg)
 
 To select panels we will use an example dataset of a fish species as introduced by the slides. The idea is to select a SNP panel that helps to monitor the species. Key aspects to consider a panel is to think about the following:
 
@@ -27,7 +42,7 @@ To select panels we will use an example dataset of a fish species as introduced 
 
 Once you decided on those aspects, you can use the `dartRverse` package to select a panel of SNPs. The package provides functions to - 1. filter SNPs based on various criteria, mainly for quality - 2. filter SNPs in accordance lab consideration (mainly can we get reliable sequences from the SNPs) - 3. select of the remaining SNPs an informative subsample for the purpose of the panel
 
-### Example data
+### Load data
 
 The first two decisions are that we would like to create a SNP panel that is informative for population structure (Fst) and we have resources to develop a panel of 50 SNPs.
 
@@ -87,7 +102,8 @@ As we have a reference genome we include another step, manly to filter for SNPs 
 
 ```{r}
 #takes a while to run, hence load the pre run data set
-#rfbe20_5 <- gl.blast(rfbe20_4,ref_genome = "d:/bernd/r/Elise_pansnp/final.genome.scf.fasta", task = "blastn", number_of_threads = 10 )
+#rfbe20_5 <- gl.blast(rfbe20_4,ref_genome="d:/bernd/r/Elise_pansnp/final.genome.scf.fasta", 
+#                     task = "blastn", number_of_threads = 10 )
 #saveRDS(rfbe20_5, "d:/bernd/r/Elise_pansnp/rfbe20_5_blast.rds")
 
 rfbe20_5 <- readRDS("./data/rfbe20_5_blast.rds")
@@ -108,9 +124,9 @@ Depending on your lab requirements you might want to filter for SNPs that are no
 
 ### Selecting informative SNPs
 
-We can now selected a subsample of SNPs using several different methods. Depending on the aim of your panel you might want to select SNPs that are informative for population structure (Fst) or inbreeding (Ho). It turns out that the dapc method is a good method to select SNPs that are informative for population structure. The code below uses this method to select 50 SNPs.
+We can now select a subsample of SNPs using several different methods. Depending on the aim of your panel you might want to select SNPs that are informative for population structure (Fst) or inbreeding (Ho). It turns out that the dapc method is a good method to select SNPs that are informative for population structure. The code below uses this method to select 50 SNPs.
 
-###run gl.select.panel
+#### **run** `gl.select.panel`
 
 ```{r}
 #takes a while to run
@@ -118,7 +134,7 @@ panel <- gl.select.panel(rfbe20_6, method="dapc", nl = 50)
 nLoc(panel)
 ```
 
-### run gl.check.panel
+#### **run** `gl.check.panel`
 
 ```{r}
 outdapc <- gl.check.panel(panel, rfbe20_6, parameter = "Fst")
@@ -131,16 +147,15 @@ panel_random <- gl.select.panel(rfbe20_6, method="random", nl = 50)
 outrandom <- gl.check.panel(panel_random, rfbe20_6, parameter = "Fst")
 ```
 
-Not as good so it pays off.
+**Not as good so it pays off.**
+
+## *Further Study*
 
 ::: callout-note
 ### Exercise
 
-![](images/task.png){#id .class width="48"}
+![](images/task.png){#id .class width="48"} Now it is time for you to select a SNP panel.
 
-Now it is time for you to select a SNP panel. You can try differen methods and compare them. E.g How good is a random panel, or one based on PIC values.
+You can try different methods and compare them. E.g How good is a random panel, or one based on PIC values.
 :::
-
-## *Further Study*
-
 ### Readings

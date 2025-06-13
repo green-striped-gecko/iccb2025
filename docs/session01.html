@@ -283,15 +283,25 @@ div.csl-indent {
    
   <ul>
   <li><a href="#required-packages" id="toc-required-packages" class="nav-link active" data-scroll-target="#required-packages"><em>Required packages</em></a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#dartr-fundamentals" id="toc-dartr-fundamentals" class="nav-link" data-scroll-target="#dartr-fundamentals"><code>dartR</code> Fundamentals</a>
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a>
-  <ul class="collapse">
-  <li><a href="#filtering-out-sex-linked-markers" id="toc-filtering-out-sex-linked-markers" class="nav-link" data-scroll-target="#filtering-out-sex-linked-markers">Filtering out sex-linked markers</a></li>
-  <li><a href="#more-filtering" id="toc-more-filtering" class="nav-link" data-scroll-target="#more-filtering">More filtering</a></li>
+  <li><a href="#reporting" id="toc-reporting" class="nav-link" data-scroll-target="#reporting">Reporting</a></li>
+  <li><a href="#filtering" id="toc-filtering" class="nav-link" data-scroll-target="#filtering">Filtering</a></li>
   </ul></li>
+  <li><a href="#filtering-out-sex-linked-markers" id="toc-filtering-out-sex-linked-markers" class="nav-link" data-scroll-target="#filtering-out-sex-linked-markers">Filtering out sex-linked markers</a>
+  <ul>
+  <li><a href="#load-data" id="toc-load-data" class="nav-link" data-scroll-target="#load-data">Load data</a></li>
+  <li><a href="#run-gl.report.sexlinked" id="toc-run-gl.report.sexlinked" class="nav-link" data-scroll-target="#run-gl.report.sexlinked">Run <code>gl.report.sexlinked</code></a>
+  <ul class="collapse">
+  <li><a href="#output-dataframe" id="toc-output-dataframe" class="nav-link" data-scroll-target="#output-dataframe">Output dataframe</a></li>
+  </ul></li>
+  <li><a href="#run-gl.drop.sexlinked" id="toc-run-gl.drop.sexlinked" class="nav-link" data-scroll-target="#run-gl.drop.sexlinked">Run <code>gl.drop.sexlinked</code></a></li>
+  </ul></li>
+  <li><a href="#more-filtering" id="toc-more-filtering" class="nav-link" data-scroll-target="#more-filtering">More filtering</a>
+  <ul>
+  <li><a href="#report-functions" id="toc-report-functions" class="nav-link" data-scroll-target="#report-functions">Report functions</a></li>
+  <li><a href="#filtering-functions" id="toc-filtering-functions" class="nav-link" data-scroll-target="#filtering-functions">Filtering functions</a></li>
   </ul></li>
   <li><a href="#further-study" id="toc-further-study" class="nav-link" data-scroll-target="#further-study"><em>Further Study</em></a>
   <ul>
@@ -331,38 +341,8 @@ div.csl-indent {
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartR.sexlinked)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="dartr-fundamentals" class="level2">
-<h2 class="anchored" data-anchor-id="dartr-fundamentals"><code>dartR</code> Fundamentals</h2>
-<p>Just before you get started how about checking out some prerequisite tutorials if you are not up to date. These are the following two tutorials <a href="./tutorials.html#tutorial-pres-one">RStudio refresher</a> and <a href="./tutorials.html#tutorial-pres-two">installing dartR</a>.</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Also a little reminder about <code>dartRverse</code>:
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><em>An accessible genetic analysis platform for conservation, ecology and agriculture</em></p>
-<p><code>dartRverse</code> aims to support the installation of R packages of the dartRverse that are user-friendly and deliver a variety of analyses and pipelines on the one platform. Currently there are two core R packages that need to be installed to use dartR:</p>
-<ul>
-<li>dartR.base</li>
-<li>dartR.data</li>
-</ul>
-<p>Additional packages are</p>
-<ul>
-<li>dartR.sim (functions to simulate SNP data)</li>
-<li>dartR.spatial (spatial analysis)</li>
-<li>dartR.popgenomics (popgenomics analysis)</li>
-<li>dartR.captive</li>
-<li>dartR.sexlinked</li>
-</ul>
-<p><code>dartR</code> is a collaboration between the University of Canberra, CSIRO and Diversity Arrays Technology, and is supported with funding from the ACT Priority Investment Program, CSIRO and the University of Canberra.</p>
-</div>
-</div>
-<section id="introduction" class="level3">
-<h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>SNPs, or single nucleotide polymorphisms, are single base pair mutations at a nuclear locus (Figure 2). That nuclear locus is represented in the dataset by two sequence tags which, at a heterozygous locus, take on two allelic states, one referred to as the reference state, the other as the alternate or SNP state.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -381,33 +361,28 @@ Also a little reminder about <code>dartRverse</code>:
 </div>
 <p>For further details go check out the <a href="./tutorials.html#tutorial-begin-one">Data Structure</a> tutorial.</p>
 </section>
-<section id="example" class="level3">
-<h3 class="anchored" data-anchor-id="example">Example</h3>
+<section id="dartr-fundamentals" class="level2">
+<h2 class="anchored" data-anchor-id="dartr-fundamentals"><code>dartR</code> Fundamentals</h2>
 <p>To help us get our head around data interrogation, subsetting, and basic filtering we are going to work through a worked example using a test dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dartR comes with a built in test dataset called testset.gl. </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We first examine the contents of testset.gl</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>testset.gl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>How many individuals have been genotyped? How many SNP loci have been scored? What is the percentage of missing data?</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Quiz!
+Question time
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><img src="images/task.png" class="class" width="48" height="48">This quiz is referring to the <code>testset.gl</code> data set you have interrogated above.</p>
-<p>Type the correct number into the blank boxes below:</p>
-<ul>
-<li>number of SNPs <input class="webex-solveme nospaces" size="3" data-answer="[&quot;255&quot;]"></li>
-<li>number of individuals <input class="webex-solveme nospaces" size="3" data-answer="[&quot;250&quot;]"></li>
-<li>percent missing data <input class="webex-solveme nospaces" size="5" data-answer="[&quot;12.34&quot;]"></li>
-</ul>
-<p><em>boxes will go green if you have the answer correct</em></p>
+<p><img src="images/task.png" class="class" width="48" height="48"> This is referring to the <code>testset.gl</code> data set you have interrogated above.</p>
+<p>How many individuals have been genotyped?</p>
+<p>How many SNP loci have been scored?</p>
+<p>What is the percentage of missing data?</p>
 </div>
 </div>
 <div class="cell">
@@ -447,17 +422,37 @@ Quiz!
 </div>
 <p>We have learned that typing the name of the genlight object gives its attributes. How do we examine the genotypes in a genlight object. This is done by converting it to a matrix.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(gl)[<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(gl)[<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         100049687-12-C/T 100049698-16-G/A 100049728-23-A/G 100049805-56-T/A
+AA010915                2               NA                0                0
+UC_00126                2               NA                0                0
+AA032760               NA               NA                0                0
+AA013214                2               NA                0                0
+AA011723                2               NA                0                0
+AA012411                2               NA                0                0
+AA019237                2               NA                0                0</code></pre>
 </div>
-<p>What do you see. Is it what you expected for the coding of the SNP scores?</p>
-<p>Lets start again.</p>
+</div>
+<p><em>What do you see? Is it what you expected for the coding of the SNP scores?</em></p>
+<section id="reporting" class="level3">
+<h3 class="anchored" data-anchor-id="reporting">Reporting</h3>
+<p>Lets start over with a focus on reporting.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the original testset.gl</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> testset.gl</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the global verbosity to 3 – this will result in some detailed comments as you run each # script</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.set.verbosity</span>(<span class="dv">3</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Now lets use a report function to report the call rate for genlight object gl</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.callrate</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the original testset.gl</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> testset.gl</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the global verbosity to 3 – this will result in some detailed comments </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  as you run each # script</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.set.verbosity</span>(<span class="dv">3</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Now lets use a report function to report the call rate for genlight object gl</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.callrate</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session01_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -470,17 +465,31 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Note that the call rate is reported against locus. This is the default. Both a tabulated result and a graph is produced. You can use both to determine a suitable threshold for filtering on callrate.</p>
-<p>What threshold do you think might be appropriate?</p>
 </div>
 </div>
-<p>Now let’s report the call rate for genlight object gl by individual.</p>
+<p><em>What threshold do you think might be appropriate?</em></p>
+<p>Now let’s report the call rate for genlight object <code>gl</code> by <strong>individual</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.callrate</span>(gl,<span class="at">method=</span><span class="st">"ind"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.callrate</span>(gl,<span class="at">method=</span><span class="st">"ind"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session01_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>Can you see the difference. Again, both a tabulated result and a graph is produced. You can use both to determine a suitable threshold for filtering on callrate. What threshold do you think might be appropriate?</p>
-<p>What about reproducibility?</p>
+<p><em>What about reproducibility?</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.reproducibility</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.reproducibility</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session01_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -495,15 +504,147 @@ Tip
 <p>Recall that DArT runs a series of technical replicates as part of its routine workflow. This enables an assessment of the quality of data associated with each locus. What threshold do you think might be appropriate for a filter of reproducability?</p>
 </div>
 </div>
+</section>
+<section id="filtering" class="level3">
+<h3 class="anchored" data-anchor-id="filtering">Filtering</h3>
 <p>Now let’s try some filtering. Return to call rate.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First look at a report to decide a threshold</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.callrate</span>(gl,<span class="at">method=</span><span class="st">"ind"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Then filter using that threshold</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">gl.filter.callrate</span>(gl, <span class="at">method=</span><span class="st">"ind"</span>, <span class="at">threshold=</span><span class="fl">0.80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use a smear plot for a visual assessment of the effectiveness of filtering</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> testset.gl</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.smearplot</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First look at a report to decide a threshold</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.callrate</span>(gl,<span class="at">method=</span><span class="st">"ind"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.callrate 
+  Processing genlight object with SNP data
+
+  Reporting Call Rate by Individual
+  No. of loci = 255 
+  No. of individuals = 250 
+    Minimum      :  0.7490196 
+    1st quartile :  0.8666667 
+    Median       :  0.8823529 
+    Mean         :  0.8765804 
+    3r quartile  :  0.8941176 
+    Maximum      :  0.9333333 
+    Missing Rate Overall:  0.1234 
+
+Listing 30 populations and their average CallRates
+  Monitor again after filtering
+         Population CallRate  N
+1     EmmacBrisWive   0.8839 10
+2     EmmacBurdMist   0.8808 10
+3     EmmacBurnBara   0.8859 11
+4     EmmacClarJack   0.8596  5
+5     EmmacClarYate   0.8769  5
+6     EmmacCoopAvin   0.7682 10
+7    EmmacCoopCully   0.9122 10
+8     EmmacCoopEulb   0.8702 10
+9    EmmacFitzAllig   0.8973 10
+10    EmmacJohnWari   0.8929 10
+11    EmmacMaclGeor   0.8806 11
+12    EmmacMaryBoru   0.8843  6
+13    EmmacMaryPetr   0.8892  4
+14     EmmacMDBBowm   0.8824 10
+15     EmmacMDBCond   0.8855 10
+16     EmmacMDBCudg   0.8878 10
+17     EmmacMDBForb   0.8766 11
+18     EmmacMDBGwyd   0.9050  9
+19     EmmacMDBMaci   0.8773 10
+20 EmmacMDBMurrMung   0.8890 10
+21     EmmacMDBSanf   0.8914 10
+22    EmmacNormJack   0.8725  6
+23    EmmacNormLeic   0.8863  1
+24    EmmacNormSalt   0.8706  1
+25    EmmacRichCasi   0.8757 10
+26        EmmacRoss   0.8706 10
+27    EmmacRussEube   0.8612 10
+28     EmmacTweeUki   0.8773 10
+29    EmsubRopeMata   0.8345  5
+30    EmvicVictJasp   0.8361  5
+
+Listing 20 individuals with the lowest CallRates
+  Use this list to see which individuals will be lost on filtering by individual
+  Set ind.to.list parameter to see more individuals
+   Individual    Population  CallRate
+1    AA063722 EmmacCoopAvin 0.7490196
+2    AA063726 EmmacCoopAvin 0.7490196
+3    AA063732 EmmacCoopAvin 0.7647059
+4    AA063720 EmmacCoopAvin 0.7686275
+5    AA063712 EmmacCoopAvin 0.7686275
+6    AA063708 EmmacCoopAvin 0.7725490
+7    AA063718 EmmacCoopAvin 0.7764706
+8    AA063710 EmmacCoopAvin 0.7764706
+9    AA063714 EmmacCoopAvin 0.7764706
+10   AA063716 EmmacCoopAvin 0.7803922
+11   AA032760  EmmacMDBMaci 0.7960784
+12   UC_00210 EmsubRopeMata 0.8196078
+13   UC_00259 EmvicVictJasp 0.8196078
+14   AA018494 EmmacRichCasi 0.8235294
+15   UC_00206 EmsubRopeMata 0.8235294
+16   AA019164 EmmacRussEube 0.8274510
+17   UC_00209 EmsubRopeMata 0.8313725
+18   UC_00254 EmvicVictJasp 0.8313725
+19   AA019159 EmmacRussEube 0.8352941
+20  UC_00126c EmvicVictJasp 0.8352941
+
+)</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session01_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.report.callrate </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Then filter using that threshold</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">gl.filter.callrate</span>(gl, <span class="at">method=</span><span class="st">"ind"</span>, <span class="at">threshold=</span><span class="fl">0.80</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.filter.callrate 
+  Processing genlight object with SNP data
+  Warning: Data may include monomorphic loci in call rate 
+                    calculations for filtering
+  Recalculating Call Rate
+  Removing individuals based on Call Rate, threshold = 0.8 
+  Individuals deleted (CallRate &lt;=  0.8 ):
+AA032760[EmmacMDBMaci], AA063718[EmmacCoopAvin], AA063720[EmmacCoopAvin], AA063722[EmmacCoopAvin], AA063726[EmmacCoopAvin], AA063732[EmmacCoopAvin], AA063708[EmmacCoopAvin], AA063710[EmmacCoopAvin], AA063712[EmmacCoopAvin], AA063714[EmmacCoopAvin], AA063716[EmmacCoopAvin],
+  Summary of filtered dataset
+    Call Rate for individuals &gt; 0.8 
+    Original No. of loci : 255 
+    Original No. of individuals: 250 
+    No. of loci retained: 255 
+    No. of individuals retained: 239 
+    No. of populations:  29 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session01_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Note: Locus metrics not recalculated
+  Note: Resultant monomorphic loci not deleted
+Completed: gl.filter.callrate </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use a smear plot for a visual assessment of the effectiveness of filtering</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> testset.gl</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>smear_pre <span class="ot">&lt;-</span> <span class="fu">gl.smearplot</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Processing genlight object with SNP data
+Starting gl.smearplot </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session01_files/figure-html/unnamed-chunk-9-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.smearplot </code></pre>
+</div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -519,19 +660,25 @@ Tip
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter on callrate by locus, then on individual</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">gl.filter.callrate</span>(gl,<span class="at">verbose=</span><span class="dv">0</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">gl.filter.callrate</span>(gl, <span class="at">method=</span> <span class="st">"ind"</span>, <span class="at">threshold=</span><span class="fl">0.80</span>, <span class="at">verbose=</span><span class="dv">0</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine the smearplot again</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.smearplot</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter on callrate by locus, then on individual</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">gl.filter.callrate</span>(gl,<span class="at">verbose=</span><span class="dv">0</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">gl.filter.callrate</span>(gl, <span class="at">method=</span> <span class="st">"ind"</span>, <span class="at">threshold=</span><span class="fl">0.80</span>, <span class="at">verbose=</span><span class="dv">0</span>)</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine the smearplot again</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>smear_post <span class="ot">&lt;-</span> <span class="fu">gl.smearplot</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session01_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
 </div>
 <p><em>What has happened. What do you conclude?</em></p>
 </section>
-<section id="exercise" class="level3">
-<h3 class="anchored" data-anchor-id="exercise">Exercise</h3>
-<section id="filtering-out-sex-linked-markers" class="level4">
-<h4 class="anchored" data-anchor-id="filtering-out-sex-linked-markers">Filtering out sex-linked markers</h4>
+</section>
+<section id="filtering-out-sex-linked-markers" class="level2">
+<h2 class="anchored" data-anchor-id="filtering-out-sex-linked-markers">Filtering out sex-linked markers</h2>
 <p>For this exercise we will use the data of the Leadbeater’s possum (LBP). This data is included in the package <code>dartR.sexlinked</code></p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -539,11 +686,12 @@ Tip
 <figcaption>The Leadbeater’s possum :)</figcaption>
 </figure>
 </div>
+<section id="load-data" class="level3">
+<h3 class="anchored" data-anchor-id="load-data">Load data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>LBP                   <span class="co"># Explore the dataset</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>LBP<span class="sc">@</span>n.loc             <span class="co"># Number of SNPs</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(LBP<span class="sc">@</span>ind.names) <span class="co"># Number of individuals</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>LBP                   <span class="co"># Explore the dataset</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>LBP<span class="sc">@</span>n.loc             <span class="co"># Number of SNPs</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(LBP<span class="sc">@</span>ind.names) <span class="co"># Number of individuals</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -551,21 +699,17 @@ Tip
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Question:
+Question time
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><img src="images/task.png" class="class" width="48" height="48"> How many SNPs and individuals does the LBP genlight object have?</p>
-<p>Type the correct number into the blank boxes below:</p>
-<ul>
-<li>number of SNPs <input class="webex-solveme nospaces" size="4" data-answer="[&quot;1000&quot;]"></li>
-<li>number of individuals <input class="webex-solveme nospaces" size="3" data-answer="[&quot;376&quot;]"></li>
-</ul>
-<p><em>boxes will go green if you have the answer correct</em></p>
+<p><img src="images/task.png" class="class" width="48" height="48"></p>
+<p>How many SNPs and individuals does the LBP genlight object have?</p>
 </div>
 </div>
-<section id="run-gl.report.sexlinked" class="level5">
-<h5 class="anchored" data-anchor-id="run-gl.report.sexlinked">Run <code>gl.report.sexlinked</code></h5>
+</section>
+<section id="run-gl.report.sexlinked" class="level3">
+<h3 class="anchored" data-anchor-id="run-gl.report.sexlinked">Run <code>gl.report.sexlinked</code></h3>
 <p>This function identifies sex-linked and autosomal loci present in a SNP dataset (i.e., genlight object) using individuals with known sex. It identifies five types of loci: w-linked or y-linked, sex-biased, z-linked or x-linked, gametologous and autosomal.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -577,12 +721,24 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><em>The genlight object must contain in <code>gl\@other\$ind.metrics</code> a column named <code>id</code>, and a column named <code>sex</code> in which individuals with known-sex are assigned <code>M</code> for male, or <code>F</code> for female. The function ignores individuals that are assigned anything else or nothing at all (unknown-sex).</em></p>
+<p>The genlight object must contain in <code>gl@other$ind.metrics</code> a column named <code>id</code>, and a column named <code>sex</code> in which individuals with known-sex are assigned <code>M</code> for male, or <code>F</code> for female. The function ignores individuals that are assigned anything else or nothing at all (unknown-sex).</p>
 </div>
 </div>
-<p><img src="images/task.png" id="id" class="class" width="48" height="48"> Check that <code>ind.metrics</code> has the necessary columns:</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/reading.png" id="id" class="class" width="48" height="48"> Check that <code>ind.metrics</code> has the necessary columns:</p>
+</div>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(LBP<span class="sc">@</span>other<span class="sc">$</span>ind.metrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(LBP<span class="sc">@</span>other<span class="sc">$</span>ind.metrics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -666,13 +822,25 @@ Tip
 </table>
 </div>
 </div>
-<p><img src="images/task.png" class="class" width="48" height="48"> Check the manual of function <code>gl.report.sexlinked</code> to investigate its other requirements:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(gl.report.sexlinked)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<p><img src="images/task.png" class="class" width="48" height="48"> Run the function to identify sex-linked loci in the LBP genlight object:</p>
+<div class="callout-title-container flex-fill">
+Check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/reading.png" class="class" width="48" height="48"> Check the manual of function <code>gl.report.sexlinked</code> to investigate its other requirements:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">gl.report.sexlinked</span>(LBP, <span class="at">system =</span> <span class="st">"xy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(gl.report.sexlinked)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>Run the function to identify sex-linked loci in the LBP genlight object:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">gl.report.sexlinked</span>(LBP, <span class="at">system =</span> <span class="st">"xy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Starting gl.report.sexlinked 
   Processing genlight object with SNP data</code></pre>
@@ -710,7 +878,7 @@ And 923 autosomal loci (grey).</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="session01_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="session01_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -728,34 +896,25 @@ Question time
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p><img src="images/task.png" class="class" width="48" height="48"></p>
 <p><strong>Question:</strong> Why are we using “xy”?</p>
 <p><strong>Question:</strong> How many males and females does the dataset contain?</p>
 <p><strong>Question:</strong> How many sex-linked loci were found?</p>
-</div>
-</div>
 <p>The output consists of two plots, plus a table. Examine the plots.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
 <p><strong>Question:</strong> What do the colours mean in the plots? Look at the figure below for a hint.</p>
-</div>
-</div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/XY.png" class="img-fluid figure-img"></p>
 <figcaption>Sex-linked loci in XY sex determination systems</figcaption>
 </figure>
 </div>
-<p><img src="images/task.png" class="class" width="48" height="48"> Now check the output table:</p>
+</div>
+</div>
+<section id="output-dataframe" class="level4">
+<h4 class="anchored" data-anchor-id="output-dataframe">Output dataframe</h4>
+<p>Now check the output table</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -824,7 +983,7 @@ Note
 <td style="text-align: right;">210</td>
 <td style="text-align: right;">1.2953770</td>
 <td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">0.9952607</td>
 <td style="text-align: left;">FALSE</td>
@@ -833,7 +992,7 @@ Note
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">161</td>
 <td style="text-align: right;">210</td>
-<td style="text-align: right;">1.3033972</td>
+<td style="text-align: right;">1.303397</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">0.0061728</td>
@@ -850,7 +1009,7 @@ Note
 <td style="text-align: right;">203</td>
 <td style="text-align: right;">2.0261283</td>
 <td style="text-align: right;">0.1638428</td>
-<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">0.9259259</td>
 <td style="text-align: right;">0.9620853</td>
 <td style="text-align: left;">FALSE</td>
@@ -859,7 +1018,7 @@ Note
 <td style="text-align: right;">7</td>
 <td style="text-align: right;">141</td>
 <td style="text-align: right;">196</td>
-<td style="text-align: right;">1.7841965</td>
+<td style="text-align: right;">1.784196</td>
 <td style="text-align: right;">0.3044519</td>
 <td style="text-align: right;">0.9598961</td>
 <td style="text-align: right;">0.0600000</td>
@@ -876,7 +1035,7 @@ Note
 <td style="text-align: right;">199</td>
 <td style="text-align: right;">1.3256351</td>
 <td style="text-align: right;">0.5289429</td>
-<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">0.9259259</td>
 <td style="text-align: right;">0.9431280</td>
 <td style="text-align: left;">FALSE</td>
@@ -885,7 +1044,7 @@ Note
 <td style="text-align: right;">11</td>
 <td style="text-align: right;">141</td>
 <td style="text-align: right;">188</td>
-<td style="text-align: right;">1.0906350</td>
+<td style="text-align: right;">1.090635</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">0.0600000</td>
@@ -902,7 +1061,7 @@ Note
 <td style="text-align: right;">211</td>
 <td style="text-align: right;">1.3015303</td>
 <td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: left;">FALSE</td>
@@ -911,7 +1070,7 @@ Note
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">156</td>
 <td style="text-align: right;">211</td>
-<td style="text-align: right;">8.0761921</td>
+<td style="text-align: right;">8.076192</td>
 <td style="text-align: right;">0.0459068</td>
 <td style="text-align: right;">0.3917911</td>
 <td style="text-align: right;">0.0370370</td>
@@ -928,7 +1087,7 @@ Note
 <td style="text-align: right;">181</td>
 <td style="text-align: right;">0.9482168</td>
 <td style="text-align: right;">0.8814171</td>
-<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">0.8641975</td>
 <td style="text-align: right;">0.8578199</td>
 <td style="text-align: left;">FALSE</td>
@@ -937,7 +1096,7 @@ Note
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">139</td>
 <td style="text-align: right;">180</td>
-<td style="text-align: right;">1.2939001</td>
+<td style="text-align: right;">1.293900</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">0.0071429</td>
@@ -954,7 +1113,7 @@ Note
 <td style="text-align: right;">210</td>
 <td style="text-align: right;">1.2953770</td>
 <td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">0.9952607</td>
 <td style="text-align: left;">FALSE</td>
@@ -963,7 +1122,7 @@ Note
 <td style="text-align: right;">19</td>
 <td style="text-align: right;">144</td>
 <td style="text-align: right;">191</td>
-<td style="text-align: right;">1.2557905</td>
+<td style="text-align: right;">1.255791</td>
 <td style="text-align: right;">0.6007790</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">0.1111111</td>
@@ -980,7 +1139,7 @@ Note
 <td style="text-align: right;">209</td>
 <td style="text-align: right;">1.3052926</td>
 <td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">0.9876543</td>
 <td style="text-align: right;">0.9905213</td>
 <td style="text-align: left;">FALSE</td>
@@ -989,7 +1148,7 @@ Note
 <td style="text-align: right;">81</td>
 <td style="text-align: right;">96</td>
 <td style="text-align: right;">128</td>
-<td style="text-align: right;">1.0533255</td>
+<td style="text-align: right;">1.053325</td>
 <td style="text-align: right;">0.8302485</td>
 <td style="text-align: right;">1.0000000</td>
 <td style="text-align: right;">0.4000000</td>
@@ -997,357 +1156,20 @@ Note
 <td style="text-align: left;">FALSE</td>
 <td style="text-align: left;">FALSE</td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">28679824-59-A/G</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">151</td>
-<td style="text-align: right;">205</td>
-<td style="text-align: right;">2.4828757</td>
-<td style="text-align: right;">0.0823245</td>
-<td style="text-align: right;">0.9968818</td>
-<td style="text-align: right;">0.9320988</td>
-<td style="text-align: right;">0.9715640</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">52</td>
-<td style="text-align: right;">62</td>
-<td style="text-align: right;">99</td>
-<td style="text-align: right;">143</td>
-<td style="text-align: right;">1.2108041</td>
-<td style="text-align: right;">0.4225316</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.3443709</td>
-<td style="text-align: right;">0.3024390</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">28684498-48-C/T</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">32</td>
-<td style="text-align: right;">40</td>
-<td style="text-align: right;">130</td>
-<td style="text-align: right;">171</td>
-<td style="text-align: right;">1.0521355</td>
-<td style="text-align: right;">0.8949886</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.8024691</td>
-<td style="text-align: right;">0.8104265</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">129</td>
-<td style="text-align: right;">170</td>
-<td style="text-align: right;">1.3165942</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.0076923</td>
-<td style="text-align: right;">0.0058480</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">28686771-26-C/T</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">161</td>
-<td style="text-align: right;">211</td>
-<td style="text-align: right;">1.3095886</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.9938272</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">54</td>
-<td style="text-align: right;">79</td>
-<td style="text-align: right;">107</td>
-<td style="text-align: right;">132</td>
-<td style="text-align: right;">0.8436386</td>
-<td style="text-align: right;">0.4470382</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.3354037</td>
-<td style="text-align: right;">0.3744076</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">28685826-39-C/A</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">151</td>
-<td style="text-align: right;">201</td>
-<td style="text-align: right;">1.4626962</td>
-<td style="text-align: right;">0.4976794</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.9320988</td>
-<td style="text-align: right;">0.9526066</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">149</td>
-<td style="text-align: right;">201</td>
-<td style="text-align: right;">2.6904699</td>
-<td style="text-align: right;">0.5782830</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.0132450</td>
-<td style="text-align: right;">0.0000000</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">28685909-47-A/G</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">161</td>
-<td style="text-align: right;">208</td>
-<td style="text-align: right;">0.4315262</td>
-<td style="text-align: right;">0.6359454</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.9938272</td>
-<td style="text-align: right;">0.9857820</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">142</td>
-<td style="text-align: right;">193</td>
-<td style="text-align: right;">1.7189806</td>
-<td style="text-align: right;">0.1483226</td>
-<td style="text-align: right;">0.7656290</td>
-<td style="text-align: right;">0.1180124</td>
-<td style="text-align: right;">0.0721154</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">28684339-40-T/C</td>
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">154</td>
-<td style="text-align: right;">201</td>
-<td style="text-align: right;">1.0440609</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.9506173</td>
-<td style="text-align: right;">0.9526066</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">33</td>
-<td style="text-align: right;">38</td>
-<td style="text-align: right;">121</td>
-<td style="text-align: right;">163</td>
-<td style="text-align: right;">1.1693320</td>
-<td style="text-align: right;">0.5934502</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.2142857</td>
-<td style="text-align: right;">0.1890547</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">28679629-14-C/T</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">157</td>
-<td style="text-align: right;">205</td>
-<td style="text-align: right;">1.0878623</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.9691358</td>
-<td style="text-align: right;">0.9715640</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">28</td>
-<td style="text-align: right;">44</td>
-<td style="text-align: right;">129</td>
-<td style="text-align: right;">161</td>
-<td style="text-align: right;">0.7947239</td>
-<td style="text-align: right;">0.4270510</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.1783439</td>
-<td style="text-align: right;">0.2146341</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">28679675-66-C/T</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">160</td>
-<td style="text-align: right;">211</td>
-<td style="text-align: right;">2.6307469</td>
-<td style="text-align: right;">0.5810799</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.9876543</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">155</td>
-<td style="text-align: right;">202</td>
-<td style="text-align: right;">0.7246290</td>
-<td style="text-align: right;">0.7844119</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.0312500</td>
-<td style="text-align: right;">0.0426540</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">28679229-66-T/C</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">159</td>
-<td style="text-align: right;">208</td>
-<td style="text-align: right;">1.3072117</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.9814815</td>
-<td style="text-align: right;">0.9857820</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">43</td>
-<td style="text-align: right;">65</td>
-<td style="text-align: right;">116</td>
-<td style="text-align: right;">143</td>
-<td style="text-align: right;">0.8159706</td>
-<td style="text-align: right;">0.4192173</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.2704403</td>
-<td style="text-align: right;">0.3125000</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">28690243-21-G/A</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">159</td>
-<td style="text-align: right;">196</td>
-<td style="text-align: right;">0.2473174</td>
-<td style="text-align: right;">0.0259465</td>
-<td style="text-align: right;">0.5976030</td>
-<td style="text-align: right;">0.9814815</td>
-<td style="text-align: right;">0.9289100</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">23</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">136</td>
-<td style="text-align: right;">196</td>
-<td style="text-align: right;">32.9246419</td>
-<td style="text-align: right;">0.0000001</td>
-<td style="text-align: right;">0.0000013</td>
-<td style="text-align: right;">0.1446541</td>
-<td style="text-align: right;">0.0000000</td>
-<td style="text-align: left;">TRUE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">28681769-49-T/G</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">161</td>
-<td style="text-align: right;">211</td>
-<td style="text-align: right;">1.3095886</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.9938272</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">29</td>
-<td style="text-align: right;">40</td>
-<td style="text-align: right;">132</td>
-<td style="text-align: right;">171</td>
-<td style="text-align: right;">0.9393419</td>
-<td style="text-align: right;">0.8931260</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.1801242</td>
-<td style="text-align: right;">0.1895735</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">28691027-42-G/A</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">160</td>
-<td style="text-align: right;">208</td>
-<td style="text-align: right;">0.8670091</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.9876543</td>
-<td style="text-align: right;">0.9857820</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">149</td>
-<td style="text-align: right;">207</td>
-<td style="text-align: right;">15.1955169</td>
-<td style="text-align: right;">0.0006362</td>
-<td style="text-align: right;">0.0095436</td>
-<td style="text-align: right;">0.0687500</td>
-<td style="text-align: right;">0.0048077</td>
-<td style="text-align: left;">TRUE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">28681640-28-G/A</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">156</td>
-<td style="text-align: right;">206</td>
-<td style="text-align: right;">1.5826038</td>
-<td style="text-align: right;">0.5425067</td>
-<td style="text-align: right;">1.0000000</td>
-<td style="text-align: right;">0.9629630</td>
-<td style="text-align: right;">0.9763033</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">24</td>
-<td style="text-align: right;">40</td>
-<td style="text-align: right;">132</td>
-<td style="text-align: right;">166</td>
-<td style="text-align: right;">0.7551270</td>
-<td style="text-align: right;">0.3339841</td>
-<td style="text-align: right;">0.9919948</td>
-<td style="text-align: right;">0.1538462</td>
-<td style="text-align: right;">0.1941748</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: left;">FALSE</td>
-</tr>
 </tbody>
 </table>
 </div>
 </div>
-<p><em>only showing the first 20 rows</em></p>
+<p><em>only showing the first 7 rows</em></p>
 </section>
-<section id="run-gl.drop.sexlinked" class="level5">
-<h5 class="anchored" data-anchor-id="run-gl.drop.sexlinked">Run <code>gl.drop.sexlinked</code></h5>
-<p><img src="images/task.png" class="class" width="48" height="48"> Remove the sex-linked loci from the LBP genlight object:</p>
+</section>
+<section id="run-gl.drop.sexlinked" class="level3">
+<h3 class="anchored" data-anchor-id="run-gl.drop.sexlinked">Run <code>gl.drop.sexlinked</code></h3>
+<p>Remove the sex-linked loci from the LBP genlight object:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>new.gl <span class="ot">&lt;-</span> <span class="fu">gl.drop.sexlinked</span>(LBP, <span class="at">system =</span> <span class="st">"xy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>new.gl</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>new.gl<span class="sc">@</span>n.loc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>new.gl <span class="ot">&lt;-</span> <span class="fu">gl.drop.sexlinked</span>(LBP, <span class="at">system =</span> <span class="st">"xy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>new.gl</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>new.gl<span class="sc">@</span>n.loc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1355,31 +1177,151 @@ Note
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Question time
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Question:</strong> How many SNPs are there left after removing sex-linked loci?</p>
-<ul>
-<li>number of SNPs <input class="webex-solveme nospaces" size="3" data-answer="[&quot;923&quot;]"></li>
-</ul>
+<p><img src="images/task.png" class="class" width="48" height="48"> How many SNPs are there left after removing sex-linked loci?</p>
 </div>
 </div>
 </section>
 </section>
-<section id="more-filtering" class="level4">
-<h4 class="anchored" data-anchor-id="more-filtering">More filtering</h4>
-<div class="callout callout-style-default callout-note callout-titled">
+<section id="more-filtering" class="level2">
+<h2 class="anchored" data-anchor-id="more-filtering">More filtering</h2>
+<p><strong>Knock yourself out trying all the different report and filtering functions</strong></p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Knock yourself out trying all the different report and filtering functions
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Remember to use them as pairs – report function to decide a threshold, filter function to apply the threshold (where appropriate)</p>
+</div>
+</div>
+<p>Below are two tables with a number of report and filter functions you can try.</p>
+<section id="report-functions" class="level3">
+<h3 class="anchored" data-anchor-id="report-functions">Report functions</h3>
+<table class="table-striped table-bordered caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Report functions</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>gl.report.callrate</td>
+<td><em>summarises CallRate values</em></td>
+</tr>
+<tr class="even">
+<td>gl.report.reproducibility</td>
+<td><em>summarises repAvg (SNP) or reproducibility (SilicoDArT) values.</em></td>
+</tr>
+<tr class="odd">
+<td>gl. report.monomorphs</td>
+<td><em>provides a count of polymorphic and monomorphic loci</em></td>
+</tr>
+<tr class="even">
+<td>gl.report.secondaries</td>
+<td><em>provides a count of loci that are secondaries, that is, loci that reside on the one sequence tag.</em></td>
+</tr>
+<tr class="odd">
+<td>gl.report.rdepth</td>
+<td><em>reports the estimate of average read depth for each locus</em></td>
+</tr>
+<tr class="even">
+<td>gl.report.hamming</td>
+<td><em>reports on Hamming distances between sequence tags</em></td>
+</tr>
+<tr class="odd">
+<td>gl.report.overshoot</td>
+<td><em>reports loci for which the SNP has been trimmed along with the adaptor sequence</em></td>
+</tr>
+<tr class="even">
+<td>gl.report.taglength</td>
+<td><em>reports a frequency tabulation of sequence tag lengths</em></td>
+</tr>
+<tr class="odd">
+<td>gl.report.sexlinked</td>
+<td><em>reports the number and type of loci likely to be in sex chromosomes</em></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="filtering-functions" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-functions">Filtering functions</h3>
+<table class="table-striped table-bordered caption-top table">
+<colgroup>
+<col style="width: 34%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Filter functions</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>gl.filter.callrate</td>
+<td><em>filter out loci or individuals for which the call rate (rate of non-missing values) is less than a specified threshold, say threshold = 0.95</em></td>
+</tr>
+<tr class="even">
+<td>gl.filter.reproducibility</td>
+<td><em>filter out loci for which the reproducibility (strictly repeatability) is less than a specified threshold, say threshold = 0.99</em></td>
+</tr>
+<tr class="odd">
+<td>gl. filter.monomorphs</td>
+<td><em>provides a count of polymorphic and monomorphic loci</em></td>
+</tr>
+<tr class="even">
+<td>gl.filter.allna</td>
+<td><em>filter out loci that are all missing values (NA)</em></td>
+</tr>
+<tr class="odd">
+<td>gl.filter.secondaries</td>
+<td><em>filter out SNPs that share a sequence tag, except one retained at random [or the best based on reproducibility (RepAvg) and information content (AvgPIC)].</em></td>
+</tr>
+<tr class="even">
+<td>gl.filter.rdepth</td>
+<td><em>filter out loci with exceptionally low or high read depth (coverage)</em></td>
+</tr>
+<tr class="odd">
+<td>gl.filter.hamming</td>
+<td><em>filter out loci that differ from each other by less than a specified number of base pairs</em></td>
+</tr>
+<tr class="even">
+<td>gl.filter.overshoot</td>
+<td><em>filter out loci where the SNP location lies outside the trimmed sequence tag</em></td>
+</tr>
+<tr class="odd">
+<td>gl.filter.taglength</td>
+<td><em>filter out loci for which the tag length is less that a threshold</em></td>
+</tr>
+<tr class="even">
+<td>gl.filter.sexlinked</td>
+<td><em>filter out loci that are likely to be in sex chromosomes</em></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>How about trying it with a different dataset?</p>
 <div class="download_btn">
 <div class="cell">
@@ -1482,118 +1424,13 @@ Knock yourself out trying all the different report and filtering functions
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how to load a genlight object</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">gl.read.dart</span>(<span class="at">filename=</span><span class="st">"./data/sample_data_2Row.csv"</span>, </span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ind.metafile=</span><span class="st">"./data/sample_metadata.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how to load a genlight object</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> <span class="fu">gl.read.dart</span>(<span class="at">filename=</span><span class="st">"./data/sample_data_2Row.csv"</span>, </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">ind.metafile=</span><span class="st">"./data/sample_metadata.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can even try it with your own data.</p>
 </div>
 </div>
-<table class="table-striped table-bordered caption-top table">
-<colgroup>
-<col style="width: 36%">
-<col style="width: 63%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Report functions</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>gl.report.callrate</td>
-<td><em>summarises CallRate values</em></td>
-</tr>
-<tr class="even">
-<td>gl.report.reproducibility</td>
-<td><em>summarises repAvg (SNP) or reproducibility (SilicoDArT) values.</em></td>
-</tr>
-<tr class="odd">
-<td>gl. report.monomorphs</td>
-<td><em>provides a count of polymorphic and monomorphic loci</em></td>
-</tr>
-<tr class="even">
-<td>gl.report.secondaries</td>
-<td><em>provides a count of loci that are secondaries, that is, loci that reside on the one sequence tag.</em></td>
-</tr>
-<tr class="odd">
-<td>gl.report.rdepth</td>
-<td><em>reports the estimate of average read depth for each locus</em></td>
-</tr>
-<tr class="even">
-<td>gl.report.hamming</td>
-<td><em>reports on Hamming distances between sequence tags</em></td>
-</tr>
-<tr class="odd">
-<td>gl.report.overshoot</td>
-<td><em>reports loci for which the SNP has been trimmed along with the adaptor sequence</em></td>
-</tr>
-<tr class="even">
-<td>gl.report.taglength</td>
-<td><em>reports a frequency tabulation of sequence tag lengths</em></td>
-</tr>
-<tr class="odd">
-<td>gl.report.sexlinked</td>
-<td><em>reports the number and type of loci likely to be in sex chromosomes</em></td>
-</tr>
-</tbody>
-</table>
-<table class="table-striped table-bordered caption-top table">
-<colgroup>
-<col style="width: 34%">
-<col style="width: 65%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Filter functions</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>gl.filter.callrate</td>
-<td><em>filter out loci or individuals for which the call rate (rate of non-missing values) is less than a specified threshold, say threshold = 0.95</em></td>
-</tr>
-<tr class="even">
-<td>gl.filter.reproducibility</td>
-<td><em>filter out loci for which the reproducibility (strictly repeatability) is less than a specified threshold, say threshold = 0.99</em></td>
-</tr>
-<tr class="odd">
-<td>gl. filter.monomorphs</td>
-<td><em>provides a count of polymorphic and monomorphic loci</em></td>
-</tr>
-<tr class="even">
-<td>gl.filter.allna</td>
-<td><em>filter out loci that are all missing values (NA)</em></td>
-</tr>
-<tr class="odd">
-<td>gl.filter.secondaries</td>
-<td><em>filter out SNPs that share a sequence tag, except one retained at random [or the best based on reproducibility (RepAvg) and information content (AvgPIC)].</em></td>
-</tr>
-<tr class="even">
-<td>gl.filter.rdepth</td>
-<td><em>filter out loci with exceptionally low or high read depth (coverage)</em></td>
-</tr>
-<tr class="odd">
-<td>gl.filter.hamming</td>
-<td><em>filter out loci that differ from each other by less than a specified number of base pairs</em></td>
-</tr>
-<tr class="even">
-<td>gl.filter.overshoot</td>
-<td><em>filter out loci where the SNP location lies outside the trimmed sequence tag</em></td>
-</tr>
-<tr class="odd">
-<td>gl.filter.taglength</td>
-<td><em>filter out loci for which the tag length is less that a threshold</em></td>
-</tr>
-<tr class="even">
-<td>gl.filter.sexlinked</td>
-<td><em>filter out loci that are likely to be in sex chromosomes</em></td>
-</tr>
-</tbody>
-</table>
-</section>
 </section>
 </section>
 <section id="further-study" class="level2">
