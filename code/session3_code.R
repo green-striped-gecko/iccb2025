@@ -46,7 +46,7 @@ pc_plot <- gl.pcoa.plot(glPca =  pc, x = temp)
 ## --------------------------------------------------------------------------------------------------------------
 
 structure_file <- ifelse('structure.exe' %in% list.files('./binaries/'), 
-                         './binaries/structure.exe', './binaries/structure')
+                         './binaries/structure.exe', './binaries/console/structure')
 srnoad <- gl.run.structure(possums.gl, k.range = 2:7, num.k.rep = 2, 
                            exec = structure_file,plot.out = FALSE,
                            burnin=500, numreps=1000, 
@@ -76,14 +76,14 @@ gl.map.interactive(platypus.gl)
 
 
 ## ------------------------------------------------------------------------------------------
-# # my_fast <- gl.run.faststructure(platypus.gl,
-# #                                 k.range = 2:4,
-# #                                 num.k.rep = 1,
-# #                                 exec = "./binaries/fastStructure",
-# #                                 exec.plink = "./binaries/", output = tempdir())
-# #
-# # gl.plot.faststructure(sr = my_fast,k.range = 3, border_ind = 0)
-# 
+my_fast <- gl.run.faststructure(platypus.gl,
+                                k.range = 2:4,
+                                num.k.rep = 1,
+                                exec = "./binaries/fastStructure",
+                                exec.plink = "./binaries/", output = tempdir())
+
+gl.plot.faststructure(sr = my_fast,k.range = 3, border_ind = 0)
+
 
 
 ## --------------------------------------------------------------------------------
