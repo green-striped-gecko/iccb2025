@@ -225,7 +225,7 @@ gl.map.interactive(platypus.gl)
 #                                 k.range = 2:4,
 #                                 num.k.rep = 1,
 #                                 exec = "./binaries/fastStructure",
-#                                 exec.plink = "./binaries/" )
+#                                 exec.plink = "./binaries/", output = tempdir())
 # 
 # gl.plot.faststructure(sr = my_fast,k.range = 3, border_ind = 0)
 
