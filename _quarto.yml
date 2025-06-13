@@ -21,7 +21,6 @@ book:
   - session08.qmd
   - break.qmd
   - tutorials.qmd
-  - powerpoints.qmd
   - references.qmd
   - feedback.qmd
 bibliography: references.bib

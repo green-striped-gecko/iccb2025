@@ -55,3 +55,8 @@ rsconnect/
 # folder
 
 session_organise
+
+# powerpoint
+
+*.pptx
+
