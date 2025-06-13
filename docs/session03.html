@@ -102,6 +102,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+
+<script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
+
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+
+<script src="site_libs/leaflet-binding-2.2.2/leaflet.js"></script>
+
+<script src="site_libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+
+<script src="site_libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+
 
 
 <link rel="stylesheet" href="css.css">
@@ -228,6 +252,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./materials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session Materials</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./tutorials.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">dartR Tutorials</span></a>
   </div>
@@ -263,16 +293,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a>
   <ul class="collapse">
-  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca">PCA</a></li>
   <li><a href="#select-one-cluster" id="toc-select-one-cluster" class="nav-link" data-scroll-target="#select-one-cluster">Select one cluster</a></li>
   </ul></li>
   <li><a href="#what-can-go-wrong" id="toc-what-can-go-wrong" class="nav-link" data-scroll-target="#what-can-go-wrong">What can go wrong</a></li>
-  <li><a href="#structure-and-faststructure" id="toc-structure-and-faststructure" class="nav-link" data-scroll-target="#structure-and-faststructure">Structure and FastStructure</a></li>
-  <li><a href="#running-structure" id="toc-running-structure" class="nav-link" data-scroll-target="#running-structure">Running STRUCTURE</a></li>
-  <li><a href="#snmf" id="toc-snmf" class="nav-link" data-scroll-target="#snmf">snmf</a></li>
-  <li><a href="#popclusture" id="toc-popclusture" class="nav-link" data-scroll-target="#popclusture">Popclusture</a></li>
   </ul></li>
-  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
+  <li><a href="#structure-and-faststructure-bayesian-clustering-models" id="toc-structure-and-faststructure-bayesian-clustering-models" class="nav-link" data-scroll-target="#structure-and-faststructure-bayesian-clustering-models">Structure and FastStructure (Bayesian clustering models)</a>
+  <ul>
+  <li><a href="#admixture-model" id="toc-admixture-model" class="nav-link" data-scroll-target="#admixture-model">Admixture Model</a></li>
+  <li><a href="#no-admixture-model" id="toc-no-admixture-model" class="nav-link" data-scroll-target="#no-admixture-model">No-Admixture Model</a></li>
+  </ul></li>
+  <li><a href="#running-structure" id="toc-running-structure" class="nav-link" data-scroll-target="#running-structure">Running STRUCTURE</a>
+  <ul>
+  <li><a href="#structure-results" id="toc-structure-results" class="nav-link" data-scroll-target="#structure-results">Structure Results</a></li>
+  <li><a href="#evanno-plots" id="toc-evanno-plots" class="nav-link" data-scroll-target="#evanno-plots">Evanno Plots</a></li>
+  <li><a href="#plotting-the-results-q-matrix" id="toc-plotting-the-results-q-matrix" class="nav-link" data-scroll-target="#plotting-the-results-q-matrix">Plotting the results (Q matrix)</a></li>
+  <li><a href="#a-spatial-structure-plot" id="toc-a-spatial-structure-plot" class="nav-link" data-scroll-target="#a-spatial-structure-plot">A “spatial” structure plot</a></li>
+  </ul></li>
+  <li><a href="#running-faststructure" id="toc-running-faststructure" class="nav-link" data-scroll-target="#running-faststructure">Running fastStructure</a>
+  <ul>
+  <li><a href="#faststructure" id="toc-faststructure" class="nav-link" data-scroll-target="#faststructure">Faststructure</a></li>
+  <li><a href="#faststructure-simple-prior" id="toc-faststructure-simple-prior" class="nav-link" data-scroll-target="#faststructure-simple-prior">Faststructure simple prior</a></li>
+  </ul></li>
+  <li><a href="#running-snmf" id="toc-running-snmf" class="nav-link" data-scroll-target="#running-snmf">Running snmf</a></li>
+  <li><a href="#popcluster" id="toc-popcluster" class="nav-link" data-scroll-target="#popcluster">Popcluster</a></li>
   <li><a href="#further-study" id="toc-further-study" class="nav-link" data-scroll-target="#further-study"><em>Further Study</em></a>
   <ul>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
@@ -327,9 +370,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="analytical-toolkit">Analytical toolkit</h4>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 26%">
-<col style="width: 37%">
-<col style="width: 36%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -345,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td><strong>STRUCTURE</strong></td>
 <td>Bayesian clustering</td>
-<td><code>gl.run.structure()</code>, <code>gl.plot.structure()</code>, <code>gl.map.structure()</code></td>
+<td><code>gl.run.structure()</code>, <code>gl.plot.structure()</code>, <code>gl.map.structure()</code>,<code>gl.read.structure()</code></td>
 </tr>
 <tr class="even">
 <td><strong>fastSTRUCTURE</strong></td>
@@ -369,54 +412,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="example" class="level3">
 <h3 class="anchored" data-anchor-id="example">Example</h3>
 <p>To help us understand our analytical toolkit better let’s start with a simple example using a simulated dataset.</p>
-<p>The dataset is a genlight object and contains 10 populations of 30 individuals each and 1000 loci and is part of the dartRverse package. The populations are fairly independent but are linked by some imigration, so a typical Metapopulation scenario. The populations are named A to J and follow more or less an isolation by distance (actually an isolation by resistance model). So population next to each other (e.g.&nbsp;B and C) are fairly well mixed and populations further apart from the rest (e.g.&nbsp;D) are more isolated.</p>
-<p>To simplify this further we limit our exercise to the first 150 individuals only (which entails now 5 populations a 30 individuals, A to E). To get an overview on the population we use the function: gl.map.interactive which plots the individuals on a map. Please note the genlight/dartR object needs to have valid lat long coordinates for each individual to be able to do so.</p>
-<p>Lets get started.</p>
-<section id="pca" class="level4">
-<h4 class="anchored" data-anchor-id="pca">PCA</h4>
+<p>The dataset contains 10 populations of 30 individuals each and 1000 loci and is part of the dartRverse package.</p>
+<p>To get an overview of the dataset, we use the function: <code>gl.map.interactive</code> which plots the individuals on a map. Please note the genlight/dartR object needs to have valid lat long coordinates for each individual to be able to do so.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the simulated possum data</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>gl <span class="ot">&lt;-</span> possums.gl[<span class="dv">1</span><span class="sc">:</span><span class="dv">150</span>,]</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Interrogate to see what the data are</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nLoc</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 200</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nInd</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 150</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">pop</span>(gl))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">pop</span>(possums.gl)) <span class="co">#check the individuals and the populations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
- A  B  C  D  E 
-30 30 30 30 30 </code></pre>
+ A  B  C  D  E  F  G  H  I  J 
+30 30 30 30 30 30 30 30 30 30 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># SNP coding for individuals 1-5 and loci 1-8</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">as.matrix</span>(gl)[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.map.interactive</span>(possums.gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  X1 X2 X3 X4 X5 X6 X7 X8
-1  1  2  1  2  2  2  1  2
-2  1  1  1  1  1  1  0  1
-3  2  0  2  0  1  1  1  1
-4  0  1  2  0  0  1  0  1
-5  1  2  1  2  2  2  1  0</code></pre>
+<pre><code>Starting gl.map.interactive 
+  Processing genlight object with SNP data
+Completed: gl.map.interactive </code></pre>
+</div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-32f2043222ff3fb15cb9" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-32f2043222ff3fb15cb9">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircles","args":[[-35.06726602006179,-35.06955064191888,-35.07673446942515,-35.06253077174035,-35.06596335361223,-35.07240653278109,-35.06945030472441,-35.05851152550337,-35.05985319383298,-35.06269461665501,-35.07283232198104,-35.06785969168114,-35.06140452612459,-35.07000849226291,-35.06262776758465,-35.0700717233947,-35.06763775026968,-35.06326203785833,-35.07286252370781,-35.05929856231865,-35.06097874939351,-35.06590367721348,-35.05911385039392,-35.06511327075684,-35.06618017560768,-35.0597295335847,-35.06424845372028,-35.06585027391014,-35.06321742421637,-35.07252226008766,-35.46055211706051,-35.45161364369143,-35.45902228106662,-35.44643386742302,-35.46243693185566,-35.45417959421039,-35.45018417344416,-35.45924311403174,-35.44890760005696,-35.4521796574947,-35.45988605372478,-35.45539809735926,-35.45501903103015,-35.4586703397519,-35.45686504707611,-35.46479149128798,-35.45078857294831,-35.45815868254312,-35.45466795585465,-35.45039956768484,-35.46205083650445,-35.4598597488244,-35.45619141886416,-35.4635740328022,-35.4552718590738,-35.45678531683682,-35.45158548805967,-35.46508625696213,-35.45351399235329,-35.45707818180141,-35.4305411459387,-35.42685899024227,-35.42643498625106,-35.42482238917844,-35.42153397361244,-35.42609105710914,-35.42688871882999,-35.42255791970729,-35.42931971756748,-35.42770966763658,-35.42101151611572,-35.42404413631208,-35.43260612963641,-35.42462356150683,-35.43076173989826,-35.4333022917218,-35.4283444715299,-35.43703873162963,-35.42927860409449,-35.425665365613,-35.42956965923308,-35.41644235863421,-35.42824801358195,-35.43278182931387,-35.42581793190112,-35.43272295602974,-35.42391325313334,-35.43013284624325,-35.42606939645366,-35.43503345463999,-35.32169712970318,-35.32487649457556,-35.32495027923733,-35.33010001632034,-35.32848842711304,-35.3353022348978,-35.32360991543328,-35.32751590778332,-35.33408666786472,-35.33098529253679,-35.32566957462272,-35.33030282665679,-35.32736989170276,-35.33371917323233,-35.33427961601613,-35.32578978209212,-35.32223144080267,-35.32890169955976,-35.33132488967286,-35.33897980880262,-35.32566382444671,-35.33328290822069,-35.32046076559659,-35.33062493966311,-35.3265500114555,-35.33813236025612,-35.33011564763665,-35.31420499230119,-35.33712599234254,-35.32168066764579,-35.49654258663418,-35.49899275331744,-35.5048623541982,-35.50897616359301,-35.50732866799677,-35.50435741531738,-35.50153906471473,-35.49747680818017,-35.51219887330005,-35.49873652856476,-35.5074862336104,-35.50094566490483,-35.51078683806539,-35.50913604553858,-35.5120312775928,-35.50008343959731,-35.50845015630614,-35.50583768547352,-35.50527204642832,-35.49769860328301,-35.50403030919819,-35.49791225538618,-35.50292484675087,-35.50526535650319,-35.50240994663054,-35.49825727661457,-35.49989444335558,-35.50989606944871,-35.49314753231366,-35.51073280268131,-35.09028209172244,-35.10562601763866,-35.09468834790307,-35.10226691796452,-35.10404606818298,-35.10226461707639,-35.1064649387605,-35.1012909096907,-35.09552040256428,-35.10380296013142,-35.10239298896918,-35.09992315972233,-35.106813271101,-35.09850591863654,-35.09665046662047,-35.1000852937053,-35.10410867606655,-35.09748131984787,-35.09509679276986,-35.08598467396443,-35.09745563377356,-35.09591447268461,-35.1021625647659,-35.10327353346593,-35.10531578799221,-35.10363077343015,-35.0966972364509,-35.10241599944423,-35.09904315164631,-35.10493170033196,-35.25746333851406,-35.26282666526694,-35.25885904645661,-35.25433842968957,-35.25625927817487,-35.24799578102685,-35.25125359809707,-35.26057844511985,-35.2565855910882,-35.2579104677626,-35.2535216496388,-35.24887241562352,-35.25233449811185,-35.25946082558522,-35.25348244417159,-35.25244045673526,-35.25750678270189,-35.24836551759917,-35.25197732224848,-35.25923458007573,-35.2523709493299,-35.25258770533333,-35.24781459590697,-35.25402347946906,-35.25828995351515,-35.25244731888565,-35.24792034477663,-35.24775017537874,-35.25592128698129,-35.24975105529739,-35.03678633873842,-35.04506814597632,-35.05028148541645,-35.05352322764037,-35.04613788148234,-35.05153058703141,-35.04770614673792,-35.05385857790979,-35.04426381195707,-35.04998790917208,-35.04556636397717,-35.05219801311198,-35.0448490389914,-35.04596212456224,-35.04454417770052,-35.04109829195849,-35.04639132481552,-35.04246514672944,-35.04400431536115,-35.04592732755992,-35.05027885556246,-35.04477564045412,-35.03717364843791,-35.04775779798644,-35.04188262583446,-35.04730665336868,-35.04340944230393,-35.0461215111677,-35.03975007072079,-35.04025728598642,-35.32108077932894,-35.30910476081184,-35.31688810992503,-35.30976907217464,-35.30770311962758,-35.3079519246528,-35.3098649085477,-35.31591847456782,-35.31416508566667,-35.31363997655311,-35.31274309706043,-35.31608262451079,-35.31297664640707,-35.30735617993078,-35.30454244454915,-35.30313890577752,-35.31932083172734,-35.30857720047657,-35.31234326531275,-35.30563727733622,-35.3136742769179,-35.30979257421675,-35.31047217289667,-35.30154527232388,-35.31682147086875,-35.31874759927437,-35.30892759947544,-35.32331404280428,-35.31255521656004,-35.31329734147328,-35.31821407262576,-35.31453947314635,-35.30920017770136,-35.3112467688915,-35.31014943670728,-35.3086552373978,-35.31398843188448,-35.30956740672165,-35.32091096914002,-35.30700321213678,-35.31827255694304,-35.31625317887094,-35.31550344843468,-35.30794644214196,-35.32559755394367,-35.31691364680829,-35.31703011303228,-35.31413426577734,-35.31172901100268,-35.30919676433004,-35.31868415649471,-35.32278353771056,-35.32209286780872,-35.31737259747131,-35.31839823496155,-35.30570058141227,-35.31265637009437,-35.30328664977582,-35.3046205989943,-35.31885966683299],[149.2869862369311,149.2746309785811,149.2722429154469,149.2812307278812,149.2750973419055,149.2781025173445,149.2788742249669,149.2860977673041,149.2932414893118,149.2755740248056,149.2836017973049,149.2668731448335,149.2834512457887,149.2751440245323,149.2874537547859,149.2808386423436,149.2931575381382,149.2800710287609,149.2786355442883,149.2725685188075,149.2777926804528,149.2841536843803,149.286859204825,149.2756010351737,149.2798786167938,149.2803295265397,149.2749598709062,149.274843528577,149.2798726878657,149.2833821406627,149.0288179804404,149.0277180830705,149.0312045633892,149.0376413352734,149.020213771592,149.031464519822,149.0263965249884,149.0334447890848,149.0319666754673,149.0267593928923,149.0246837668797,149.0305891411105,149.0333227917825,149.0300755275159,149.0274354086494,149.0256585381179,149.0270384143907,149.0356977904418,149.0268846492132,149.0368917779229,149.0228416033965,149.0324760640069,149.0282992350292,149.0314982386245,149.0360673401843,149.0207172222744,149.0400934578165,149.0233656493286,149.0341314983903,149.0283495735485,149.0574687540712,149.0642340451419,149.0677556332095,149.054291984695,149.0602994007142,149.0601359082545,149.0628131330281,149.0535954115097,149.058145221787,149.0569703969507,149.0554037144645,149.0595432368244,149.0596963628989,149.0647007349419,149.0597112056045,149.0626633884261,149.0547451500818,149.05438612097,149.0635747895413,149.0658366566245,149.06260850334,149.0572024129704,149.0577147431848,149.0545997458017,149.0626555521874,149.0533198080399,149.0632658470781,149.0584276835635,149.0592254429095,149.0664611869001,149.3407810789724,149.3443086887442,149.345574440209,149.3294786770262,149.3432051441674,149.3387756642478,149.3385776355366,149.3318337391863,149.3357765252715,149.3425597241434,149.3345677489617,149.3461888279114,149.333187906449,149.3404463687952,149.3384208988126,149.3380757594117,149.334741497081,149.337551214032,149.3371697887127,149.3375770393958,149.3465796576442,149.3371321827274,149.3361313733821,149.3415461243541,149.3430198145683,149.3401600929371,149.3385720295742,149.3343231627318,149.3345616070885,149.3359777747675,149.1903751584785,149.1761015620989,149.1874076466016,149.1773022850008,149.1768425444278,149.1701853415744,149.1718366901681,149.1819735472706,149.1920093709055,149.1782511233533,149.1754055348819,149.1812874032252,149.1732527262135,149.1762625588293,149.1804589981038,149.1780983213944,149.1745326252297,149.1852313994641,149.1754605771461,149.1718831677804,149.1845883622531,149.1797244901746,149.1738832290481,149.1745917459272,149.1744087375343,149.171940248434,149.1769928678676,149.1778069240305,149.1864311912754,149.1771088042872,149.3123592283648,149.3138068870638,149.3109555831198,149.3125970321352,149.3120300922422,149.3020983469503,149.3066252726427,149.3023942337188,149.3075493421399,149.3077190683017,149.3131977406748,149.301566717441,149.3112155937549,149.3128431653757,149.3020746454079,149.3126200386714,149.3078562529869,149.3089540131912,149.2988499866342,149.3027540378994,149.3029638860752,149.3089194403182,149.3076427977256,149.3067226879785,149.3149961319015,149.309586546441,149.3142886467226,149.3053553955789,149.3105822577607,149.3108634199685,148.9573545816232,148.9554287935822,148.9572241081063,148.9524862670473,148.9508703355062,148.9620263556052,148.9556369710045,148.9589342553403,148.9503832697383,148.9593873419979,148.9642612127874,148.9534487749339,148.9558372622644,148.9609143112926,148.9539434397952,148.964088653204,148.9692554559202,148.9597789586625,148.9465675690042,148.9546635367143,148.9609655125572,148.9606110446398,148.9574766822493,148.9549669042505,148.9546682346545,148.9510797438726,148.9593468081232,148.9618373864566,148.9629566316666,148.965179818795,148.9759018691969,148.9773240098244,148.9688010416865,148.9759983622175,148.9818844625505,148.9712043412155,148.9725276010708,148.9855438625258,148.9777000746431,148.9723348460409,148.9757713222528,148.9811603997944,148.9785653614914,148.9733917410304,148.9782542240715,148.9802231732174,148.9841627753458,148.9769258414715,148.9731115261655,148.9724707939007,148.9612207062529,148.9777906746257,148.9771875781056,148.9762891870199,148.98175542184,148.9796736301612,148.9749932808876,148.9824389606382,148.9870670433449,148.9808013863632,149.0655250355371,149.0735615324574,149.0589249274312,149.0635880542299,149.0656507524615,149.0641858283409,149.0640057797014,149.0719451888883,149.0701256500111,149.0697371067751,149.0636376200768,149.0670581810177,149.0712838523052,149.0636119179286,149.0676874555645,149.0645763396189,149.0696804939401,149.0667889296484,149.0656149230987,149.0585503727854,149.0645136601808,149.0666711103567,149.063129816549,149.0658475440867,149.0639915291339,149.063605376561,149.0754642026001,149.0631314416762,149.0652890536814,149.062513715519,149.1091473414796,149.1056448799021,149.1073185403203,149.1050453348088,149.1034056196705,149.1079204805214,149.1146185522628,149.1061432467666,149.1043111074862,149.1103096403853,149.1127064156037,149.120178926065,149.1123330035292,149.1011143804763,149.1107415871216,149.1098135401913,149.1129372988147,149.1071637057953,149.1188254616263,149.1069094066366,149.1109064204218,149.1115998896922,149.1052957334344,149.1048523445162,149.1048261912158,149.1062467945229,149.1160628805448,149.1122257937272,149.1063921630403,149.104989018014],10,null,null,{"interactive":true,"className":"","stroke":true,"color":["#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099"],"weight":10,"opacity":0.8,"fill":true,"fillColor":["#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF0000","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#FF9900","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#CCFF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#33FF00","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FF66","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#00FFFF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#0066FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#3300FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#CC00FF","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099","#FF0099"],"fillOpacity":0.2},["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130","131","132","133","134","135","136","137","138","139","140","141","142","143","144","145","146","147","148","149","150","151","152","153","154","155","156","157","158","159","160","161","162","163","164","165","166","167","168","169","170","171","172","173","174","175","176","177","178","179","180","181","182","183","184","185","186","187","188","189","190","191","192","193","194","195","196","197","198","199","200","201","202","203","204","205","206","207","208","209","210","211","212","213","214","215","216","217","218","219","220","221","222","223","224","225","226","227","228","229","230","231","232","233","234","235","236","237","238","239","240","241","242","243","244","245","246","247","248","249","250","251","252","253","254","255","256","257","258","259","260","261","262","263","264","265","266","267","268","269","270","271","272","273","274","275","276","277","278","279","280","281","282","283","284","285","286","287","288","289","290","291","292","293","294","295","296","297","298","299","300"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]},{"method":"addMarkers","args":[[-35.06585614987745,-35.45634649838929,-35.42767222710986,-35.32860077260636,-35.50377366818333,-35.10013788956748,-35.25400479995207,-35.04569545895509,-35.3119317417252,-35.31401691430649],[149.280051548008,149.0297248441548,149.0597150725238,149.3385600728948,149.1783878394327,149.3083996163062,148.9577193407132,148.9770825166318,149.0659965797388,149.1089995232864],{"iconUrl":{"data":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=","index":0},"iconWidth":1,"iconHeight":1},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["A","B","C","D","E","F","G","H","I","J"],{"interactive":false,"permanent":true,"direction":"top","opacity":1,"offset":[0,0],"textsize":"12px","textOnly":true,"className":"","sticky":true},null]},{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]}],"limits":{"lat":[-35.51219887330005,-35.03678633873842],"lng":[148.9465675690042,149.3465796576442]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<p>The next step is to actually calculate genetic difference between individuals. We do this by measuring euclidean distance but it is worth remembering that there are a myriad of different distances we can use. There are five different options for the function we will using, <code>gl.dist.ind</code>, that may be worth exploring depending on the context of your data.</p>
-<p>The distance measure for SNP genotypes can be one of:</p>
-<ul>
-<li><p><strong>Euclidean Distance</strong></p></li>
-<li><p>Scaled Euclidean Distance</p></li>
-<li><p>Simple Mismatch Distance</p></li>
-<li><p>Absolute Mismatch Distance</p></li>
-<li><p>Czekanowski (Manhattan) Distance</p></li>
-</ul>
-<p>But lets stick with euclidean distance for now. Euclidean distance is quite simple it treats</p>
-<p>possum.gl</p>
+<p>The populations are fairly independent but are linked by some imigration, so a typical Metapopulation scenario. The populations are named A to J and follow more or less an isolation by distance. So population next to each other (e.g.&nbsp;B and C) are fairly well mixed and populations further apart from the rest (e.g.&nbsp;D) are more isolated.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate an Euclidean Distance Matrix on individuals</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">gl.dist.ind</span>(gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Undertake a PCA on the raw data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> <span class="fu">gl.pcoa</span>(possums.gl, <span class="at">verbose =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.pcoa 
+  Processing genlight object with SNP data
+  Warning: Number of loci is less than the number of individuals to be represented
+  Performing a PCA, individuals as entities, loci as attributes, SNP genotype as state</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Also defined by 'spam'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Also defined by 'spam'</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -424,313 +461,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Represent visually as a heat map</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.plot.heatmap</span>(D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in rep(col, length.out = leaves_length): 'x' is NULL so the result will
-be NULL</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL
-Warning in rep(if (nam %in% names(L)) L[[nam]] else default, length.out =
-indx): 'x' is NULL so the result will be NULL</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Ordination yielded 9 informative dimensions( broken-stick criterion) from 299 original dimensions
+    PCA Axis 1 explains 10.5 % of the total variance
+    PCA Axis 1 and 2 combined explain 19.1 % of the total variance
+    PCA Axis 1-3 combined explain 26.8 % of the total variance
+Starting gl.colors 
+Selected color type 2 
+Completed: gl.colors </code></pre>
 </div>
 <div class="cell-output-display">
 <div>
@@ -739,15 +477,13 @@ indx): 'x' is NULL so the result will be NULL</code></pre>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.pcoa </code></pre>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Undertake a PCA on the raw data</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> <span class="fu">gl.pcoa</span>(gl, <span class="at">verbose =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Starting gl.pcoa 
-  Processing genlight object with SNP data
-  Performing a PCA, individuals as entities, loci as attributes, SNP genotype as state</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first two dimensions of the PCA</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pc_a1a2 <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(<span class="at">glPca =</span> pc, <span class="at">x =</span> possums.gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -755,15 +491,8 @@ indx): 'x' is NULL so the result will be NULL</code></pre>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Ordination yielded 4 informative dimensions( broken-stick criterion) from 149 original dimensions
-    PCA Axis 1 explains 15.5 % of the total variance
-    PCA Axis 1 and 2 combined explain 30.8 % of the total variance
-    PCA Axis 1-3 combined explain 41.2 % of the total variance
-Starting gl.colors 
-Selected color type 2 
-Completed: gl.colors </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first and third dimensions of the PCA</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>pc_a1a3 <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(<span class="at">glPca =</span> pc, <span class="at">x =</span> possums.gl, <span class="at">xaxis =</span> <span class="dv">1</span>, <span class="at">yaxis =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -771,36 +500,20 @@ Completed: gl.colors </code></pre>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Completed: gl.pcoa </code></pre>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first three dimensions of the PCA</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pc_a1a3 <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(<span class="at">glPca =</span> pc, <span class="at">x =</span> possums.gl, <span class="at">xaxis =</span> <span class="dv">1</span>, <span class="at">yaxis =</span> <span class="dv">2</span>, <span class="at">zaxis =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in RColorBrewer::brewer.pal(N, "Set2"): n too large, allowed maximum for palette Set2 is 8
+Returning the palette you asked for with that many colors
+Warning in RColorBrewer::brewer.pal(N, "Set2"): n too large, allowed maximum for palette Set2 is 8
+Returning the palette you asked for with that many colors</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first two dimensions of the PCA</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>pc_a1a2 <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(pc,gl,<span class="at">pop.labels=</span><span class="st">"legend"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="session03_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first and third dimensions of the PCA</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>pc_a1a3 <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(pc,gl,<span class="at">xaxis=</span><span class="dv">1</span>,<span class="at">yaxis=</span><span class="dv">3</span>, <span class="at">pop.labels=</span><span class="st">"legend"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="session03_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
 <section id="select-one-cluster" class="level4">
 <h4 class="anchored" data-anchor-id="select-one-cluster">Select one cluster</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only the data from one cluster in the primary PCA</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">gl.drop.pop</span>(gl, <span class="at">pop.list=</span><span class="fu">c</span>(<span class="st">'D'</span>, <span class="st">'A'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only the data from one cluster in the primary PCA</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">gl.drop.pop</span>(<span class="at">x =</span> possums.gl, <span class="at">pop.list =</span> <span class="fu">c</span>(<span class="st">'D'</span>, <span class="st">'A'</span>, <span class="st">'E'</span>, <span class="st">'F'</span>, <span class="st">'H'</span>, <span class="st">'G'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Starting gl.drop.pop 
   Processing genlight object with SNP data
@@ -809,25 +522,37 @@ Completed: gl.colors </code></pre>
   Locus metrics not recalculated
 Completed: gl.drop.pop </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first two dimensions of the secondary PCA</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> <span class="fu">gl.pcoa</span>(temp, <span class="at">verbose =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first two dimensions of the secondary PCA</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> <span class="fu">gl.pcoa</span>(temp, <span class="at">verbose =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Starting gl.pcoa 
   Processing genlight object with SNP data
   Performing a PCA, individuals as entities, loci as attributes, SNP genotype as state</code></pre>
 </div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Also defined by 'spam'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Also defined by 'spam'</code></pre>
+</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="session03_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="session03_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Ordination yielded 2 informative dimensions( broken-stick criterion) from 89 original dimensions
-    PCA Axis 1 explains 22.9 % of the total variance
-    PCA Axis 1 and 2 combined explain 30.5 % of the total variance
-    PCA Axis 1-3 combined explain NA % of the total variance
+<pre><code>  Ordination yielded 12 informative dimensions( broken-stick criterion) from 119 original dimensions
+    PCA Axis 1 explains 11 % of the total variance
+    PCA Axis 1 and 2 combined explain 17.4 % of the total variance
+    PCA Axis 1-3 combined explain 22.7 % of the total variance
 Starting gl.colors 
 Selected color type 2 
 Completed: gl.colors </code></pre>
@@ -835,25 +560,25 @@ Completed: gl.colors </code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="session03_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="session03_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Completed: gl.pcoa </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pc_plot <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(pc, temp,<span class="at">pop.labels=</span><span class="st">"legend"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pc_plot <span class="ot">&lt;-</span> <span class="fu">gl.pcoa.plot</span>(<span class="at">glPca =</span>  pc, <span class="at">x =</span> temp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Starting gl.pcoa.plot 
   Processing an ordination file (glPca)
   Processing genlight object with SNP data
-  Plotting populations identified by a legend
+  Plotting populations in a space defined by the SNPs
   Preparing plot .... please wait</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="session03_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="session03_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -870,28 +595,195 @@ Completed: gl.colors </code></pre>
 <p>You can choose alternative methods of filling in the missing data prior to running your pca using the <code>gl.impute</code> function.</p>
 <p>PCA is a hypothesis generating tool, not a tool for definitive decisions of the structure of populations.</p>
 <p>Structure variants can also turn up on a PCA, like an inversion.</p>
+<p><img src="images/inversion_pca.png" class="img-fluid"></p>
 <p>PCA is sample size dependent - but this is more for the top two dimensions not all the informative dimensions.</p>
 </section>
-<section id="structure-and-faststructure" class="level3">
-<h3 class="anchored" data-anchor-id="structure-and-faststructure">Structure and FastStructure</h3>
-<p>To run STRUCTURE from within R, we need to install the non-GUI executable (the version without frontend) for your operating system [e.g windows, mac or linux]. You can download STRUCTURE for your OS from <a href="http://web.stanford.edu/group/pritchardlab/structure_software/release_versions/v2.3.4/html/structure.html" class="uri">http://web.stanford.edu/group/pritchardlab/structure_software/release_versions/v2.3.4/html/structure.html</a>.</p>
-<p>To let R know where the executable is, you need to set the path to the executable. For example, under windows, if you have the executable in <code>d:/programms/structure/structure.exe</code>, you can use the command below.</p>
 </section>
-<section id="running-structure" class="level3">
-<h3 class="anchored" data-anchor-id="running-structure">Running STRUCTURE</h3>
+<section id="structure-and-faststructure-bayesian-clustering-models" class="level2">
+<h2 class="anchored" data-anchor-id="structure-and-faststructure-bayesian-clustering-models">Structure and FastStructure (Bayesian clustering models)</h2>
+<p>Structure attempts to find the number of populations or sources (K ) at which population genetics parameters (i.e.&nbsp;Hardy–Weinberg equilibrium within populations and linkage equilibrium between loci) are maximized.</p>
+<section id="admixture-model" class="level3">
+<h3 class="anchored" data-anchor-id="admixture-model">Admixture Model</h3>
+<ul>
+<li><p><strong>Definition</strong>: The admixture model assumes that individuals can have ancestry from multiple populations. This means that the genetic makeup of an individual can be a mixture of two or more populations. This model is particularly useful for analyzing genetic data from populations that are known to have mixed or where there is gene flow between populations.</p></li>
+<li><p><strong>Application</strong>: It is applied when there is historical or recent admixture between populations, and it allows for the estimation of individual ancestry proportions from each of the inferred clusters. For example, an individual might be 50% from population A, 30% from population B, and 20% from population C under the admixture model.</p></li>
+<li><p><strong>Utility</strong>: The admixture model can uncover complex patterns of genetic structure that are not apparent under the assumption of discrete, non-overlapping populations.</p></li>
+</ul>
+</section>
+<section id="no-admixture-model" class="level3">
+<h3 class="anchored" data-anchor-id="no-admixture-model">No-Admixture Model</h3>
+<ul>
+<li><p><strong>Definition</strong>: The no-admixture model assumes that individuals have ancestry from only one population. This model is particularly useful for analyzing genetic data from populations that are known to be isolated from one another.</p></li>
+<li><p><strong>Application</strong>: This model is used in situations where populations are relatively well-defined and isolated, with little to no gene flow between them. It simplifies the analysis by considering that an individual’s entire genetic information originates from one of the K clusters without any mixture.</p></li>
+<li><p><strong>Utility</strong>: The no-admixture model is useful for identifying distinct populations and their members, especially in cases where populations are clearly separated geographically or temporally.</p></li>
+</ul>
+<p>To run STRUCTURE from within R, we need to download the non-GUI executable (the version without frontend) for your operating system [e.g windows, mac or linux]. You can download STRUCTURE for your OS from <a href="http://web.stanford.edu/group/pritchardlab/structure_software/release_versions/v2.3.4/html/structure.html" class="uri">http://web.stanford.edu/group/pritchardlab/structure_software/release_versions/v2.3.4/html/structure.html</a>.</p>
+<p>The possible arguments are listed below:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>parameter</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>k.range</td>
+<td>vector of values to for maxpop in multiple runs. If set to NULL, a single STRUCTURE run is conducted with maxpops groups. If specified, do not also specify maxpops.</td>
+</tr>
+<tr class="even">
+<td>num.k.rep</td>
+<td>number of replicates for each value in k.range.</td>
+</tr>
+<tr class="odd">
+<td>label</td>
+<td>label to use for input and output files</td>
+</tr>
+<tr class="even">
+<td>delete.files</td>
+<td>logical. Delete all files when STRUCTURE is finished?</td>
+</tr>
+<tr class="odd">
+<td>exec</td>
+<td>name of executable for STRUCTURE. Defaults to “structure”.</td>
+</tr>
+<tr class="even">
+<td>burnin</td>
+<td>number of iterations for MCMC burnin.</td>
+</tr>
+<tr class="odd">
+<td>numreps</td>
+<td>number of MCMC replicates.</td>
+</tr>
+<tr class="even">
+<td>noadmix</td>
+<td>logical. No admixture?</td>
+</tr>
+<tr class="odd">
+<td>freqscorr</td>
+<td>logical. Correlated frequencies?</td>
+</tr>
+<tr class="even">
+<td>randomize</td>
+<td>randomize.</td>
+</tr>
+<tr class="odd">
+<td>pop.prior</td>
+<td>a character specifying which population prior model to use: “locprior” or “usepopinfo”.</td>
+</tr>
+<tr class="even">
+<td>locpriorinit</td>
+<td>parameterizes locprior parameter r - how informative the populations are. Only used when pop.prior = “locprior”.</td>
+</tr>
+<tr class="odd">
+<td>maxlocprior</td>
+<td>specifies range of locprior parameter r. Only used when pop.prior = “locprior”.</td>
+</tr>
+<tr class="even">
+<td>gensback</td>
+<td>integer defining the number of generations back to test for immigrant ancestry. Only used when pop.prior = “usepopinfo”.</td>
+</tr>
+<tr class="odd">
+<td>migrprior</td>
+<td>numeric between 0 and 1 listing migration prior. Only used when pop.prior = “usepopinfo”.</td>
+</tr>
+<tr class="even">
+<td>popflag</td>
+<td>a vector of integers (0, 1) or logicals identifiying whether or not to use strata information. Only used when pop.prior = “usepopinfo”.</td>
+</tr>
+<tr class="odd">
+<td>pops</td>
+<td>vector of population labels to be used in place of numbers in STRUCTURE file.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="running-structure" class="level2">
+<h2 class="anchored" data-anchor-id="running-structure">Running STRUCTURE</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>srnoad <span class="ot">&lt;-</span> <span class="fu">gl.run.structure</span>(possums, <span class="at">k.range =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">num.k.rep =</span> <span class="dv">10</span>, <span class="at">exec =</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                             <span class="st">'./binaries/structure.exe'</span>,<span class="at">plot.out =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">burnin=</span><span class="dv">50</span>, <span class="at">numreps=</span><span class="dv">100</span>, <span class="co"># this is just for a test run</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                         <span class="co"># burnin=50000, numreps=100000, # for robust results</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">noadmix=</span><span class="cn">FALSE</span>)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">gl.evanno</span>(srnoad)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>qmatnoad <span class="ot">&lt;-</span> <span class="fu">gl.plot.structure</span>(srnoad2, <span class="at">K=</span><span class="dv">4</span>, <span class="at">clumpak =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> <span class="fu">gl.map.structure</span>(<span class="at">qmat =</span> qmatnoad, <span class="at">x =</span> possums, <span class="at">K=</span><span class="dv">3</span>, <span class="at">scalex=</span><span class="dv">1</span>, <span class="at">scaley=</span><span class="fl">0.5</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>structure_file <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="st">'structure.exe'</span> <span class="sc">%in%</span> <span class="fu">list.files</span>(<span class="st">'./binaries/'</span>), </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                         <span class="st">'./binaries/structure.exe'</span>, <span class="st">'./binaries/structure'</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>srnoad <span class="ot">&lt;-</span> <span class="fu">gl.run.structure</span>(possums.gl, <span class="at">k.range =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>, <span class="at">num.k.rep =</span> <span class="dv">2</span>, </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">exec =</span> structure_file,<span class="at">plot.out =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">burnin=</span><span class="dv">500</span>, <span class="at">numreps=</span><span class="dv">1000</span>, </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">noadmix=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.run.structure 
+  Processing genlight object with SNP data</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.run.structure </code></pre>
+</div>
+</div>
+<section id="structure-results" class="level3">
+<h3 class="anchored" data-anchor-id="structure-results">Structure Results</h3>
+<p>Okay now that we got that out of our way lets see how to interpret the results of the structure run. However, to really trust our results we would want to run <code>gl.run.structure</code> with larger burn in and number of reps, more like burnin=50000 and numreps=100000. But this takes a while, so we will not be doing that today.</p>
+</section>
+<section id="evanno-plots" class="level3">
+<h3 class="anchored" data-anchor-id="evanno-plots">Evanno Plots</h3>
+<p>The Evanno method is a statistical approach used to determine the most likely number of genetic clusters (K) present in a dataset analyzed by STRUCTURE software. STRUCTURE is a computational tool used for inferring population structure using genetic data. Identifying the correct number of clusters (K) is crucial for accurately interpreting genetic data in the context of population structure, evolutionary biology, and conservation genetics. The Evanno method specifically addresses the challenge of choosing the optimal K by analyzing the rate of change in the likelihood of data between successive K values, rather than just relying on the maximum likelihood. This is done through the calculation of ΔK, a quantity based on the second order rate of change of the likelihood function with respect to K. The method suggests that the value of K corresponding to the highest ΔK should be considered the most likely number of clusters present in the dataset.</p>
+<p>The Evanno method is a method to determine the most likely number of populations. It is based on the second order rate of change of the likelihood function with respect to K. The method is implemented in the <code>gl.evanno</code> function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ev <span class="ot">&lt;-</span> <span class="fu">gl.evanno</span>(srnoad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plotting-the-results-q-matrix" class="level3">
+<h3 class="anchored" data-anchor-id="plotting-the-results-q-matrix">Plotting the results (Q matrix)</h3>
+<p>The Q matrix represents the estimated ancestry proportions of individuals across different inferred genetic clusters. STRUCTURE aims to identify K clusters (populations) that best explain the patterns of genetic variation observed in the data, with K either being predefined by the user or determined using methods like the Evanno method.</p>
+<p>The Q matrix is essentially a matrix where each row corresponds to an individual in the dataset, and each column represents one of the K inferred genetic clusters. The entries in the matrix are the estimated proportions (ranging from 0 to 1) of each individual’s genome that originated from each cluster. The sum of an individual’s ancestry proportions across all K clusters equals 1.</p>
+<p>The values in the Q matrix can be interpreted as the fraction of an individual’s ancestry that comes from each of the K clusters. The Q matrix is often visualized using bar plots or stacked bar graphs, where each individual’s ancestry proportions are shown as segments of a bar colored differently for each cluster.</p>
+<p>To get a plot for a certain level you need to specify K or at least a range of K.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>qmatnoad <span class="ot">&lt;-</span> <span class="fu">gl.plot.structure</span>(srnoad, <span class="at">K=</span><span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.plot.structure </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.plot.structure </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(qmatnoad[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Label cluster1 cluster2 cluster3      K orig.pop   ord
+   &lt;char&gt;    &lt;num&gt;    &lt;num&gt;    &lt;num&gt; &lt;char&gt;   &lt;fctr&gt; &lt;int&gt;
+1:      1        0        1        0      3        A     1
+2:     10        0        1        0      3        A     2
+3:    100        1        0        0      3        D    91
+4:    101        1        0        0      3        D    92
+5:    102        1        0        0      3        D    93
+6:    103        1        0        0      3        D    94</code></pre>
+</div>
+</div>
+</section>
+<section id="a-spatial-structure-plot" class="level3">
+<h3 class="anchored" data-anchor-id="a-spatial-structure-plot">A “spatial” structure plot</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>gm <span class="ot">&lt;-</span> <span class="fu">gl.map.structure</span>(<span class="at">qmat =</span> qmatnoad, <span class="at">x =</span> possums.gl,<span class="at">K=</span><span class="dv">5</span>, <span class="at">scalex=</span><span class="dv">1</span>, <span class="at">scaley=</span><span class="fl">0.5</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -903,21 +795,471 @@ Exercise: Study the results using different Ks and with/without admixture
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><img src="images/task.png" class="class" width="48" height="48"> The above run was a structure run using the no-admixture model for a range of K=2:7. Study the results by plotting it for various Ks and try to interpret the results in the light of the simulated population structure.</p>
+<p><img src="images/task.png" class="class" width="48" height="48"> The above run was a Structure run using the admixture model for a range of K=2:7. Study the results by plotting it for various Ks and try to interpret the results in the light of the simulated population structure.</p>
 <p>How about trying it on your own data or the example data provided.</p>
 </div>
 </div>
 </section>
-<section id="snmf" class="level3">
-<h3 class="anchored" data-anchor-id="snmf">snmf</h3>
 </section>
-<section id="popclusture" class="level3">
-<h3 class="anchored" data-anchor-id="popclusture">Popclusture</h3>
+<section id="running-faststructure" class="level2">
+<h2 class="anchored" data-anchor-id="running-faststructure">Running fastStructure</h2>
+<section id="faststructure" class="level3">
+<h3 class="anchored" data-anchor-id="faststructure">Faststructure</h3>
+<p>Faststructure is a faster implementation of the structure algorithm. Be aware though it is named Fast’structure’ it is a fairly different implementation of the original approach, hence the results might differ from the original STRUCTURE. The method is based on a variational Bayesian framework and is designed to be faster and more scalable than the original STRUCTURE software. It is particularly useful for analyzing large datasets with many individuals and/or many SNPs (&gt;5000). One of the most important differences is that there is no no-admixture model in Faststructure, but you can run two models that allow for “complex” situtations (logistic prior) and situations where the ancestry is more evenly distributed (simple prior). Also the way how to identify K differ between the methods. We will run the previous examples with both settings and compare the results.</p>
+<p>The method is now implemented in the <code>gl.run.faststructure</code> function. Unfortunatley noone to my knowledge has compiled Faststructure for windows, so it is only available for Linux and Mac. We also need to have plink installed as this is the required input format for faststructure.</p>
+</section>
+<section id="faststructure-simple-prior" class="level3">
+<h3 class="anchored" data-anchor-id="faststructure-simple-prior">Faststructure simple prior</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>platypus.gl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> ********************
+ *** DARTR OBJECT ***
+ ********************
+
+ ** 81 genotypes,  1,000 SNPs , size: 7.4 Mb
+
+    missing data: 5902 (=7.29 %) scored as NA
+
+ ** Genetic data
+   @gen: list of 81 SNPbin
+   @ploidy: ploidy of each individual  (range: 2-2)
+
+ ** Additional data
+   @ind.names:  81 individual labels
+   @loc.names:  1000 locus labels
+   @loc.all:  1000 allele labels
+   @position: integer storing positions of the SNPs [within 69 base sequence]
+   @pop: population of each individual (group size range: 17-41)
+   @other: a list containing: loc.metrics, ind.metrics, latlon, loc.metrics.flags, verbose, history 
+    @other$ind.metrics: id, pop, lat, lon, Microchip, Weight, Sex, AgeClass, concentration, PlateID, Row, Column, order_dart, id_b, service, plate_location, sex 
+    @other$loc.metrics: AlleleID, CloneID, AlleleSequence, TrimmedSequence, Chrom_Platypus_Chrom_NCBIv1, ChromPos_Platypus_Chrom_NCBIv1, AlnCnt_Platypus_Chrom_NCBIv1, AlnEvalue_Platypus_Chrom_NCBIv1, SNP, SnpPosition, CallRate, OneRatioRef, OneRatioSnp, FreqHomRef, FreqHomSnp, FreqHets, PICRef, PICSnp, AvgPIC, AvgCountRef, AvgCountSnp, RepAvg, clone, uid, rdepth, monomorphs, maf, OneRatio, PIC 
+   @other$latlon[g]: coordinates for all individuals are attached</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.map.interactive</span>(platypus.gl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.map.interactive 
+  Processing genlight object with SNP data
+  Warning: data include loci that are scored NA across all individuals.
+  Consider filtering using gl &lt;- gl.filter.allna(gl)
+Completed: gl.map.interactive </code></pre>
+</div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-5e31c5b28917d1c9eb29" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-5e31c5b28917d1c9eb29">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org/copyright/\">OpenStreetMap<\/a>,  <a href=\"https://opendatacommons.org/licenses/odbl/\">ODbL<\/a>"}]},{"method":"addCircles","args":[[-28.989203,-29.027057,-29.296528,-29.179456,-29.474119,-29.506811,-29.456671,-29.011746,-29.035987,-29.022531,-29.026713,-29.027057,-29.189063,-29.303547,-29.474119,-29.506811,-29.456671,-29.011746,-29.035987,-29.002064,-29.026713,-29.189063,-29.302878,-29.49832,-29.506811,-29.456671,-29.011746,-28.984905,-29.002064,-29.031212,-29.014825,-29.232346,-29.302878,-29.493532,-29.502849,-29.456671,-29.011746,-28.984905,-29.002064,-29.031212,-29.014825,-29.232346,-29.249669,-29.493532,-29.463007,-29.456671,-29.035987,-28.984905,-29.030611,-29.031212,-28.959487,-29.27808,-29.249669,-29.506811,-29.463007,-29.456671,-29.035987,-28.984905,-29.014065,-29.296528,-29.027057,-28.959487,-29.179456,-29.249669,-29.506811,-29.463007,-29.036629,-29.035987,-28.984905,-29.014065,-29.296528,-29.027057,-28.959487,-29.179456,-29.474119,-29.506811,-29.463007,-29.030611,-29.035987,-29.022531,-28.989203],[151.701152,151.724683,151.144227,151.111784,151.485041,151.589001,151.464321,151.86722,151.759721,151.86925,151.746975,151.724683,151.132304,151.138189,151.485041,151.589001,151.464321,151.86722,151.759721,151.995101,151.742656,151.132304,151.124002,151.562924,151.589001,151.464321,151.86722,151.951568,151.995101,151.742656,151.722949,151.114818,151.124002,151.543319,151.611012,151.464321,151.86722,151.951568,151.995101,151.742656,151.722949,151.114818,151.133357,151.543319,151.478227,151.464321,151.759721,151.951568,151.851523,151.742656,151.544385,151.117899,151.133357,151.589001,151.478227,151.464321,151.759721,151.951568,151.864932,151.144227,151.724683,151.544385,151.111784,151.133357,151.589001,151.478227,151.820534,151.759721,151.951568,151.864932,151.144227,151.724683,151.544385,151.111784,151.485041,151.589001,151.478227,151.851523,151.759721,151.86925,151.701152],10,null,null,{"interactive":true,"className":"","stroke":true,"color":["#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#0000FF","#0000FF","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF"],"weight":10,"opacity":0.8,"fill":true,"fillColor":["#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#00FF00","#0000FF","#0000FF","#00FF00","#00FF00","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF","#00FF00","#0000FF","#0000FF","#00FF00","#FF0000","#FF0000","#FF0000","#0000FF","#0000FF","#0000FF","#0000FF"],"fillOpacity":0.2},["T27","T35","SDS4","SDS12","SUS20","SUS28","SUS36","T3","T11","T19","T28","T36","SDS5","SDS13","SUS21","SUS29","SUS37","T4","T12","T20","T29","SDS6","SDS14","SUS22","SUS30","SUS38","T5","T13","T21","T30","T38","SDS7","SDS15","SUS23","SUS31","SUS39","T6","T14","T22","T31","T39","SDS8","SDS16","SUS24","SUS32","SUS40","T7","T15","T23","T32","T40","SDS9","SDS17","SUS25","SUS33","SUS41","T8","T16","T24","SDS2","T33","T41","SDS10","SDS18","SUS26","SUS34","T1","T9","T17","T25","SDS3","T34","T42","SDS11","SUS19","SUS27","SUS35","T2","T10","T18","T26"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null,null]},{"method":"addMarkers","args":[[-29.48015260869565,-29.24748,-29.012353],[151.5195016086957,151.1274376470588,151.8014629512195],{"iconUrl":{"data":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=","index":0},"iconWidth":1,"iconHeight":1},null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,["SEVERN_ABOVE","SEVERN_BELOW","TENTERFIELD"],{"interactive":false,"permanent":true,"direction":"top","opacity":1,"offset":[0,0],"textsize":"12px","textOnly":true,"className":"","sticky":true},null]},{"method":"addProviderTiles","args":["Esri.NatGeoWorldMap",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]}],"limits":{"lat":[-29.506811,-28.959487],"lng":[151.111784,151.995101]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># my_fast &lt;- gl.run.faststructure(platypus.gl,  </span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 k.range = 2:4,</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 num.k.rep = 1,</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 exec = "./binaries/fastStructure",</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co">#                                 exec.plink = "./binaries/", output = tempdir())</span></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># gl.plot.faststructure(sr = my_fast,k.range = 3, border_ind = 0)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/faststruc_plot.png" class="img-fluid figure-img"></p>
+<figcaption>This plot was from running gl.run.faststructure with only one rep. Try increasing the number of reps (num.k.rep = x) and see how this plot changes</figcaption>
+</figure>
+</div>
+<p>Here we can check the marginal likelihoods for the different K values. The recommended K is then the one with the highest marginal likelihood at the lowest K possible. So here we would decide on K=4. As before we can plot the Q matrix and the spatial structure plot.</p>
 </section>
 </section>
-<section id="exercise" class="level2">
-<h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
-<p>Fun example on real data.</p>
+<section id="running-snmf" class="level2">
+<h2 class="anchored" data-anchor-id="running-snmf">Running snmf</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>my_snmf <span class="ot">&lt;-</span> <span class="fu">gl.run.snmf</span>(possums.gl, <span class="at">minK =</span> <span class="dv">2</span>, <span class="at">maxK =</span> <span class="dv">7</span>, <span class="at">rep =</span> <span class="dv">2</span>, <span class="at">regularization =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.plot.snmf</span>(<span class="at">snmf_result =</span> my_snmf,<span class="at">plot.K =</span> <span class="dv">3</span>, <span class="at">border_ind =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="popcluster" class="level2">
+<h2 class="anchored" data-anchor-id="popcluster">Popcluster</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>my_popcluster <span class="ot">&lt;-</span> <span class="fu">gl.run.popcluster</span>(<span class="at">x =</span> possums.gl, <span class="at">minK =</span> <span class="dv">2</span>, <span class="at">maxK =</span> <span class="dv">7</span>, <span class="at">rep =</span> <span class="dv">2</span>, <span class="at">popcluster.path =</span> <span class="st">'./binaries/'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.run.popcluster 
+  Processing genlight object with SNP data</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.run.popcluster </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>my_plot_popcluster <span class="ot">&lt;-</span> <span class="fu">gl.plot.popcluster</span>(my_popcluster,<span class="at">plot.K =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.plot.popcluster </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session03_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.plot.popcluster </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.map.popcluster</span>(<span class="at">x =</span> possums.gl, <span class="at">qmat =</span>  my_plot_popcluster)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(Label)`</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$Q_name
+$Q_name$A
+   Index Order Label PercentMiss Cluster Pop_1 Pop_2 Pop_3 Pop Pop_name
+9      9     9     9         0.0       1 0.811 0.143 0.046   A        A
+3      3     3     3         0.0       1 0.840 0.000 0.160   A        A
+5      5     5     5         0.0       1 0.844 0.000 0.156   A        A
+8      8     8     8         0.0       1 0.845 0.051 0.104   A        A
+4      4     4     4         0.0       1 0.887 0.000 0.113   A        A
+2      2     2     2         0.0       1 0.896 0.104 0.000   A        A
+17    17    17    17         0.0       1 0.901 0.099 0.000   A        A
+19    19    19    19         0.0       1 0.908 0.059 0.033   A        A
+27    27    27    27         0.0       1 0.931 0.000 0.069   A        A
+7      7     7     7         0.0       1 0.949 0.000 0.051   A        A
+1      1     1     1         0.0       1 0.970 0.030 0.000   A        A
+25    25    25    25         0.0       1 0.974 0.026 0.000   A        A
+15    15    15    15         0.0       1 0.979 0.000 0.021   A        A
+23    23    23    23         0.0       1 0.979 0.000 0.021   A        A
+16    16    16    16         0.0       1 0.998 0.001 0.001   A        A
+6      6     6     6         0.0       1 0.999 0.000 0.001   A        A
+13    13    13    13         0.0       1 0.999 0.000 0.001   A        A
+20    20    20    20         0.0       1 0.999 0.000 0.001   A        A
+28    28    28    28         0.0       1 0.999 0.000 0.001   A        A
+10    10    10    10         0.0       1 0.999 0.001 0.000   A        A
+11    11    11    11         0.0       1 0.999 0.001 0.000   A        A
+12    12    12    12         0.0       1 0.999 0.001 0.000   A        A
+14    14    14    14         0.0       1 0.999 0.001 0.000   A        A
+18    18    18    18         0.0       1 0.999 0.001 0.000   A        A
+21    21    21    21         0.0       1 0.999 0.001 0.000   A        A
+22    22    22    22         0.0       1 0.999 0.001 0.000   A        A
+24    24    24    24         0.0       1 0.999 0.001 0.000   A        A
+26    26    26    26         0.0       1 0.999 0.001 0.000   A        A
+29    29    29    29         0.0       1 0.999 0.001 0.000   A        A
+30    30    30    30         0.0       1 0.999 0.001 0.000   A        A
+
+$Q_name$B
+   Index Order Label PercentMiss Cluster Pop_1 Pop_2 Pop_3 Pop Pop_name
+48    48    48    48         0.0       2 0.000 0.762 0.238   B        B
+38    38    38    38         0.0       2 0.000 0.799 0.201   B        B
+31    31    31    31         0.0       2 0.000 0.822 0.178   B        B
+56    56    56    56         0.0       2 0.000 0.845 0.155   B        B
+45    45    45    45         0.0       2 0.000 0.848 0.152   B        B
+54    54    54    54         0.0       2 0.000 0.848 0.152   B        B
+59    59    59    59         0.0       2 0.000 0.892 0.108   B        B
+57    57    57    57         0.0       2 0.000 0.894 0.106   B        B
+32    32    32    32         0.0       2 0.000 0.903 0.097   B        B
+34    34    34    34         0.0       2 0.000 0.915 0.085   B        B
+50    50    50    50         0.0       2 0.000 0.926 0.074   B        B
+39    39    39    39         0.0       2 0.000 0.930 0.070   B        B
+36    36    36    36         0.0       2 0.000 0.999 0.001   B        B
+37    37    37    37         0.0       2 0.000 0.999 0.001   B        B
+51    51    51    51         0.0       2 0.001 0.997 0.002   B        B
+33    33    33    33         0.0       2 0.001 0.999 0.000   B        B
+60    60    60    60         0.0       2 0.001 0.999 0.000   B        B
+43    43    43    43         0.0       2 0.004 0.828 0.168   B        B
+58    58    58    58         0.0       2 0.004 0.857 0.139   B        B
+52    52    52    52         0.0       2 0.005 0.787 0.208   B        B
+41    41    41    41         0.0       2 0.025 0.975 0.000   B        B
+55    55    55    55         0.0       2 0.038 0.850 0.112   B        B
+44    44    44    44         0.0       2 0.054 0.860 0.086   B        B
+46    46    46    46         0.0       2 0.071 0.929 0.000   B        B
+35    35    35    35         0.0       2 0.076 0.924 0.000   B        B
+47    47    47    47         0.0       2 0.106 0.791 0.103   B        B
+49    49    49    49         0.0       2 0.151 0.849 0.000   B        B
+53    53    53    53         0.0       2 0.173 0.827 0.000   B        B
+40    40    40    40         0.0       2 0.175 0.825 0.000   B        B
+42    42    42    42         0.0       2 0.228 0.715 0.057   B        B
+
+$Q_name$C
+   Index Order Label PercentMiss Cluster Pop_1 Pop_2 Pop_3 Pop Pop_name
+78    78    78    78         0.0       2 0.000 0.508 0.492   C        C
+80    80    80    80         0.0       2 0.000 0.513 0.487   C        C
+83    83    83    83         0.0       2 0.000 0.515 0.485   C        C
+67    67    67    67         0.0       2 0.000 0.593 0.407   C        C
+74    74    74    74         0.0       2 0.000 0.718 0.282   C        C
+63    63    63    63         0.0       2 0.000 0.736 0.264   C        C
+72    72    72    72         0.0       2 0.000 0.792 0.208   C        C
+75    75    75    75         0.0       2 0.000 0.806 0.194   C        C
+73    73    73    73         0.0       2 0.000 0.808 0.192   C        C
+84    84    84    84         0.0       2 0.000 0.830 0.170   C        C
+62    62    62    62         0.0       2 0.000 0.863 0.137   C        C
+65    65    65    65         0.0       2 0.000 0.874 0.126   C        C
+89    89    89    89         0.0       2 0.000 0.887 0.113   C        C
+70    70    70    70         0.0       2 0.000 0.900 0.100   C        C
+77    77    77    77         0.0       2 0.000 0.905 0.095   C        C
+68    68    68    68         0.0       2 0.000 0.910 0.090   C        C
+71    71    71    71         0.0       2 0.000 0.911 0.089   C        C
+69    69    69    69         0.0       2 0.000 0.915 0.085   C        C
+82    82    82    82         0.0       2 0.000 0.973 0.027   C        C
+87    87    87    87         0.0       2 0.000 0.999 0.001   C        C
+61    61    61    61         0.0       2 0.001 0.844 0.155   C        C
+76    76    76    76         0.0       2 0.001 0.951 0.048   C        C
+90    90    90    90         0.0       2 0.002 0.799 0.199   C        C
+88    88    88    88         0.0       2 0.002 0.820 0.178   C        C
+66    66    66    66         0.0       2 0.003 0.589 0.408   C        C
+85    85    85    85         0.0       2 0.006 0.732 0.262   C        C
+86    86    86    86         0.0       2 0.006 0.739 0.255   C        C
+81    81    81    81         0.0       2 0.037 0.751 0.212   C        C
+64    64    64    64         0.0       2 0.037 0.826 0.137   C        C
+79    79    79    79         0.0       2 0.165 0.772 0.063   C        C
+
+$Q_name$D
+    Index Order Label PercentMiss Cluster Pop_1 Pop_2 Pop_3 Pop Pop_name
+97     97    97    97         0.0       3 0.000 0.001 0.999   D        D
+99     99    99    99         0.0       3 0.000 0.001 0.999   D        D
+104   104   104   104         0.0       3 0.000 0.001 0.999   D        D
+105   105   105   105         0.0       3 0.000 0.001 0.999   D        D
+110   110   110   110         0.0       3 0.000 0.001 0.999   D        D
+120   120   120   120         0.0       3 0.000 0.001 0.999   D        D
+92     92    92    92         0.0       3 0.001 0.000 0.999   D        D
+94     94    94    94         0.0       3 0.001 0.000 0.999   D        D
+98     98    98    98         0.0       3 0.001 0.000 0.999   D        D
+100   100   100   100         0.0       3 0.001 0.000 0.999   D        D
+102   102   102   102         0.0       3 0.001 0.000 0.999   D        D
+107   107   107   107         0.0       3 0.001 0.000 0.999   D        D
+109   109   109   109         0.0       3 0.001 0.000 0.999   D        D
+111   111   111   111         0.0       3 0.001 0.000 0.999   D        D
+113   113   113   113         0.0       3 0.001 0.000 0.999   D        D
+114   114   114   114         0.0       3 0.001 0.000 0.999   D        D
+115   115   115   115         0.0       3 0.001 0.000 0.999   D        D
+116   116   116   116         0.0       3 0.001 0.000 0.999   D        D
+117   117   117   117         0.0       3 0.001 0.000 0.999   D        D
+118   118   118   118         0.0       3 0.001 0.000 0.999   D        D
+95     95    95    95         0.0       3 0.001 0.001 0.998   D        D
+96     96    96    96         0.0       3 0.001 0.001 0.998   D        D
+103   103   103   103         0.0       3 0.001 0.001 0.998   D        D
+119   119   119   119         0.0       3 0.001 0.001 0.998   D        D
+93     93    93    93         0.0       3 0.023 0.000 0.977   D        D
+106   106   106   106         0.0       3 0.031 0.000 0.969   D        D
+91     91    91    91         0.0       3 0.034 0.000 0.966   D        D
+101   101   101   101         0.0       3 0.061 0.000 0.939   D        D
+108   108   108   108         0.0       3 0.075 0.000 0.925   D        D
+112   112   112   112         0.0       3 0.089 0.000 0.911   D        D
+
+$Q_name$E
+    Index Order Label PercentMiss Cluster Pop_1 Pop_2 Pop_3 Pop Pop_name
+121   121   121   121         0.0       3 0.000 0.001 0.999   E        E
+122   122   122   122         0.0       3 0.000 0.001 0.999   E        E
+123   123   123   123         0.0       3 0.000 0.001 0.999   E        E
+126   126   126   126         0.0       3 0.000 0.001 0.999   E        E
+129   129   129   129         0.0       3 0.000 0.001 0.999   E        E
+131   131   131   131         0.0       3 0.000 0.001 0.999   E        E
+135   135   135   135         0.0       3 0.000 0.001 0.999   E        E
+137   137   137   137         0.0       3 0.000 0.001 0.999   E        E
+140   140   140   140         0.0       3 0.000 0.001 0.999   E        E
+142   142   142   142         0.0       3 0.000 0.001 0.999   E        E
+143   143   143   143         0.0       3 0.000 0.001 0.999   E        E
+144   144   144   144         0.0       3 0.000 0.001 0.999   E        E
+146   146   146   146         0.0       3 0.000 0.001 0.999   E        E
+148   148   148   148         0.0       3 0.000 0.001 0.999   E        E
+150   150   150   150         0.0       3 0.000 0.028 0.972   E        E
+138   138   138   138         0.0       3 0.000 0.048 0.952   E        E
+139   139   139   139         0.0       3 0.000 0.054 0.946   E        E
+147   147   147   147         0.0       3 0.000 0.066 0.934   E        E
+149   149   149   149         0.0       3 0.000 0.079 0.921   E        E
+141   141   141   141         0.0       3 0.000 0.089 0.911   E        E
+136   136   136   136         0.0       3 0.000 0.138 0.862   E        E
+128   128   128   128         0.0       3 0.001 0.000 0.999   E        E
+130   130   130   130         0.0       3 0.001 0.000 0.999   E        E
+124   124   124   124         0.0       3 0.001 0.001 0.998   E        E
+145   145   145   145         0.0       3 0.032 0.000 0.968   E        E
+125   125   125   125         0.0       3 0.044 0.000 0.956   E        E
+127   127   127   127         0.0       3 0.063 0.000 0.937   E        E
+132   132   132   132         0.0       3 0.066 0.000 0.934   E        E
+133   133   133   133         0.0       3 0.073 0.000 0.927   E        E
+134   134   134   134         0.0       3 0.075 0.000 0.925   E        E
+
+$Q_name$F
+    Index Order Label PercentMiss Cluster Pop_1 Pop_2 Pop_3 Pop Pop_name
+151   151   151   151         0.0       2 0.001 0.999     0   F        F
+152   152   152   152         0.0       2 0.001 0.999     0   F        F
+153   153   153   153         0.0       2 0.001 0.999     0   F        F
+154   154   154   154         0.0       2 0.001 0.999     0   F        F
+155   155   155   155         0.0       2 0.001 0.999     0   F        F
+156   156   156   156         0.0       2 0.001 0.999     0   F        F
+157   157   157   157         0.0       2 0.001 0.999     0   F        F
+158   158   158   158         0.0       2 0.001 0.999     0   F        F
+159   159   159   159         0.0       2 0.001 0.999     0   F        F
+160   160   160   160         0.0       2 0.001 0.999     0   F        F
+161   161   161   161         0.0       2 0.001 0.999     0   F        F
+162   162   162   162         0.0       2 0.001 0.999     0   F        F
+163   163   163   163         0.0       2 0.001 0.999     0   F        F
+164   164   164   164         0.0       2 0.001 0.999     0   F        F
+165   165   165   165         0.0       2 0.001 0.999     0   F        F
+167   167   167   167         0.0       2 0.001 0.999     0   F        F
+168   168   168   168         0.0       2 0.001 0.999     0   F        F
+169   169   169   169         0.0       2 0.001 0.999     0   F        F
+170   170   170   170         0.0       2 0.001 0.999     0   F        F
+171   171   171   171         0.0       2 0.001 0.999     0   F        F
+172   172   172   172         0.0       2 0.001 0.999     0   F        F
+173   173   173   173         0.0       2 0.001 0.999     0   F        F
+174   174   174   174         0.0       2 0.001 0.999     0   F        F
+176   176   176   176         0.0       2 0.001 0.999     0   F        F
+177   177   177   177         0.0       2 0.001 0.999     0   F        F
+178   178   178   178         0.0       2 0.001 0.999     0   F        F
+179   179   179   179         0.0       2 0.001 0.999     0   F        F
+180   180   180   180         0.0       2 0.001 0.999     0   F        F
+175   175   175   175         0.0       2 0.024 0.976     0   F        F
+166   166   166   166         0.0       2 0.052 0.948     0   F        F
+
+$Q_name$G
+    Index Order Label PercentMiss Cluster Pop_1 Pop_2 Pop_3 Pop Pop_name
+194   194   194   194         0.0       2 0.000 0.975 0.025   G        G
+189   189   189   189         0.0       2 0.001 0.999 0.000   G        G
+190   190   190   190         0.0       2 0.001 0.999 0.000   G        G
+196   196   196   196         0.0       2 0.001 0.999 0.000   G        G
+197   197   197   197         0.0       2 0.001 0.999 0.000   G        G
+204   204   204   204         0.0       2 0.001 0.999 0.000   G        G
+206   206   206   206         0.0       2 0.001 0.999 0.000   G        G
+209   209   209   209         0.0       2 0.001 0.999 0.000   G        G
+184   184   184   184         0.0       2 0.018 0.982 0.000   G        G
+193   193   193   193         0.0       2 0.025 0.975 0.000   G        G
+202   202   202   202         0.0       2 0.052 0.948 0.000   G        G
+187   187   187   187         0.0       2 0.057 0.943 0.000   G        G
+207   207   207   207         0.0       2 0.066 0.934 0.000   G        G
+208   208   208   208         0.0       2 0.068 0.932 0.000   G        G
+203   203   203   203         0.0       2 0.077 0.923 0.000   G        G
+205   205   205   205         0.0       2 0.079 0.921 0.000   G        G
+198   198   198   198         0.0       2 0.080 0.920 0.000   G        G
+210   210   210   210         0.0       2 0.082 0.918 0.000   G        G
+195   195   195   195         0.0       2 0.089 0.911 0.000   G        G
+200   200   200   200         0.0       2 0.094 0.906 0.000   G        G
+201   201   201   201         0.0       2 0.098 0.902 0.000   G        G
+183   183   183   183         0.0       2 0.107 0.893 0.000   G        G
+182   182   182   182         0.0       2 0.121 0.879 0.000   G        G
+185   185   185   185         0.0       2 0.123 0.877 0.000   G        G
+188   188   188   188         0.0       2 0.132 0.868 0.000   G        G
+191   191   191   191         0.0       2 0.132 0.868 0.000   G        G
+186   186   186   186         0.0       2 0.133 0.867 0.000   G        G
+181   181   181   181         0.0       2 0.153 0.847 0.000   G        G
+192   192   192   192         0.0       2 0.166 0.834 0.000   G        G
+199   199   199   199         0.0       2 0.178 0.822 0.000   G        G
+
+$Q_name$H
+    Index Order Label PercentMiss Cluster Pop_1 Pop_2 Pop_3 Pop Pop_name
+232   232   232   232         0.0       1 0.929 0.000 0.071   H        H
+230   230   230   230         0.0       1 0.932 0.068 0.000   H        H
+212   212   212   212         0.0       1 0.998 0.001 0.001   H        H
+214   214   214   214         0.0       1 0.998 0.001 0.001   H        H
+217   217   217   217         0.0       1 0.998 0.001 0.001   H        H
+222   222   222   222         0.0       1 0.998 0.001 0.001   H        H
+223   223   223   223         0.0       1 0.998 0.001 0.001   H        H
+237   237   237   237         0.0       1 0.998 0.001 0.001   H        H
+238   238   238   238         0.0       1 0.998 0.001 0.001   H        H
+240   240   240   240         0.0       1 0.998 0.001 0.001   H        H
+220   220   220   220         0.0       1 0.999 0.000 0.001   H        H
+221   221   221   221         0.0       1 0.999 0.000 0.001   H        H
+224   224   224   224         0.0       1 0.999 0.000 0.001   H        H
+226   226   226   226         0.0       1 0.999 0.000 0.001   H        H
+227   227   227   227         0.0       1 0.999 0.000 0.001   H        H
+228   228   228   228         0.0       1 0.999 0.000 0.001   H        H
+229   229   229   229         0.0       1 0.999 0.000 0.001   H        H
+236   236   236   236         0.0       1 0.999 0.000 0.001   H        H
+239   239   239   239         0.0       1 0.999 0.000 0.001   H        H
+211   211   211   211         0.0       1 0.999 0.001 0.000   H        H
+213   213   213   213         0.0       1 0.999 0.001 0.000   H        H
+215   215   215   215         0.0       1 0.999 0.001 0.000   H        H
+216   216   216   216         0.0       1 0.999 0.001 0.000   H        H
+218   218   218   218         0.0       1 0.999 0.001 0.000   H        H
+219   219   219   219         0.0       1 0.999 0.001 0.000   H        H
+225   225   225   225         0.0       1 0.999 0.001 0.000   H        H
+231   231   231   231         0.0       1 0.999 0.001 0.000   H        H
+233   233   233   233         0.0       1 0.999 0.001 0.000   H        H
+234   234   234   234         0.0       1 0.999 0.001 0.000   H        H
+235   235   235   235         0.0       1 0.999 0.001 0.000   H        H
+
+$Q_name$I
+    Index Order Label PercentMiss Cluster Pop_1 Pop_2 Pop_3 Pop Pop_name
+263   263   263   263         0.0       2 0.000 0.878 0.122   I        I
+259   259   259   259         0.0       2 0.000 0.905 0.095   I        I
+254   254   254   254         0.0       2 0.000 0.923 0.077   I        I
+253   253   253   253         0.0       2 0.000 0.932 0.068   I        I
+255   255   255   255         0.0       2 0.000 0.962 0.038   I        I
+243   243   243   243         0.0       2 0.000 0.981 0.019   I        I
+242   242   242   242         0.0       2 0.000 0.999 0.001   I        I
+245   245   245   245         0.0       2 0.000 0.999 0.001   I        I
+249   249   249   249         0.0       2 0.000 0.999 0.001   I        I
+250   250   250   250         0.0       2 0.000 0.999 0.001   I        I
+256   256   256   256         0.0       2 0.000 0.999 0.001   I        I
+258   258   258   258         0.0       2 0.000 0.999 0.001   I        I
+261   261   261   261         0.0       2 0.000 0.999 0.001   I        I
+262   262   262   262         0.0       2 0.000 0.999 0.001   I        I
+268   268   268   268         0.0       2 0.000 0.999 0.001   I        I
+269   269   269   269         0.0       2 0.000 0.999 0.001   I        I
+252   252   252   252         0.0       2 0.001 0.999 0.000   I        I
+260   260   260   260         0.0       2 0.001 0.999 0.000   I        I
+265   265   265   265         0.0       2 0.001 0.999 0.000   I        I
+266   266   266   266         0.0       2 0.001 0.999 0.000   I        I
+267   267   267   267         0.0       2 0.001 0.999 0.000   I        I
+244   244   244   244         0.0       2 0.002 0.894 0.104   I        I
+270   270   270   270         0.0       2 0.005 0.886 0.109   I        I
+248   248   248   248         0.0       2 0.005 0.944 0.051   I        I
+264   264   264   264         0.0       2 0.012 0.797 0.191   I        I
+247   247   247   247         0.0       2 0.014 0.844 0.142   I        I
+241   241   241   241         0.0       2 0.039 0.895 0.066   I        I
+246   246   246   246         0.0       2 0.049 0.799 0.152   I        I
+251   251   251   251         0.0       2 0.066 0.756 0.178   I        I
+257   257   257   257         0.0       2 0.076 0.886 0.038   I        I
+
+$Q_name$J
+    Index Order Label PercentMiss Cluster Pop_1 Pop_2 Pop_3 Pop Pop_name
+300   300   300   300         0.0       2 0.000 0.699 0.301   J        J
+284   284   284   284         0.0       2 0.000 0.792 0.208   J        J
+282   282   282   282         0.0       2 0.000 0.828 0.172   J        J
+297   297   297   297         0.0       2 0.000 0.842 0.158   J        J
+285   285   285   285         0.0       2 0.000 0.887 0.113   J        J
+292   292   292   292         0.0       2 0.000 0.893 0.107   J        J
+279   279   279   279         0.0       2 0.000 0.896 0.104   J        J
+275   275   275   275         0.0       2 0.000 0.897 0.103   J        J
+278   278   278   278         0.0       2 0.000 0.908 0.092   J        J
+298   298   298   298         0.0       2 0.000 0.913 0.087   J        J
+289   289   289   289         0.0       2 0.000 0.957 0.043   J        J
+271   271   271   271         0.0       2 0.000 0.967 0.033   J        J
+295   295   295   295         0.0       2 0.000 0.998 0.002   J        J
+272   272   272   272         0.0       2 0.000 0.999 0.001   J        J
+273   273   273   273         0.0       2 0.000 0.999 0.001   J        J
+276   276   276   276         0.0       2 0.000 0.999 0.001   J        J
+277   277   277   277         0.0       2 0.000 0.999 0.001   J        J
+280   280   280   280         0.0       2 0.000 0.999 0.001   J        J
+283   283   283   283         0.0       2 0.000 0.999 0.001   J        J
+287   287   287   287         0.0       2 0.000 0.999 0.001   J        J
+288   288   288   288         0.0       2 0.000 0.999 0.001   J        J
+290   290   290   290         0.0       2 0.000 0.999 0.001   J        J
+291   291   291   291         0.0       2 0.000 0.999 0.001   J        J
+293   293   293   293         0.0       2 0.000 0.999 0.001   J        J
+294   294   294   294         0.0       2 0.000 0.999 0.001   J        J
+296   296   296   296         0.0       2 0.000 0.999 0.001   J        J
+274   274   274   274         0.0       2 0.001 0.945 0.054   J        J
+281   281   281   281         0.0       2 0.001 0.999 0.000   J        J
+286   286   286   286         0.0       2 0.001 0.999 0.000   J        J
+299   299   299   299         0.0       2 0.057 0.855 0.088   J        J
+
+
+$map</code></pre>
+</div>
+</div>
 </section>
 <section id="further-study" class="level2">
 <h2 class="anchored" data-anchor-id="further-study"><em>Further Study</em></h2>

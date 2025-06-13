@@ -228,6 +228,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./materials.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Session Materials</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./tutorials.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">dartR Tutorials</span></a>
   </div>
@@ -255,7 +261,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#required-packages" id="toc-required-packages" class="nav-link active" data-scroll-target="#required-packages"><em>Required packages</em></a></li>
-  <li><a href="#session-content" id="toc-session-content" class="nav-link" data-scroll-target="#session-content">Session Content</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#a-first-simulation" id="toc-a-first-simulation" class="nav-link" data-scroll-target="#a-first-simulation">A first simulation</a></li>
+  <li><a href="#starting-conditions" id="toc-starting-conditions" class="nav-link" data-scroll-target="#starting-conditions">Starting conditions</a>
+  <ul>
+  <li><a href="#gl.sim.ind" id="toc-gl.sim.ind" class="nav-link" data-scroll-target="#gl.sim.ind"><code>gl.sim.ind</code></a></li>
+  <li><a href="#birth-and-death" id="toc-birth-and-death" class="nav-link" data-scroll-target="#birth-and-death">Birth and death</a></li>
+  </ul></li>
+  <li><a href="#snp-panel-over-time" id="toc-snp-panel-over-time" class="nav-link" data-scroll-target="#snp-panel-over-time">SNP panel over time…</a></li>
   <li><a href="#further-study" id="toc-further-study" class="nav-link" data-scroll-target="#further-study"><em>Further Study</em></a>
   <ul>
   <li><a href="#readings" id="toc-readings" class="nav-link" data-scroll-target="#readings">Readings</a></li>
@@ -290,15 +303,670 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="required-packages" class="level2">
 <h2 class="anchored" data-anchor-id="required-packages"><em>Required packages</em></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartR.base)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartR.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dartRverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="session-content" class="level2">
-<h2 class="anchored" data-anchor-id="session-content">Session Content</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>In this session we will learn howto run simulations within the dartRverse. Please be aware dartRverse is not a fully fledged simulation tool. It allows to do quick and easy simulations, but for a comprehensive simulation framework you should consider using <code>SLIM</code>. By the way there is a cool package called ‘slimR’ which allows to integrate and run simulations from within R (and it talk to the dartRverse for analysis).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><em>…they may take time…</em> Also often simulation take some time and if you run lots of them (to explore a vast parameter space) you may need to parallelise your run, have a good amount of storage and also computing power available. Often you develop a simulation locally, but then might need to transfer it to a cluster or HPC system to run it.</p>
+</div>
+</div>
+</section>
+<section id="a-first-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="a-first-simulation">A first simulation</h2>
+<p>The dartRverse allows to run time forward simulations. Often you want to run some simulation based on an existing genlight object.</p>
+<p>We load some example data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rfbe <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"./data/rfbe.rds"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.report.basics</span>(rfbe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.report.basics 
+
+SUMMARY STATISTICS
+
+Datatype: SNP 
+Loci: 9849 
+Individuals: 383 
+Populations: 16 
+
+Average Read Depth: 28.70085
+Values: 3772167 
+           0    1    2   NA
+percent 65.5 22.0 11.2  1.3
+
+Monomorphic Loci: 2 
+Loci all NA: 0 
+Individuals all NA: 0 
+
+Sample Sizes:
+
+    BHA_A2       E504       E508       E509       E518       NW30       NW70 
+        19         19         20         20         20         20         20 
+      NW72       NW80 PJTub1.2.3   PJTub4.5     PJTub6       SE60       SW10 
+        10         10         64         51         33         20         19 
+      SW20       SW60 
+        18         20 
+
+Loci all NA across individuals by Population
+ BHA_A2 E504 E508 E509 E518 NW30 NW70 NW72 NW80 PJTub1.2.3 PJTub4.5 PJTub6 SE60
+      0    0    0    0    0    0    0    0    0          0        0      0    0
+ SW10 SW20 SW60
+    0    0    0
+
+Individuals all NA across loci by Population
+ BHA_A2 E504 E508 E509 E518 NW30 NW70 NW72 NW80 PJTub1.2.3 PJTub4.5 PJTub6 SE60
+      0    0    0    0    0    0    0    0    0          0        0      0    0
+ SW10 SW20 SW60
+    0    0    0
+
+Completed: gl.report.basics </code></pre>
+</div>
+</div>
+<p>Lets come up with a scenario.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Scenario
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We want to study how expected heterozygosity over time will change if I transfer 10 individuals from population PJTub1.2.3 to a new population. We want to simulate this new population for 20 generations and we want to repeat the simulation 10 times to get a good estimate of the expected heterozygosity.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>source <span class="ot">&lt;-</span> <span class="fu">gl.keep.pop</span>(rfbe, <span class="at">pop.list=</span><span class="st">"PJTub1.2.3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.keep.pop 
+  Processing genlight object with SNP data
+  Checking for presence of nominated populations
+  Retaining only populations PJTub1.2.3 
+  Warning: Resultant dataset may contain monomorphic loci
+  Locus metrics not recalculated
+Completed: gl.keep.pop </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nInd</span>(source)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 64</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>source</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> ********************
+ *** DARTR OBJECT ***
+ ********************
+
+ ** 64 genotypes,  9,849 SNPs , size: 14.3 Mb
+
+    missing data: 8161 (=1.29 %) scored as NA
+
+ ** Genetic data
+   @gen: list of 64 SNPbin
+   @ploidy: ploidy of each individual  (range: 2-2)
+
+ ** Additional data
+   @ind.names:  64 individual labels
+   @loc.names:  9849 locus labels
+   @loc.all:  9849 allele labels
+   @position: integer storing positions of the SNPs [within 69 base sequence]
+   @pop: population of each individual (group size range: 64-64)
+   @other: a list containing: loc.metrics, ind.metrics, loc.metrics.flags, verbose, history 
+    @other$ind.metrics: id, pop 
+    @other$loc.metrics: AlleleID, CloneID, AlleleSequence, TrimmedSequence, Chrom_Scaturiginichthys_vermeilipinnis2, ChromPosTag_Scaturiginichthys_vermeilipinnis2, ChromPosSnp_Scaturiginichthys_vermeilipinnis2, AlnCnt_Scaturiginichthys_vermeilipinnis2, AlnEvalue_Scaturiginichthys_vermeilipinnis2, Strand_Scaturiginichthys_vermeilipinnis2, SNP, SnpPosition, CallRate, OneRatioRef, OneRatioSnp, FreqHomRef, FreqHomSnp, FreqHets, PICRef, PICSnp, AvgPIC, AvgCountRef, AvgCountSnp, RepAvg, clone, uid, rdepth, monomorphs, maf, OneRatio, PIC 
+   @other$latlon[g]: no coordinates attached</code></pre>
+</div>
+</div>
+<p>As you can see (low amount of missing data) the data set is prefiltered for quality SNPs, but in simulations we often do not want any missing data (they are a pain, as for example it could happen just by chance that a loci would only have missing data if a subsample is drawn randomly. Hence we wan to get rid of all missing data. There are two options (remove or impute). We go for the remove version, but depending on the amount of missing data impute would work fine as well here. Also the decision is most likely influenced by your question. Would a random imputation bias your results towards a certain outcome?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#remove all missing data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>source2 <span class="ot">&lt;-</span> <span class="fu">gl.filter.callrate</span>(source, <span class="at">method=</span><span class="st">"loc"</span>, <span class="at">threshold=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.filter.callrate 
+  Processing genlight object with SNP data
+  Warning: Data may include monomorphic loci in call rate 
+                    calculations for filtering
+  Recalculating Call Rate
+  Removing loci based on Call Rate, threshold = 1 </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.filter.callrate </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#impute</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#source2 &lt;- gl.impute(source, method="random")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>next we transfer 10 individuals assuming the source population allelele frequencies</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a new genlight object based on allele frequencies from source2</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>transfer <span class="ot">&lt;-</span> <span class="fu">gl.subsample.ind</span>(source2, <span class="at">n=</span><span class="dv">10</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>res<span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">gl.He</span>(transfer))   <span class="co">#mean heterozygosity </span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2247581</code></pre>
+</div>
+</div>
+<pre><code>We have a starting heterosygosity of he[1]: 0.2247581 </code></pre>
+<p>The next step is then repeat this for 20 generations (assuming an ideal poulation for simplicity)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (gen <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">21</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#cloning snails</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  transfer <span class="ot">&lt;-</span> <span class="fu">gl.sim.offspring</span>(transfer, transfer, <span class="at">noffpermother =</span> <span class="dv">1</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  res[gen] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">gl.He</span>(transfer))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res, <span class="at">type=</span><span class="st">"b"</span>, <span class="at">xlab=</span><span class="st">"Generation"</span>, <span class="at">ylab=</span><span class="st">"Expected heterozygosity"</span>, </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Simulation of expected heterozygosity over time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As we can see expected heterozygosity is decreasiong over time.</p>
+<p>This is a very simple simulation, but it shows the basic idea. You can also use the <code>gl.sim.offspring</code> function to simulate more complex scenarios, such as different mating systems and check the effect.</p>
+<p>This was only one instance so we can repeat this simulation 10 times to get a better estimate of the expected heterozygosity over time. To do so we create a function around the whole simulation (which makes life easier for repeats).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>simHe <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">nInd=</span><span class="dv">10</span>, <span class="at">ngens=</span><span class="dv">20</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#remove all missing data</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create a new genlight object based on allele frequencies from source2</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  transfer <span class="ot">&lt;-</span> <span class="fu">gl.subsample.ind</span>(x, <span class="at">n=</span>nInd, <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">gl.He</span>(transfer))   <span class="co">#mean heterozygosity </span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (gen <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>ngens)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">#cloning snails</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    transfer <span class="ot">&lt;-</span> <span class="fu">gl.sim.offspring</span>(transfer, transfer, <span class="at">noffpermother =</span> <span class="dv">1</span>)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    res[gen] <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">gl.He</span>(transfer))</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">#test the function</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">simHe</span>(source2, <span class="at">nInd =</span> <span class="dv">30</span>, <span class="at">ngens =</span> <span class="dv">20</span>)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="at">type=</span><span class="st">"b"</span>, <span class="at">xlab=</span><span class="st">"Generation"</span>, <span class="at">ylab=</span><span class="st">"Expected heterozygosity"</span>,</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Simulation of expected heterozygosity over time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now we can run this simulation 10 times and plot the results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nreps <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span>nreps, <span class="cf">function</span>(x) <span class="fu">simHe</span>(source2, <span class="at">nInd =</span> <span class="dv">10</span>, <span class="at">ngens =</span> <span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>out is now a list of 10 vectors with the expected heterozygosity over time. We can plot the results using a matrix plot. We need to combine this list into a matrix first.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>outmat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">do.call</span>(cbind, out))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">matplot</span>(outmat, <span class="at">type=</span><span class="st">"b"</span>, <span class="at">xlab=</span><span class="st">"Generation"</span>, <span class="at">ylab=</span><span class="st">"Expected heterozygosity"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">main=</span><span class="st">"Simulation of expected heterozygosity over time"</span>, <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span>nreps, <span class="at">pch=</span><span class="dv">1</span><span class="sc">:</span>nreps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Or a ggplot version using boxplots over time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>outmat2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(outmat, <span class="at">cols=</span><span class="fu">everything</span>(), <span class="at">names_to=</span><span class="st">"replicate"</span>, <span class="at">values_to=</span><span class="st">"He"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>outmat2<span class="sc">$</span>generation <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">each=</span>nreps)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(outmat2, <span class="fu">aes</span>(<span class="at">x=</span>generation, <span class="at">y=</span>He, <span class="at">group=</span>generation)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Generation"</span>, <span class="at">y=</span><span class="st">"Expected heterozygosity"</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">title=</span><span class="st">"Simulation of expected heterozygosity over time"</span>) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/task.png" id="id" class="class" width="48" height="48"> Create a simulation of expected heterozygosity over time for the source population PJTub1.2.3, but this time transfer only 5 individuals and run the simulation for 50 generations. Repeat the simulation 5 times and plot the results using a boxplot. Or find another scenario you want to simulate. You can also change the <code>gl.sim.offspring</code> function to simulate more complex scenarios, such as different mating systems and check the effect.</p>
+</div>
+</div>
+</section>
+<section id="starting-conditions" class="level2">
+<h2 class="anchored" data-anchor-id="starting-conditions">Starting conditions</h2>
+<p>There are two more functions that can be used to create populations.</p>
+<ul>
+<li><p><code>gl.sim.ind</code>: create a population of individuals based on the current allele frequency of a darR/genlight object. For example it is a good starting point if you have a well sampled population (allele frequencies are representative) and want to create starting populations that are larger. Repeated gl.sim.ind over generations can simulate drift only (no effect of mating etc.)</p></li>
+<li><p><code>gl.sim.Neconst</code>: creates a population of individuals based on a constant effective population size (Ne) and a given mutation rate. An example is used in session 2. Be aware it creates only allele frequencies correctly, but loci are not in hardy weinberg equilibrium. hence often you want to create a certain size and then create offspring from this population to get a realistic population structure.</p></li>
+</ul>
+<section id="gl.sim.ind" class="level3">
+<h3 class="anchored" data-anchor-id="gl.sim.ind"><code>gl.sim.ind</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#use only 1000 loci (due ot speed)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>glsim1 <span class="ot">&lt;-</span> <span class="fu">gl.sim.ind</span>(source2[,<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>], <span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gl.smearplot</span>(glsim1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Processing genlight object with SNP data
+Starting gl.smearplot </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Completed: gl.smearplot </code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To demonstrate gl.sim.ind we can think about a scenario of a population of 20 individuals that is split in half and we want to check how fst changes in an ideal population. Theory says that Fst should increase over time and reach 1 finally. We can simulate this by creating two populations of 10 individuals and then create individuals for 20 generations with no exchange.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>glsim1 <span class="ot">&lt;-</span>  <span class="fu">gl.sim.ind</span>(source2, <span class="at">n =</span> <span class="dv">10</span>, <span class="at">popname =</span> <span class="st">"pop1"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>glsim2 <span class="ot">&lt;-</span>  <span class="fu">gl.sim.ind</span>(source2, <span class="at">n =</span> <span class="dv">10</span>, <span class="at">popname =</span> <span class="st">"pop2"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>fst <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) {</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a> glsim1 <span class="ot">&lt;-</span> <span class="fu">gl.sim.ind</span>(glsim1, <span class="at">n=</span><span class="dv">10</span>, <span class="at">popname =</span> <span class="st">"pop1"</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a> glsim2 <span class="ot">&lt;-</span> <span class="fu">gl.sim.ind</span>(glsim2, <span class="at">n=</span><span class="dv">10</span>, <span class="at">popname =</span> <span class="st">"pop2"</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a> gg <span class="ot">&lt;-</span> <span class="fu">rbind</span>(glsim1, glsim2)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>fst[i] <span class="ot">&lt;-</span> <span class="fu">gl.fst.pop</span>(gg, <span class="at">verbose =</span> <span class="dv">0</span>)[<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fst, <span class="at">type=</span><span class="st">"b"</span>, <span class="at">xlab=</span><span class="st">"Generation"</span>, <span class="at">ylab=</span><span class="st">"Fst"</span>, </span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Simulation of Fst over time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><img src="images/task.png" id="id" class="class" width="48" height="48"> Can you modify this example and exchange individuals between the two population and see how affects this Fst.</p>
+</div>
+</div>
+</section>
+<section id="birth-and-death" class="level3">
+<h3 class="anchored" data-anchor-id="birth-and-death">Birth and death</h3>
+<p>To create birth and death and a realistic mating system, so we have the Canberra Grassland Earless Dragon as an example. As we want to do something geneticy, we use hte following parameter</p>
+<ul>
+<li><p>We start with a population of 100 individuals, 1000 loci (even sex ratio)</p></li>
+<li><p>yearly survival is 0.8</p></li>
+<li><p>yearly reproduction is up to 3 individuals per female (even distribution)</p></li>
+<li><p>K (carrying capacity is 100)</p></li>
+<li><p>run 30 generations</p></li>
+</ul>
+<p>How many alleles are lost after 30 generations and how does this depend on population size?</p>
+<p>Let us start this time with a function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>simalllos <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">ngens=</span><span class="dv">30</span>, <span class="at">nind=</span><span class="dv">100</span>, <span class="at">nloc=</span><span class="dv">1000</span>, <span class="at">surv=</span><span class="fl">0.8</span>, <span class="at">repro=</span><span class="dv">3</span>, <span class="at">K=</span><span class="dv">100</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#create a population of individuals</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  dummy <span class="ot">&lt;-</span> <span class="fu">gl.sim.ind</span>(x, <span class="at">n =</span> nind, <span class="at">popname =</span> <span class="st">"pop1"</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  dummy <span class="ot">&lt;-</span> dummy[,<span class="dv">1</span><span class="sc">:</span>nloc]</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#allocate sex</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pop</span>(dummy) <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"M"</span>,<span class="st">"F"</span>), <span class="fu">nInd</span>(dummy),<span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (gen <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>ngens)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">#offsprings</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    offsprings <span class="ot">&lt;-</span> <span class="fu">gl.sim.offspring</span>(<span class="at">fathers =</span> dummy[<span class="at">pop=</span><span class="st">"M"</span>], <span class="at">mothers =</span> dummy[<span class="at">pop=</span><span class="st">"F"</span>],</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">noffpermother =</span> repro)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pop</span>(offsprings) <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"M"</span>,<span class="st">"F"</span>), <span class="fu">nInd</span>(offsprings),<span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#death of adults</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    survival <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="fu">nInd</span>(dummy), <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> surv) <span class="co">#survival</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    dummy <span class="ot">&lt;-</span> dummy[survival <span class="sc">==</span> <span class="dv">1</span>, ] <span class="co">#keep only survivors</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">#combine population</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    dummy <span class="ot">&lt;-</span> <span class="fu">rbind</span>(dummy, offsprings)</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    <span class="co">#check population size &gt; K</span></span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">nInd</span>(dummy) <span class="sc">&gt;</span> K) {</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>      <span class="co">#randomly remove individuals to keep population size at K</span></span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>      remove <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nInd</span>(dummy), <span class="fu">nInd</span>(dummy) <span class="sc">-</span> K, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>      dummy <span class="ot">&lt;-</span> dummy[<span class="sc">-</span>remove, ]</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">#check alleles lost</span></span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>  alleleslost <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">colMeans</span>(<span class="fu">as.matrix</span>(dummy)) <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span><span class="dv">0</span>)</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(alleleslost)</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a><span class="co">#test </span></span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="fu">gl.filter.monomorphs</span>(source2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.filter.monomorphs 
+  Processing genlight object with SNP data
+  Identifying monomorphic loci
+  Removing monomorphic loci and loci with all missing 
+                       data
+Completed: gl.filter.monomorphs </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">simalllos</span>(start, <span class="at">ngens=</span><span class="dv">30</span>, <span class="at">nind=</span><span class="dv">20</span>, <span class="at">nloc=</span><span class="dv">1000</span>, <span class="at">surv=</span><span class="fl">0.8</span>, <span class="at">repro=</span><span class="dv">3</span>, <span class="at">K=</span><span class="dv">100</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 260</code></pre>
+</div>
+</div>
+<p>We now have a cool function and can run a comprehensive simulation, checking various parameters on number of alleles lost. Be aware the first sample size also removes alleles (when we create the gl.sim.ind population)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>paras <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">ngens=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">ninds=</span><span class="dv">20</span>, <span class="at">nlocs=</span><span class="dv">1000</span>, <span class="at">surv=</span><span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>), <span class="at">repro=</span><span class="dv">3</span>, <span class="at">K=</span><span class="dv">50</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(paras), <span class="cf">function</span>(i) {</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">simalllos</span>(start, <span class="at">ngens=</span>paras<span class="sc">$</span>ngens[i], <span class="at">nind=</span>paras<span class="sc">$</span>ninds[i], <span class="at">nloc=</span>paras<span class="sc">$</span>nlocs[i],</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">surv=</span>paras<span class="sc">$</span>surv[i], <span class="at">repro=</span>paras<span class="sc">$</span>repro[i], <span class="at">K=</span>paras<span class="sc">$</span>K[i])</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>paras<span class="sc">$</span>alleleslost <span class="ot">&lt;-</span> res</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(paras, <span class="fu">aes</span>(<span class="at">x=</span>ngens, <span class="at">y=</span>alleleslost, <span class="at">color=</span><span class="fu">factor</span>(ninds), <span class="at">group=</span><span class="fu">factor</span>(ninds))) <span class="sc">+</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Generations"</span>, <span class="at">y=</span><span class="st">"Alleles lost"</span>, <span class="at">color=</span><span class="st">"Population size"</span>) <span class="sc">+</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Set1"</span>) <span class="sc">+</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>surv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="snp-panel-over-time" class="level2">
+<h2 class="anchored" data-anchor-id="snp-panel-over-time">SNP panel over time…</h2>
+<p>We learned to select a SNP panel, but how good does it behave over time?</p>
+<p>Subselect some population from our red fin blue eye data set and create a SNP panel. We will then simulate the future of this population and check how well the SNP panel performs over time. We use He as a parameter to check the performance of the SNP panel. And the SNP panel is based on “pic” selection of SNPs (=fast way to select a SNP panel).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">pop</span>(rfbe))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    BHA_A2       E504       E508       E509       E518       NW30       NW70 
+        19         19         20         20         20         20         20 
+      NW72       NW80 PJTub1.2.3   PJTub4.5     PJTub6       SE60       SW10 
+        10         10         64         51         33         20         19 
+      SW20       SW60 
+        18         20 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#lets keep the first 9 populations</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>pops <span class="ot">&lt;-</span> <span class="fu">popNames</span>(rfbe)[<span class="dv">1</span><span class="sc">:</span><span class="dv">9</span>]</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>rfbe2 <span class="ot">&lt;-</span> <span class="fu">gl.keep.pop</span>(rfbe, <span class="at">pop.list=</span>pops, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">#and impute missing data</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>rfbe3 <span class="ot">&lt;-</span>  <span class="fu">gl.impute</span>(rfbe2,<span class="at">method=</span><span class="st">"neighbour"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.impute 
+  Processing genlight object with SNP data
+  Imputation based on drawing from the nearest neighbour
+  Warning: Population  NW80  has  11  loci with all missing values.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Also defined by 'spam'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Also defined by 'spam'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Residual missing values were filled randomly drawing from the global allele profiles by locus
+Completed: gl.impute </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>panel <span class="ot">&lt;-</span> <span class="fu">gl.select.panel</span>(rfbe3, <span class="at">method=</span><span class="st">"pic"</span>, <span class="at">nl=</span><span class="dv">50</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">gl.check.panel</span>(panel, rfbe3, <span class="at">parameter=</span><span class="st">"Fst"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">lm</span>(res[,<span class="dv">1</span>] <span class="sc">~</span> res[,<span class="dv">2</span>]))<span class="sc">$</span>r.squared</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8407802</code></pre>
+</div>
+</div>
+<p>Now lets simulate the future of this population and check how well the SNP panel performs over time. We will use the <code>gl.sim.offspring</code> function to simulate offspring and then check Fst (He) over time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> rfbe3</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>xx <span class="ot">&lt;-</span> xx[<span class="fu">order</span>(<span class="fu">pop</span>(xx)),]</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ( i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  pops <span class="ot">&lt;-</span> <span class="fu">seppop</span>(xx)</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#panmictiv pops, but completely seperated</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  pops <span class="ot">&lt;-</span> <span class="fu">lapply</span>(pops, <span class="cf">function</span>(yy)   {</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    dummy <span class="ot">&lt;-</span> <span class="fu">gl.sim.offspring</span>(yy,yy, <span class="at">noffpermother =</span> <span class="dv">3</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>    dummy <span class="ot">&lt;-</span> <span class="fu">gl.sample</span>(dummy, <span class="fu">nInd</span>(yy), <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">verbose =</span> <span class="dv">0</span>)</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  pops <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, pops)  </span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pop</span>(pops)<span class="ot">&lt;-</span> <span class="fu">pop</span>(xx)</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">gl.check.panel</span>(<span class="at">x =</span>panel, pops, <span class="at">parameter=</span><span class="st">"Fst"</span>)</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>out[i] <span class="ot">&lt;-</span> <span class="fu">summary</span>(<span class="fu">lm</span>(res[,<span class="dv">1</span>] <span class="sc">~</span> res[,<span class="dv">2</span>]))<span class="sc">$</span>r.squared</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>xx<span class="ot">&lt;-</span> pops</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">"Generation"</span>, i, <span class="st">"R-squared:"</span>, out[i], <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a><span class="fu">flush.console</span>()  </span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generation 2 R-squared: 0.759853833717633 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-17-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generation 3 R-squared: 0.539566062958218 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-17-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generation 4 R-squared: 0.474825308323337 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-17-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generation 5 R-squared: 0.433089579421944 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-17-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generation 6 R-squared: 0.388461070679624 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-17-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generation 7 R-squared: 0.279210111909157 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-17-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generation 8 R-squared: 0.242591869025034 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-17-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generation 9 R-squared: 0.227123939076829 </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-17-9.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Generation 10 R-squared: 0.220908824826448 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(out, <span class="at">type=</span><span class="st">"b"</span>, <span class="at">xlab=</span><span class="st">"Generation"</span>, <span class="at">ylab=</span><span class="st">"R-squared"</span>, </span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main=</span><span class="st">"Performance of SNP panel over time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session07_files/figure-html/unnamed-chunk-17-10.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>And done!!!</strong></p>
 </section>
 <section id="further-study" class="level2">
 <h2 class="anchored" data-anchor-id="further-study"><em>Further Study</em></h2>
+<p>Lots to come later ;-)</p>
 <section id="readings" class="level3">
 <h3 class="anchored" data-anchor-id="readings">Readings</h3>
 
