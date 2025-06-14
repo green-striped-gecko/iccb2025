@@ -43,7 +43,8 @@ pca_pa_result <-gl.assign.pca(pa.result, unknown="AA011731")
 
 
 ## Analysis 4: Assignment by Mahalanobis Distances --------------------------------------------------------------------------------------------------------------------------------
-mahal_result <- gl.assign.mahalanobis(pa.result,unknown="AA011731")
+mahal_result <- gl.assign.mahal(pa.result,unknown="AA011731")
+
 
 
 # Exercise ----------------------------------------------------------------------------------------------------------------------------------

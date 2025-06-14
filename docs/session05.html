@@ -697,7 +697,55 @@ Completed: gl.assign.pca </code></pre>
 <section id="assignment-by-mahalanobis-distances" class="level3">
 <h3 class="anchored" data-anchor-id="assignment-by-mahalanobis-distances">Assignment by Mahalanobis Distances</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#mahal_result &lt;- gl.assign.mahalanobis(pa.result,unknown="AA011731")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mahal_result <span class="ot">&lt;-</span> <span class="fu">gl.assign.mahal</span>(pa.result,<span class="at">unknown=</span><span class="st">"AA011731"</span>, <span class="at">verbose =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>HELLO HELLO HELLO
+Starting gl.assign.mahal 
+  Discarding 0 populations with sample size &lt; 10 :
+ 
+  Rendering the data matrix dense by imputation</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Also defined by 'spam'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Found more than one class "dist" in cache; using the first, from namespace 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Also defined by 'spam'</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Undertaking a PCA</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="session05_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Starting gl.colors 
+Selected color type 2 
+Completed: gl.colors 
+  Dimensions retained: 1 
+  Number of dimensions with substantial eigenvalues (Broken-Stick Criterion): 1 . Hardwired limit 3 
+    Selecting the smallest of the two
+    Dimension of confidence envelope set at 1 
+Assignment of unknown individual: AA011731 
+Alpha level of significance: 0.001 
+      pop     MahalD      pval assign
+1    Mary 0.09623112 1.0000000    yes
+2    Pine 0.34572127 0.9999989    yes
+3 Burnett 3.32087394 0.9728334    yes
+  Best assignment is the population with the largest probability
+                of assignment, in this case Mary 
+  Returning a genlight object with the putative source populations and the unknown
+Completed: gl.assign.mahal </code></pre>
+</div>
 </div>
 </section>
 </section>
@@ -720,16 +768,16 @@ Exercise
 <section id="the-data" class="level3">
 <h3 class="anchored" data-anchor-id="the-data">The data</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>gl</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The unknown</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>Unknown <span class="ot">=</span> <span class="st">"AA046092"</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Preliminaries</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">popNames</span>(gl)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>gl2 <span class="ot">&lt;-</span> <span class="fu">gl.keep.pop</span>(gl, <span class="at">pop.list=</span><span class="fu">c</span>(<span class="st">"EmsubBamuAli"</span>, <span class="st">"EmsubFlyGuka"</span>, <span class="st">"EmsubFlyJikw"</span>,</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"EmsubJardine"</span>, <span class="st">"EmsubKerema"</span>, <span class="st">"EmsubMorehead"</span>))</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Knock yourself out</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>gl</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The unknown</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>Unknown <span class="ot">=</span> <span class="st">"AA046092"</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Preliminaries</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">popNames</span>(gl)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>gl2 <span class="ot">&lt;-</span> <span class="fu">gl.keep.pop</span>(gl, <span class="at">pop.list=</span><span class="fu">c</span>(<span class="st">"EmsubBamuAli"</span>, <span class="st">"EmsubFlyGuka"</span>, <span class="st">"EmsubFlyJikw"</span>,</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"EmsubJardine"</span>, <span class="st">"EmsubKerema"</span>, <span class="st">"EmsubMorehead"</span>))</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Knock yourself out</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>

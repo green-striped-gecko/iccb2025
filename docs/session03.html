@@ -446,7 +446,7 @@ Completed: gl.map.interactive </code></pre>
 <p>At its core, PCA identifies the directions (called principal components) along which the variation in the data is highest. These directions are orthogonal (perpendicular) to each other and are ranked by how much variance they capture from the original data. By projecting data onto the top few principal components, we can often retain the most important information while discarding noise or less useful details.</p>
 <p><img src="images/pca.png" class="img-fluid"></p>
 <p><img src="images/snp_plot.jpg" class="img-fluid"></p>
-<p><a href="Distances and their visualization in studies of spatial-temporal genetic variation using single nucleotide polymorphisms (SNPs) | bioRxiv">Great paper on PCA</a>!</p>
+<p><strong>Great paper on PCA</strong>: <a href="https://www.biorxiv.org/content/10.1101/2023.03.22.533737v3.abstract">Distances and their visualization in studies of spatial-temporal genetic variation using single nucleotide polymorphisms (SNPs)</a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Undertake a PCA on the raw data</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> <span class="fu">gl.pcoa</span>(possums.gl, <span class="at">verbose =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

@@ -73,7 +73,7 @@ At its core, PCA identifies the directions (called principal components) along w
 
 ![](images/snp_plot.jpg)
 
-[Great paper on PCA](Distances and their visualization in studies of spatial-temporal genetic variation using single nucleotide polymorphisms (SNPs) | bioRxiv)!
+**Great paper on PCA**: [Distances and their visualization in studies of spatial-temporal genetic variation using single nucleotide polymorphisms (SNPs)](https://www.biorxiv.org/content/10.1101/2023.03.22.533737v3.abstract)
 
 ```{r}
 # Undertake a PCA on the raw data
