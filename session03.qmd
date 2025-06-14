@@ -18,6 +18,8 @@ library(dartRverse)
 
 *Why population structure matters*
 
+![](images/pop_comp.jpg)
+
 -   What is a “population” in population genetics?
 
 -   Genetic structure defined – how allele frequencies vary among groups.
@@ -27,6 +29,10 @@ library(dartRverse)
 -   Isolation-by-distance & sampling design – avoiding spurious structure.
 
 -   Why we care: management units, inbreeding, local adaptation, introgression.
+
+![](images/pop_spp.png)
+
+![](images/ibd.png)
 
 #### Analytical toolkit
 
@@ -57,6 +63,18 @@ gl.map.interactive(possums.gl)
 
 The populations are fairly independent but are linked by some imigration, so a typical Metapopulation scenario. The populations are named A to J and follow more or less an isolation by distance. So population next to each other (e.g. B and C) are fairly well mixed and populations further apart from the rest (e.g. D) are more isolated.
 
+## PCA
+
+Principal Component Analysis (PCA) is a powerful statistical technique used for dimensionality reduction, data visualization, and feature extraction. In many real-world datasets, like our SNP datasets, data can have a very high number of features or dimensions. PCA helps by transforming the data into a new coordinate system where most of the variability in the data can be captured in fewer dimensions.
+
+At its core, PCA identifies the directions (called principal components) along which the variation in the data is highest. These directions are orthogonal (perpendicular) to each other and are ranked by how much variance they capture from the original data. By projecting data onto the top few principal components, we can often retain the most important information while discarding noise or less useful details.
+
+![](images/pca.png)
+
+![](images/snp_plot.jpg)
+
+[Great paper on PCA](Distances and their visualization in studies of spatial-temporal genetic variation using single nucleotide polymorphisms (SNPs) | bioRxiv)!
+
 ```{r}
 # Undertake a PCA on the raw data
 pc <- gl.pcoa(possums.gl, verbose = 3)
@@ -79,22 +97,38 @@ pc_a1a3 <- gl.pcoa.plot(glPca = pc, x = possums.gl, xaxis = 1, yaxis = 2, zaxis 
 
 ```{r}
 # Select only the data from one cluster in the primary PCA
-temp <- gl.drop.pop(x = possums.gl, pop.list = c('D', 'A', 'E', 'F', 'H', 'G'))
+temp <- gl.drop.pop(x = possums.gl, pop.list = c('D', 'A', 'E', 'F', 'H'))
 # Plot the first two dimensions of the secondary PCA
 pc <- gl.pcoa(temp, verbose = 3)
 pc_plot <- gl.pcoa.plot(glPca =  pc, x = temp)
 
 ```
 
+### Canberra grassland earless dragon
+
+The Canberra Grassland Earless Dragon (*Tympanocryptis lineata*) is a small lizard that is usually less than 150 mm long and weighs 5–9 g. Each one has distinctive markings on its back that can be used to identify individuals.
+
+Canberra Grassland Earless Dragons are grassland specialists, preferring natural temperate grasslands. Found in ACT grasslands and adjacent grasslands in NSW.
+
+![](images/ged_map1.png){.class width="480" height="680"}
+
+Lets take at a look at the pca of CGED.
+
+![](images/ged_pca.png)
+
+There seems to be some grasslands more isolated than others.
+
+![](images/ged_map.png)
+
 ### What can go wrong
+
+PCA is a hypothesis generating tool, not a tool for definitive decisions of the structure of populations.
 
 Missing data causes distortion, which can lead to misinterpretation.
 
 dartR, that uses the `adgenet` package for its pca, fills missing data with the global average.
 
 You can choose alternative methods of filling in the missing data prior to running your pca using the `gl.impute` function.
-
-PCA is a hypothesis generating tool, not a tool for definitive decisions of the structure of populations.
 
 Structure variants can also turn up on a PCA, like an inversion.
 
@@ -162,7 +196,7 @@ srnoad <- gl.run.structure(possums.gl, k.range = 2:7, num.k.rep = 2,
 
 ### Structure Results
 
-Okay now that we got that out of our way lets see how to interpret the results of the structure run. However, to really trust our results we would want to run `gl.run.structure` with larger burn in and number of reps, more like burnin=50000 and numreps=100000. But this takes a while, so we will not be doing that today.  
+Okay now that we got that out of our way lets see how to interpret the results of the structure run. However, to really trust our results we would want to run `gl.run.structure` with larger burn in and number of reps, more like burnin=50000 and numreps=100000. But this takes a while, so we will not be doing that today.
 
 ### Evanno Plots
 
@@ -219,7 +253,6 @@ platypus.gl
 
 gl.map.interactive(platypus.gl)
 ```
-
 
 ```{r eval = FALSE, echo=T}
 # my_fast <- gl.run.faststructure(platypus.gl,  

@@ -291,10 +291,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#analytical-toolkit" id="toc-analytical-toolkit" class="nav-link" data-scroll-target="#analytical-toolkit">Analytical toolkit</a></li>
   </ul></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a>
-  <ul class="collapse">
-  <li><a href="#select-one-cluster" id="toc-select-one-cluster" class="nav-link" data-scroll-target="#select-one-cluster">Select one cluster</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
   </ul></li>
+  <li><a href="#pca" id="toc-pca" class="nav-link" data-scroll-target="#pca">PCA</a>
+  <ul>
+  <li><a href="#select-one-cluster" id="toc-select-one-cluster" class="nav-link" data-scroll-target="#select-one-cluster">Select one cluster</a></li>
+  <li><a href="#canberra-grassland-earless-dragon" id="toc-canberra-grassland-earless-dragon" class="nav-link" data-scroll-target="#canberra-grassland-earless-dragon">Canberra grassland earless dragon</a></li>
   <li><a href="#what-can-go-wrong" id="toc-what-can-go-wrong" class="nav-link" data-scroll-target="#what-can-go-wrong">What can go wrong</a></li>
   </ul></li>
   <li><a href="#structure-and-faststructure-bayesian-clustering-models" id="toc-structure-and-faststructure-bayesian-clustering-models" class="nav-link" data-scroll-target="#structure-and-faststructure-bayesian-clustering-models">Structure and FastStructure (Bayesian clustering models)</a>
@@ -359,6 +361,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level3">
 <h3 class="anchored" data-anchor-id="introduction">Introduction</h3>
 <p><em>Why population structure matters</em></p>
+<p><img src="images/pop_comp.jpg" class="img-fluid"></p>
 <ul>
 <li><p>What is a “population” in population genetics?</p></li>
 <li><p>Genetic structure defined – how allele frequencies vary among groups.</p></li>
@@ -366,6 +369,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Isolation-by-distance &amp; sampling design – avoiding spurious structure.</p></li>
 <li><p>Why we care: management units, inbreeding, local adaptation, introgression.</p></li>
 </ul>
+<p><img src="images/pop_spp.png" class="img-fluid"></p>
+<p><img src="images/ibd.png" class="img-fluid"></p>
 <section id="analytical-toolkit" class="level4">
 <h4 class="anchored" data-anchor-id="analytical-toolkit">Analytical toolkit</h4>
 <table class="caption-top table">
@@ -433,6 +438,15 @@ Completed: gl.map.interactive </code></pre>
 </div>
 </div>
 <p>The populations are fairly independent but are linked by some imigration, so a typical Metapopulation scenario. The populations are named A to J and follow more or less an isolation by distance. So population next to each other (e.g.&nbsp;B and C) are fairly well mixed and populations further apart from the rest (e.g.&nbsp;D) are more isolated.</p>
+</section>
+</section>
+<section id="pca" class="level2">
+<h2 class="anchored" data-anchor-id="pca">PCA</h2>
+<p>Principal Component Analysis (PCA) is a powerful statistical technique used for dimensionality reduction, data visualization, and feature extraction. In many real-world datasets, like our SNP datasets, data can have a very high number of features or dimensions. PCA helps by transforming the data into a new coordinate system where most of the variability in the data can be captured in fewer dimensions.</p>
+<p>At its core, PCA identifies the directions (called principal components) along which the variation in the data is highest. These directions are orthogonal (perpendicular) to each other and are ranked by how much variance they capture from the original data. By projecting data onto the top few principal components, we can often retain the most important information while discarding noise or less useful details.</p>
+<p><img src="images/pca.png" class="img-fluid"></p>
+<p><img src="images/snp_plot.jpg" class="img-fluid"></p>
+<p><a href="Distances and their visualization in studies of spatial-temporal genetic variation using single nucleotide polymorphisms (SNPs) | bioRxiv">Great paper on PCA</a>!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Undertake a PCA on the raw data</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> <span class="fu">gl.pcoa</span>(possums.gl, <span class="at">verbose =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -513,7 +527,7 @@ Returning the palette you asked for with that many colors</code></pre>
 <h4 class="anchored" data-anchor-id="select-one-cluster">Select one cluster</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only the data from one cluster in the primary PCA</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">gl.drop.pop</span>(<span class="at">x =</span> possums.gl, <span class="at">pop.list =</span> <span class="fu">c</span>(<span class="st">'D'</span>, <span class="st">'A'</span>, <span class="st">'E'</span>, <span class="st">'F'</span>, <span class="st">'H'</span>, <span class="st">'G'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">gl.drop.pop</span>(<span class="at">x =</span> possums.gl, <span class="at">pop.list =</span> <span class="fu">c</span>(<span class="st">'D'</span>, <span class="st">'A'</span>, <span class="st">'E'</span>, <span class="st">'F'</span>, <span class="st">'H'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Starting gl.drop.pop 
   Processing genlight object with SNP data
@@ -549,10 +563,10 @@ Completed: gl.drop.pop </code></pre>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Ordination yielded 12 informative dimensions( broken-stick criterion) from 119 original dimensions
-    PCA Axis 1 explains 11 % of the total variance
-    PCA Axis 1 and 2 combined explain 17.4 % of the total variance
-    PCA Axis 1-3 combined explain 22.7 % of the total variance
+<pre><code>  Ordination yielded 13 informative dimensions( broken-stick criterion) from 149 original dimensions
+    PCA Axis 1 explains 12.8 % of the total variance
+    PCA Axis 1 and 2 combined explain 20.9 % of the total variance
+    PCA Axis 1-3 combined explain 25.7 % of the total variance
 Starting gl.colors 
 Selected color type 2 
 Completed: gl.colors </code></pre>
@@ -587,13 +601,22 @@ Completed: gl.colors </code></pre>
 </div>
 </div>
 </section>
+<section id="canberra-grassland-earless-dragon" class="level3">
+<h3 class="anchored" data-anchor-id="canberra-grassland-earless-dragon">Canberra grassland earless dragon</h3>
+<p>The Canberra Grassland Earless Dragon (<em>Tympanocryptis lineata</em>) is a small lizard that is usually less than 150 mm long and weighs 5–9 g. Each one has distinctive markings on its back that can be used to identify individuals.</p>
+<p>Canberra Grassland Earless Dragons are grassland specialists, preferring natural temperate grasslands. Found in ACT grasslands and adjacent grasslands in NSW.</p>
+<p><img src="images/ged_map1.png" class="class" width="480" height="680"></p>
+<p>Lets take at a look at the pca of CGED.</p>
+<p><img src="images/ged_pca.png" class="img-fluid"></p>
+<p>There seems to be some grasslands more isolated than others.</p>
+<p><img src="images/ged_map.png" class="img-fluid"></p>
 </section>
 <section id="what-can-go-wrong" class="level3">
 <h3 class="anchored" data-anchor-id="what-can-go-wrong">What can go wrong</h3>
+<p>PCA is a hypothesis generating tool, not a tool for definitive decisions of the structure of populations.</p>
 <p>Missing data causes distortion, which can lead to misinterpretation.</p>
 <p>dartR, that uses the <code>adgenet</code> package for its pca, fills missing data with the global average.</p>
 <p>You can choose alternative methods of filling in the missing data prior to running your pca using the <code>gl.impute</code> function.</p>
-<p>PCA is a hypothesis generating tool, not a tool for definitive decisions of the structure of populations.</p>
 <p>Structure variants can also turn up on a PCA, like an inversion.</p>
 <p><img src="images/inversion_pca.png" class="img-fluid"></p>
 <p>PCA is sample size dependent - but this is more for the top two dimensions not all the informative dimensions.</p>
